@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b45bhglgnjdn2"]
+
+[ext_resource type="Script" path="res://extraction.gd" id="1_b1a8a"]
+
+[node name="explotation" type="StaticBody2D"]
+script = ExtResource("1_b1a8a")

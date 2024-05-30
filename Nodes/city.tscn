@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://8uasae1ijq1j"]
+
+[ext_resource type="Script" path="res://Nodes/city.gd" id="1_3nrmv"]
+
+[node name="City" type="StaticBody2D"]
+input_pickable = true
+script = ExtResource("1_3nrmv")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1kw0ifkd38dv"]
+
+[ext_resource type="Script" path="res://Nodes/depot.gd" id="1_y2sh0"]
+
+[node name="depot" type="StaticBody2D"]
+script = ExtResource("1_y2sh0")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyjghtj87k2b7"]
+
+[ext_resource type="Script" path="res://Nodes/actor_static.gd" id="1_l0v5q"]
+
+[node name="Actor_Static" type="StaticBody2D"]
+input_pickable = true
+script = ExtResource("1_l0v5q")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
