@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://cfaipfii1a8i4"]
 
+[ext_resource type="Texture2D" uid="uid://dokhhcuujsknb" path="res://Assets/Iso_Placeholders.png" id="1_6pxd4"]
 [ext_resource type="Script" path="res://Nodes/map.gd" id="1_638rh"]
-[ext_resource type="Texture2D" uid="uid://dokhhcuujsknb" path="res://Iso_Placeholders.png" id="1_fjwxv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5sd33"]
-texture = ExtResource("1_fjwxv")
+texture = ExtResource("1_6pxd4")
 texture_region_size = Vector2i(32, 16)
 1:3/0 = 0
 0:3/0 = 0

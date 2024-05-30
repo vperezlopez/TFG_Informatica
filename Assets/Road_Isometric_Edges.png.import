@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dokhhcuujsknb"
-path="res://.godot/imported/Iso_Placeholders.png-b299c851761b3604b89dc701b9e740db.ctex"
+uid="uid://p343pknr5q1f"
+path="res://.godot/imported/Road_Isometric_Edges.png-2c536730ace4e895e616267cfc0751e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Iso_Placeholders.png"
-dest_files=["res://.godot/imported/Iso_Placeholders.png-b299c851761b3604b89dc701b9e740db.ctex"]
+source_file="res://Assets/Road_Isometric_Edges.png"
+dest_files=["res://.godot/imported/Road_Isometric_Edges.png-2c536730ace4e895e616267cfc0751e9.ctex"]
 
 [params]
 

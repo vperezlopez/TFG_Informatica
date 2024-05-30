@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5okquq3i4fw6"
-path="res://.godot/imported/Placeholder_6.png-dabc201684aa4c807927ccef1ec94e62.ctex"
+uid="uid://d1tedhc4oux20"
+path="res://.godot/imported/City_Placeholder.png-e0242a665fa3f8832928ff0df3f51c2a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Placeholder_6.png"
-dest_files=["res://.godot/imported/Placeholder_6.png-dabc201684aa4c807927ccef1ec94e62.ctex"]
+source_file="res://Assets/City_Placeholder.png"
+dest_files=["res://.godot/imported/City_Placeholder.png-e0242a665fa3f8832928ff0df3f51c2a.ctex"]
 
 [params]
 
