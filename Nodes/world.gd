@@ -10,9 +10,9 @@ var harbor = preload("res://Nodes/harbor.tscn")
 var map_width = 64 # *2
 var map_height = 64 # /2
 
-var n_cities = 10
-var n_explotations = 6
-var n_harbors = 4
+var n_cities = 2
+var n_explotations = 0
+var n_harbors = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +20,14 @@ func _ready():
 	map.generate_map(map_width, map_height)
 	generate_cities(n_cities)
 	generate_actors_static()
+	
+	#var c1 = city.instantiate()
+	#var c2 = city.instantiate()
+	#add_child(c1)
+	#add_child(c2)
+	#$map.place_actor_static(c1, Vector2i(8, 8))
+	#$map.place_actor_static(c2, Vector2i(32, 16))
+	map.generate_roads()
 	
 	for e in $map.occupied_tiles:
 		var actor = $map.occupied_tiles.get(e)
