@@ -33,13 +33,14 @@ func generate_map(width : int, height : int):
 	for x in range (width):
 		for y in range (floor(height/2)):
 			set_cell(0, Vector2i(x, y), 1, Vector2i(0, 3))
-
+	set_cell(1, Vector2i(16, 16), 2, Vector2i(3, 1))
 
 func _process(delta):
 	$CursorLabel.visible = debug_enabled
 	if debug_enabled:
 		var world_pos = get_global_mouse_position()
 		var map_pos = local_to_map(world_pos)
+		$CursorLabel.z_index = 2
 		$CursorLabel.position = get_global_mouse_position()
 		$CursorLabel.text = "Tile Coordinates: (" + str(map_pos.x) + ", " + str(map_pos.y + 1) + ")\n" + \
 							"Global Position: (" + str(roundf(world_pos.x)) + ", " + str(roundf(world_pos.y)) + ")"
@@ -88,9 +89,12 @@ func a_star_search(start, goal):
 
 		for next in get_neighbors(current):
 			var direction = calc_dir(current, next)
-			var new_cost = cost_so_far[current] + movement_cost(current, next)
+			var new_cost = cost_so_far[current] + movement_cost(current, next, last_dir[current], direction)
+			if current.y < 12 and current.y > 5:
+				print('Current: ' + str(current) + ', Next: ' + str(next) + ', Cost: ' + str(movement_cost(current, next, last_dir[current], direction)) + ', New_dir: ' + str(direction != last_dir[current]))
 			if direction == last_dir[current]:
-				print('Current: ' + str(current) + ', Next: ' + str(next) + ', New_dir: ' + str(direction != last_dir[current]))
+				pass
+				#print('Current: ' + str(current) + ', Next: ' + str(next) + ', New_dir: ' + str(direction != last_dir[current]))
 			
 			if not cost_so_far.has(next) or new_cost < cost_so_far[next]:
 				cost_so_far[next] = new_cost
@@ -111,7 +115,7 @@ func get_neighbors(node : Vector2i):
 		Vector2i(-1, mod -1),	# Top-left
 		Vector2i(+1, mod -1),	# Top-right
 		Vector2i(-1, mod),		# Bottom-left
-		Vector2i(+1, mod),		# Bottom-right
+		Vector2i(+1, mod)		# Bottom-right
 	]
 
 	for dir in directions:
@@ -126,14 +130,15 @@ func calc_dir(current : Vector2i, next : Vector2i) -> Vector2i :
 	var mod = (current.x % 2) * x_dir
 	return Vector2i(x_dir, y_dir + mod)
 
-func movement_cost(from, to):
+func movement_cost(from, to, last_dir, dir):
 	var cost = 10 #MOVE_COST
+	if dir != last_dir: cost += 5
 	return cost
 
 
 func heuristic(a, b, last_dir, dir):
 	var h = abs(a.x - b.x) + abs(a.y - b.y)
-	if dir != last_dir: h += 10000
+	if dir != last_dir: h += 5
 	return h
 
 
@@ -151,7 +156,8 @@ func reconstruct_path(came_from, start, goal):
 func is_valid_position(pos):
 	return pos.x >= 0 and pos.y >= 0 and pos.x < map_width and pos.y < map_height
 
-
 func draw_roads(path):
+	for pos in path:
+		print(pos)
 	set_cells_terrain_path(1, path, 0, 0)
 	
