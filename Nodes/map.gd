@@ -1,5 +1,7 @@
 extends TileMap
 
+enum PATH {ROAD = 1, RAILWAY = 2}
+
 var altitude = FastNoiseLite.new()
 var map_width = 0
 var map_height = 0
@@ -85,15 +87,18 @@ func a_star_search(start, goal):
 			break
 
 		for next in get_neighbors(current):
-			var direction = next - current
+			var direction = calc_dir(current, next)
 			var new_cost = cost_so_far[current] + movement_cost(current, next)
+			if direction == last_dir[current]:
+				print('Current: ' + str(current) + ', Next: ' + str(next) + ', New_dir: ' + str(direction != last_dir[current]))
+			
 			if not cost_so_far.has(next) or new_cost < cost_so_far[next]:
 				cost_so_far[next] = new_cost
 				var priority = new_cost + heuristic(goal, next, last_dir[current], direction)
 				open_set.push(next, priority)
 				came_from[next] = current
 				last_dir[next] = direction
-				print('Current: ' + str(current) + ', Next: '+ str(next) + ', Priority: ' + str(priority) + ', Heuristic: ' + str(heuristic(goal, next, last_dir[current], direction)) + ', Cost so far: ' + str(cost_so_far[next]))
+				#print('Current: ' + str(current) + ', Next: '+ str(next) + ', Priority: ' + str(priority) + ', Heuristic: ' + str(heuristic(goal, next, last_dir[current], direction)) + ', Cost so far: ' + str(cost_so_far[next]))
 
 	return reconstruct_path(came_from, start, goal)
 
@@ -115,6 +120,11 @@ func get_neighbors(node : Vector2i):
 			neighbors.append(neighbor)
 	return neighbors
 
+func calc_dir(current : Vector2i, next : Vector2i) -> Vector2i :
+	var x_dir = next.x - current.x
+	var y_dir = next.y - current.y
+	var mod = (current.x % 2) * x_dir
+	return Vector2i(x_dir, y_dir + mod)
 
 func movement_cost(from, to):
 	var cost = 10 #MOVE_COST
@@ -123,7 +133,7 @@ func movement_cost(from, to):
 
 func heuristic(a, b, last_dir, dir):
 	var h = abs(a.x - b.x) + abs(a.y - b.y)
-	if dir != last_dir: h += 100
+	if dir != last_dir: h += 10000
 	return h
 
 
@@ -143,4 +153,5 @@ func is_valid_position(pos):
 
 
 func draw_roads(path):
-	set_cells_terrain_connect(1, path, 0, 0)
+	set_cells_terrain_path(1, path, 0, 0)
+	

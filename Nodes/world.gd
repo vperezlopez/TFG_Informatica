@@ -10,7 +10,7 @@ var harbor = preload("res://Nodes/harbor.tscn")
 var map_width = 64 # *2
 var map_height = 64 # /2
 
-var n_cities = 2
+var n_cities = 0
 var n_explotations = 0
 var n_harbors = 0
 
@@ -21,12 +21,12 @@ func _ready():
 	generate_cities(n_cities)
 	generate_actors_static()
 	
-	#var c1 = city.instantiate()
-	#var c2 = city.instantiate()
-	#add_child(c1)
-	#add_child(c2)
-	#$map.place_actor_static(c1, Vector2i(8, 8))
-	#$map.place_actor_static(c2, Vector2i(32, 16))
+	var c1 = city.instantiate()
+	var c2 = city.instantiate()
+	add_child(c1)
+	add_child(c2)
+	$map.place_actor_static(c1, Vector2i(8, 8))
+	$map.place_actor_static(c2, Vector2i(32, 8))
 	map.generate_roads()
 	
 	for e in $map.occupied_tiles:
