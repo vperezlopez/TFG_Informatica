@@ -1,5 +1,6 @@
 extends Node2D
 
+var actor = preload("res://Nodes/actor_static.tscn")
 var city = preload("res://Nodes/city.tscn")
 var explotation = preload("res://Nodes/explotation.tscn")
 var factory = preload("res://Nodes/factory.tscn")
@@ -13,6 +14,8 @@ var map_height = 64 # /2
 var n_cities = 0
 var n_explotations = 0
 var n_harbors = 0
+
+var build : Actor_Static
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -39,6 +42,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if build:
+		build.position = get_global_mouse_position()
 	pass
 
 func generate_cities(n : int):
@@ -64,6 +69,17 @@ func _on_control_gui_input(event):
 		print("Out click detected")
 	pass # Replace with function body.
 
+func building_mode(actor_static_instance : Actor_Static):
+	print('Building mode: engaged')
+	if build:
+		remove_child(build)
+	build = actor_static_instance
+	add_child(build)
+
+func cancel_building_mode():
+	if build:
+		remove_child(build)
+	build = null
 
 func _input(event):
 	if event is InputEventKey:
@@ -73,3 +89,24 @@ func _input(event):
 			if event.keycode == KEY_K:
 				$map.debug_enabled = !$map.debug_enabled
 				print("Debug mode: " + ['disabled', 'enabled'][int($map.debug_enabled)])
+			if event.keycode == KEY_F:
+				building_mode(factory.instantiate())
+			if event.keycode == KEY_D:
+				building_mode(depot.instantiate())
+			if event.keycode == KEY_W:
+				building_mode(warehouse.instantiate())
+			if event.keycode == KEY_C:
+				for child in get_children():
+					print(child.get_class)
+				
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if build:
+				var placed = $map.build_actor_static(build)
+				if !placed:
+					cancel_building_mode()
+				build = null
+
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			if build:
+				cancel_building_mode()

@@ -45,6 +45,13 @@ func _process(delta):
 		$CursorLabel.text = "Tile Coordinates: (" + str(map_pos.x) + ", " + str(map_pos.y + 1) + ")\n" + \
 							"Global Position: (" + str(roundf(world_pos.x)) + ", " + str(roundf(world_pos.y)) + ")"
 
+func build_actor_static(actor_static_instance : Actor_Static) -> bool:
+	var pos = local_to_map(get_global_mouse_position())
+	var valid = valid_position(pos.x, pos.y)
+	if valid:
+		place_actor_static(actor_static_instance, pos)
+	return valid
+
 func place_actor_static(actor_static_instance : Actor_Static, pos : Vector2i = Vector2i(-1, -1)):
 	if pos == Vector2i(-1, -1):
 		pos = get_random_pos()
@@ -91,7 +98,8 @@ func a_star_search(start, goal):
 			var direction = calc_dir(current, next)
 			var new_cost = cost_so_far[current] + movement_cost(current, next, last_dir[current], direction)
 			if current.y < 12 and current.y > 5:
-				print('Current: ' + str(current) + ', Next: ' + str(next) + ', Cost: ' + str(movement_cost(current, next, last_dir[current], direction)) + ', New_dir: ' + str(direction != last_dir[current]))
+				pass
+				#print('Current: ' + str(current) + ', Next: ' + str(next) + ', Cost: ' + str(movement_cost(current, next, last_dir[current], direction)) + ', New_dir: ' + str(direction != last_dir[current]))
 			if direction == last_dir[current]:
 				pass
 				#print('Current: ' + str(current) + ', Next: ' + str(next) + ', New_dir: ' + str(direction != last_dir[current]))
