@@ -1,5 +1,15 @@
 extends TileMap
 
+var actor = preload("res://Nodes/actor_static.tscn")
+var city = preload("res://Nodes/city.tscn")
+var explotation = preload("res://Nodes/explotation.tscn")
+var factory = preload("res://Nodes/factory.tscn")
+var warehouse = preload("res://Nodes/warehouse.tscn")
+var depot = preload("res://Nodes/depot.tscn")
+var harbor = preload("res://Nodes/harbor.tscn")
+
+const PriorityQueue = preload("res://Nodes/PriorityQueue.gd")
+
 enum PATH {ROAD = 1, RAILWAY = 2}
 
 var altitude = FastNoiseLite.new()
@@ -21,19 +31,22 @@ var debug_enabled = false
 
 var occupied_tiles : Dictionary = {}
 
-const PriorityQueue = preload("res://Nodes/PriorityQueue.gd")
+
+
+var build : Actor_Static
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	generate_map(get_parent().map_width, get_parent().map_height)
+	pass
+	#generate_map(get_parent().map_width, get_parent().map_height)
 
-func generate_map(width : int, height : int):
-	map_width = width
-	map_height = height
-	for x in range (width):
-		for y in range (floor(height/2)):
-			set_cell(0, Vector2i(x, y), 1, Vector2i(0, 3))
-	set_cell(1, Vector2i(16, 16), 2, Vector2i(3, 1))
+func initialize(width : int, height : int, n_cities : int, n_explotations : int, n_harbors : int):
+	generate_map(width, height)
+	generate_actors_static(city, n_cities)
+	generate_actors_static(explotation, n_explotations)
+	generate_actors_static(harbor, n_harbors)
+	generate_roads()
+
 
 func _process(delta):
 	$CursorLabel.visible = debug_enabled
@@ -44,6 +57,23 @@ func _process(delta):
 		$CursorLabel.position = get_global_mouse_position()
 		$CursorLabel.text = "Tile Coordinates: (" + str(map_pos.x) + ", " + str(map_pos.y + 1) + ")\n" + \
 							"Global Position: (" + str(roundf(world_pos.x)) + ", " + str(roundf(world_pos.y)) + ")"
+	
+	if build:
+		build.position = get_global_mouse_position()
+
+func generate_map(width : int, height : int):
+	map_width = width
+	map_height = height
+	for x in range (width):
+		for y in range (floor(height/2)):
+			set_cell(0, Vector2i(x, y), 1, Vector2i(0, 3))
+	set_cell(1, Vector2i(16, 16), 2, Vector2i(3, 1))
+
+func generate_actors_static(actor_static_class, n : int):
+	for i in range(n):
+		var static_actor_instance = actor_static_class.instantiate()
+		add_child(static_actor_instance)
+		place_actor_static(static_actor_instance)
 
 func build_actor_static(actor_static_instance : Actor_Static) -> bool:
 	var pos = local_to_map(get_global_mouse_position())
@@ -169,3 +199,48 @@ func draw_roads(path):
 		print(pos)
 	set_cells_terrain_path(1, path, 0, 0)
 	
+
+func building_mode(actor_static_instance : Actor_Static):
+	print('Building mode: engaged')
+	if build:
+		remove_child(build)
+	build = actor_static_instance
+	add_child(build)
+
+func cancel_building_mode():
+	if build:
+		remove_child(build)
+	build = null
+
+
+
+func _input(event):
+	if event is InputEventKey:
+		if event.pressed:
+			if event.keycode == KEY_ESCAPE:
+				get_tree().quit()
+			if event.keycode == KEY_K:
+				debug_enabled = !debug_enabled
+				print("Debug mode: " + ['disabled', 'enabled'][int(debug_enabled)])
+			if event.keycode == KEY_F:
+				building_mode(factory.instantiate())
+			if event.keycode == KEY_D:
+				building_mode(depot.instantiate())
+			if event.keycode == KEY_W:
+				building_mode(warehouse.instantiate())
+			if event.keycode == KEY_C:
+				for child in get_children():
+					print(child.get_class)
+				
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if build:
+				var placed = build_actor_static(build)
+				if !placed:
+					cancel_building_mode()
+				build = null
+
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			if build:
+				cancel_building_mode()
+
