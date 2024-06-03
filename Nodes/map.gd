@@ -12,36 +12,23 @@ const PriorityQueue = preload("res://Nodes/PriorityQueue.gd")
 
 enum PATH {ROAD = 1, RAILWAY = 2}
 
-var altitude = FastNoiseLite.new()
 var map_width = 0
 var map_height = 0
 
-var base_grass = Vector2i(0, 1)
-var alternative_grass := [
-	Vector2i(1, 1),
-	Vector2i(2, 1),
-	Vector2i(3, 1),
-	Vector2i(0, 3),
-	Vector2i(1, 3),
-	Vector2i(2, 3)
-]
-var alternative_grass_chance = 0.06
-
-var debug_enabled = false
-
 var occupied_tiles : Dictionary = {}
 
-
-
-var build : Actor_Static
-
+var mouse_tile : Vector2i
+var selected_building : Actor_Static
+var debug_enabled : bool = false
+var build_road : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-	#generate_map(get_parent().map_width, get_parent().map_height)
 
 func initialize(width : int, height : int, n_cities : int, n_explotations : int, n_harbors : int):
-	generate_map(width, height)
+	map_width = width
+	map_height = height
+	generate_map(map_width, map_height)
 	generate_actors_static(city, n_cities)
 	generate_actors_static(explotation, n_explotations)
 	generate_actors_static(harbor, n_harbors)
@@ -58,8 +45,20 @@ func _process(delta):
 		$CursorLabel.text = "Tile Coordinates: (" + str(map_pos.x) + ", " + str(map_pos.y + 1) + ")\n" + \
 							"Global Position: (" + str(roundf(world_pos.x)) + ", " + str(roundf(world_pos.y)) + ")"
 	
-	if build:
-		build.position = get_global_mouse_position()
+	mouse_tile = local_to_map(get_global_mouse_position())
+	if selected_building:
+		selected_building.position = map_to_local(mouse_tile)
+		if !valid_position(selected_building.position.x, selected_building.position.y):
+			selected_building.sprite.self_modulate = '#ff00007f'
+		else:
+			selected_building.sprite.self_modulate = '#00ff007f'
+	
+	if build_road:
+		print('build road')
+		print(mouse_tile)
+		set_cell(2, mouse_tile, 2, Vector2i(3, 1))
+
+# GENERATION FUNCTIONS
 
 func generate_map(width : int, height : int):
 	map_width = width
@@ -67,13 +66,50 @@ func generate_map(width : int, height : int):
 	for x in range (width):
 		for y in range (floor(height/2)):
 			set_cell(0, Vector2i(x, y), 1, Vector2i(0, 3))
-	set_cell(1, Vector2i(16, 16), 2, Vector2i(3, 1))
 
 func generate_actors_static(actor_static_class, n : int):
 	for i in range(n):
 		var static_actor_instance = actor_static_class.instantiate()
 		add_child(static_actor_instance)
 		place_actor_static(static_actor_instance)
+
+func generate_roads(start_pos : Vector2i = Vector2i(-1, -1), end_pos : Vector2i = Vector2i(-1, -1)) :
+	if start_pos == Vector2i(-1, -1):
+		start_pos = occupied_tiles.keys()[0]
+	if end_pos == Vector2i(-1, -1):
+		end_pos = occupied_tiles.keys()[1]
+	var path = a_star_search(start_pos, end_pos)
+	draw_roads(path)
+
+
+# PLACING FUNCTIONS
+
+func place_actor_static(actor_static_instance : Actor_Static, pos : Vector2i = Vector2i(-1, -1)):
+	if pos == Vector2i(-1, -1):
+		pos = get_random_pos()
+	if valid_position(pos[0], pos[1]):
+		actor_static_instance.position = map_to_local(pos)
+		occupied_tiles[pos] = actor_static_instance
+
+func draw_roads(path):
+	for pos in path:
+		print(pos)
+	set_cells_terrain_path(1, path, 0, 0)
+
+
+# BUILDING FUNCTIONS
+
+func building_mode(actor_static_instance : Actor_Static):
+	if selected_building:
+		remove_child(selected_building)
+	selected_building = actor_static_instance
+	add_child(selected_building)
+	selected_building.z_index = 2
+
+func cancel_building_mode():
+	if selected_building:
+		remove_child(selected_building)
+	selected_building = null
 
 func build_actor_static(actor_static_instance : Actor_Static) -> bool:
 	var pos = local_to_map(get_global_mouse_position())
@@ -82,12 +118,10 @@ func build_actor_static(actor_static_instance : Actor_Static) -> bool:
 		place_actor_static(actor_static_instance, pos)
 	return valid
 
-func place_actor_static(actor_static_instance : Actor_Static, pos : Vector2i = Vector2i(-1, -1)):
-	if pos == Vector2i(-1, -1):
-		pos = get_random_pos()
-	if valid_position(pos[0], pos[1]):
-		actor_static_instance.position = map_to_local(pos)
-		occupied_tiles[pos] = actor_static_instance
+func building_mode_road():
+	build_road = true
+
+# UTILITIES
 
 func get_random_pos() -> Vector2i:
 	var rand_x = -1
@@ -101,12 +135,47 @@ func valid_position(x : int, y : int) -> bool :
 	if occupied_tiles.has(Vector2i(x, y)):
 		return false
 	return x > -1 and y > -1
-	
-func generate_roads() :
-	var start_pos = occupied_tiles.keys()[0]
-	var end_pos = occupied_tiles.keys()[1]	
-	var path = a_star_search(start_pos, end_pos)
-	draw_roads(path)
+
+
+
+# INPUT_HANDLERS
+
+func _input(event):
+	if event is InputEventKey:
+		if event.pressed:
+			if event.keycode == KEY_ESCAPE:
+				get_tree().quit()
+			if event.keycode == KEY_K:
+				debug_enabled = !debug_enabled
+				print("Debug mode: " + ['disabled', 'enabled'][int(debug_enabled)])
+			if event.keycode == KEY_F:
+				building_mode(factory.instantiate())
+			if event.keycode == KEY_D:
+				building_mode(depot.instantiate())
+			if event.keycode == KEY_W:
+				building_mode(warehouse.instantiate())
+			if event.keycode == KEY_C:
+				for child in get_children():
+					print(child.get_class)
+			if event.keycode == KEY_R:
+				print('Building road')
+				building_mode_road()
+				
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if selected_building:
+				selected_building.sprite.self_modulate = '#ffffffff'
+				var placed = build_actor_static(selected_building)
+				if !placed:
+					cancel_building_mode()
+				selected_building = null
+
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			if selected_building:
+				cancel_building_mode()
+
+
+# A* Algorithm PENDING IMPROVEMENTS TO GENERATE STRAIGHT ROADS MORE OFTEN
 
 func a_star_search(start, goal):
 	var open_set = PriorityQueue.new()
@@ -193,54 +262,7 @@ func reconstruct_path(came_from, start, goal):
 
 func is_valid_position(pos):
 	return pos.x >= 0 and pos.y >= 0 and pos.x < map_width and pos.y < map_height
-
-func draw_roads(path):
-	for pos in path:
-		print(pos)
-	set_cells_terrain_path(1, path, 0, 0)
 	
 
-func building_mode(actor_static_instance : Actor_Static):
-	print('Building mode: engaged')
-	if build:
-		remove_child(build)
-	build = actor_static_instance
-	add_child(build)
 
-func cancel_building_mode():
-	if build:
-		remove_child(build)
-	build = null
-
-
-
-func _input(event):
-	if event is InputEventKey:
-		if event.pressed:
-			if event.keycode == KEY_ESCAPE:
-				get_tree().quit()
-			if event.keycode == KEY_K:
-				debug_enabled = !debug_enabled
-				print("Debug mode: " + ['disabled', 'enabled'][int(debug_enabled)])
-			if event.keycode == KEY_F:
-				building_mode(factory.instantiate())
-			if event.keycode == KEY_D:
-				building_mode(depot.instantiate())
-			if event.keycode == KEY_W:
-				building_mode(warehouse.instantiate())
-			if event.keycode == KEY_C:
-				for child in get_children():
-					print(child.get_class)
-				
-	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			if build:
-				var placed = build_actor_static(build)
-				if !placed:
-					cancel_building_mode()
-				build = null
-
-		if event.button_index == MOUSE_BUTTON_RIGHT:
-			if build:
-				cancel_building_mode()
 
