@@ -31,5 +31,5 @@ func _ready(): # INITIALIZE CHILDREN NODES
 	label.text = loc_name
 	add_child(label)
 
-func _on_input_event(viewport, event, shape_idx):
+func _on_input_event(_viewport, _event, _shape_idx):
 	pass

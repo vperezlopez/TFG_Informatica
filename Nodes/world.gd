@@ -3,7 +3,7 @@ extends Node2D
 var map_width = 64 # *2
 var map_height = 64 # /2
 
-var n_cities = 2
+var n_cities = 5
 var n_explotations = 0
 var n_harbors = 0
 
@@ -16,7 +16,7 @@ func _ready():
 	add_child(map)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_control_gui_input(event):
