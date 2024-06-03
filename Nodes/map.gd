@@ -10,6 +10,13 @@ var harbor = preload("res://Nodes/harbor.tscn")
 
 const priority_queue_class = preload("res://Nodes/PriorityQueue.gd")
 
+const iso_dirs = [ #this has to be corrected adding + Vector2i(0, x % 2)
+		Vector2i(-1, -1),	# Top-left
+		Vector2i(+1, -1),	# Top-right
+		Vector2i(-1, 0),		# Bottom-left
+		Vector2i(+1, 0)		# Bottom-right
+	]
+
 enum PATH {ROAD = 1, RAILWAY = 2}
 enum BuildMode { NONE, BUILDING, DEMOLISH, ROAD, DEMOLISH_ROAD }
 
@@ -18,10 +25,13 @@ var map_height = 0
 
 var occupied_tiles : Dictionary = {}
 
+var b_mode : BuildMode = BuildMode.NONE
+
 var mouse_tile : Vector2i
 var mouse_tile_prev : Vector2i
 
-var b_mode : BuildMode = BuildMode.NONE
+var start_tile #: Vector2i
+var start_hold : Vector2i
 
 var selected_building : Actor_Static
 
@@ -29,14 +39,6 @@ const HUE_GREEN_T = '#00ff007f'
 const HUE_RED_T = '#ff00007f'
 const HUE_RED = '#ff0000ff'
 const HUE_DEFAULT = '#ffffffff'
-
-#var build_road : bool = false
-var road_start : Vector2i
-var road_end: Vector2i
-var is_dragging : bool = false
-
-#var demolish : bool = false
-#var demolish_road : bool = false
 
 var debug_enabled : bool = false
 
@@ -78,18 +80,24 @@ func _process(_delta):
 						
 			BuildMode.ROAD:
 				clear_layer(2)
-				if is_dragging:
-					road_end = local_to_map(get_global_mouse_position())
-					var path = a_star_search(road_start, road_end)
-					set_cells_terrain_connect(2, path, 0, 0)
-				else:
+				if !start_tile:
 					set_cells_terrain_connect(2, [mouse_tile], 0, 0)
+				else:
+					var road_end = local_to_map(get_global_mouse_position())
+					var path = construct_path(start_tile, road_end)
+					set_cells_terrain_connect(2, path, 0, 0)
 			
 			BuildMode.DEMOLISH:
 				if occupied_tiles.has(mouse_tile_prev):
 					occupied_tiles.get(mouse_tile_prev).sprite.self_modulate = HUE_DEFAULT
 				if occupied_tiles.has(mouse_tile):
 					occupied_tiles.get(mouse_tile).sprite.self_modulate = HUE_RED
+			
+			BuildMode.DEMOLISH_ROAD:
+				if !start_tile:
+					pass
+				else:
+					pass
 
 # GENERATION FUNCTIONS
 
@@ -138,10 +146,6 @@ func preview_building(actor_static_instance : Actor_Static):
 	add_child(selected_building)
 	selected_building.z_index = 3
 
-#func cancel_building_mode():
-	#if selected_building:
-		#remove_child(selected_building)
-	#selected_building = null
 
 func build_actor_static(actor_static_instance : Actor_Static) -> bool:
 	var pos = local_to_map(get_global_mouse_position())
@@ -150,29 +154,24 @@ func build_actor_static(actor_static_instance : Actor_Static) -> bool:
 		place_actor_static(actor_static_instance, pos)
 	return valid
 
-#func building_mode_road():
-	#b_mode = BuildMode.ROAD
-
-#func cancel_building_mode_road():
-	#clear_layer(2)
-	#is_dragging = false
-	#b_mode = BuildMode.NONE
-
-#func demolish_mode():
-	#b_mode = BuildMode.DEMOLISH
-
-#func cancel_demolish_mode():
-	#b_mode = BuildMode.NONE
-	##if occupied_tiles.has(mouse_tile_prev):
-		##occupied_tiles.get(mouse_tile_prev).sprite.self_modulate = HUE_DEFAULT
-	#if occupied_tiles.has(mouse_tile):
-		#occupied_tiles.get(mouse_tile).sprite.self_modulate = HUE_DEFAULT
-
-#func demolish_road_mode():
-	#b_mode = BuildMode.DEMOLISH_ROAD
-
-#func cancel_demolish_road_mode():
-	#b_mode = BuildMode.NONE
+func construct_path(start : Vector2i, end : Vector2i):
+	var current : Vector2i = start
+	var next : Vector2i
+	var path = []
+	path.append(current)
+	while current != end:
+		var min_d = 9223372036854775807
+		for neighbour in get_iso_neighbours(current):
+			var v_distance = end - (current + neighbour)
+			var distance = abs(v_distance.x) + abs(v_distance.y)
+			if distance < min_d:
+				min_d = distance
+				next = current + neighbour
+		path.append(next)
+		current = next
+		
+	path.append(end)
+	return path
 
 func set_build_mode(bm : BuildMode) :
 	
@@ -185,13 +184,14 @@ func set_build_mode(bm : BuildMode) :
 				remove_child(selected_building)
 			selected_building = null
 		BuildMode.ROAD:
-			is_dragging = false
+			start_tile = null
 			clear_layer(2)
 		BuildMode.DEMOLISH:
 			if occupied_tiles.has(mouse_tile):
 				occupied_tiles.get(mouse_tile).sprite.self_modulate = HUE_DEFAULT
 		BuildMode.DEMOLISH_ROAD:
-			is_dragging = false
+			pass
+			#is_dragging = false
 	
 	#SET NEW BUILD MODE
 	match bm:
@@ -208,6 +208,29 @@ func set_build_mode(bm : BuildMode) :
 	
 	b_mode = bm
 
+func build(pos : Vector2i, actor_static_instance : Actor_Static):
+	pass
+	
+func build_road(pos : Vector2i):
+	if !start_tile:
+		start_tile = pos
+	else:
+		var end_tile = pos
+		var path = construct_path(start_tile, end_tile)
+		set_cells_terrain_connect(1, path, 0, 0)
+		start_tile =end_tile
+
+func demolish(pos : Vector2i):
+	if occupied_tiles.has(pos):
+		remove_child(occupied_tiles.get(pos))
+		occupied_tiles.erase(pos)
+
+func demolish_road(pos : Vector2i):
+	set_cell(1, pos, -1) # TRY TO CORRECT THE MISCONECTIONS AROUND
+
+
+
+
 # UTILITIES
 
 func get_random_pos() -> Vector2i:
@@ -223,7 +246,15 @@ func valid_position(x : int, y : int) -> bool :
 		return false
 	return x > -1 and y > -1
 
-
+func get_iso_neighbours(pos : Vector2i) :
+	var mod = pos.x % 2
+	var neighbours = [
+		Vector2i(-1, mod -1),	# Top-left
+		Vector2i(+1, mod -1),	# Top-right
+		Vector2i(-1, mod),		# Bottom-left
+		Vector2i(+1, mod)		# Bottom-right
+	]
+	return neighbours
 
 # INPUT_HANDLERS
 
@@ -263,36 +294,29 @@ func _input(event):
 			if event.keycode == KEY_Z:
 				set_build_mode(BuildMode.DEMOLISH_ROAD)
 				
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed:
-				match b_mode:
-					BuildMode.BUILDING:
-						if selected_building:
-							selected_building.sprite.self_modulate = HUE_DEFAULT
-							var placed = build_actor_static(selected_building)
-							if !placed: # CHECK WHY THIS LOGIC WORKS
-								#cancel_building_mode()
-								set_build_mode(BuildMode.NONE)
-							selected_building = null
-					BuildMode.ROAD:
-						road_start = local_to_map(get_global_mouse_position())
-						is_dragging = true
-					BuildMode.DEMOLISH:
-						if occupied_tiles.has(mouse_tile):
-							remove_child(occupied_tiles.get(mouse_tile))
-					BuildMode.DEMOLISH_ROAD:
-						set_cells_terrain_connect(1, [mouse_tile], -1, -1)
-			else:
-				match b_mode:
-					BuildMode.ROAD:
-						road_end = local_to_map(get_global_mouse_position())
-						var path = a_star_search(road_start, road_end)
-						set_cells_terrain_connect(1, path, 0, 0)
-						is_dragging = false
+			match b_mode:
+				BuildMode.BUILDING:
+					if selected_building:
+						selected_building.sprite.self_modulate = HUE_DEFAULT
+						var placed = build_actor_static(selected_building)
+						if !placed: # CHECK WHY THIS LOGIC WORKS
+							#cancel_building_mode()
+							set_build_mode(BuildMode.NONE)
+						selected_building = null
+				BuildMode.ROAD:
+					build_road(mouse_tile)
+				BuildMode.DEMOLISH:
+					demolish(mouse_tile)
+				BuildMode.DEMOLISH_ROAD:
+					demolish_road(mouse_tile)
 
 		if event.button_index == MOUSE_BUTTON_RIGHT:
-			set_build_mode(BuildMode.NONE)
+			if b_mode == BuildMode.ROAD and start_tile:
+				start_tile = null
+			else:
+				set_build_mode(BuildMode.NONE)
 
 
 
