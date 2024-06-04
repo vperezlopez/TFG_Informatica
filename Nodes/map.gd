@@ -8,6 +8,9 @@ var warehouse = preload("res://Nodes/warehouse.tscn")
 var depot = preload("res://Nodes/depot.tscn")
 var harbor = preload("res://Nodes/harbor.tscn")
 
+var vehicle = preload("res://Nodes/vehicle.tscn")
+var truck = preload("res://Nodes/truck.tscn")
+
 const priority_queue_class = preload("res://Nodes/PriorityQueue.gd")
 
 const iso_dirs = [ #this has to be corrected adding + Vector2i(0, x % 2)
@@ -54,6 +57,12 @@ func initialize(width : int, height : int, n_cities : int, n_explotations : int,
 	generate_actors_static(explotation, n_explotations)
 	generate_actors_static(harbor, n_harbors)
 	generate_roads()
+	
+	var truck_instance = truck.instantiate()
+	add_child(truck_instance)
+	truck_instance.z_index = 3
+	truck_instance.position = map_to_local(Vector2i(16, 16))
+	
 
 
 func _process(_delta):
@@ -191,7 +200,6 @@ func set_build_mode(bm : BuildMode) :
 				occupied_tiles.get(mouse_tile).sprite.self_modulate = HUE_DEFAULT
 		BuildMode.DEMOLISH_ROAD:
 			pass
-			#is_dragging = false
 	
 	#SET NEW BUILD MODE
 	match bm:
@@ -228,9 +236,6 @@ func demolish(pos : Vector2i):
 func demolish_road(pos : Vector2i):
 	set_cell(1, pos, -1) # TRY TO CORRECT THE MISCONECTIONS AROUND
 
-
-
-
 # UTILITIES
 
 func get_random_pos() -> Vector2i:
@@ -255,6 +260,30 @@ func get_iso_neighbours(pos : Vector2i) :
 		Vector2i(+1, mod)		# Bottom-right
 	]
 	return neighbours
+
+func calculate_area_corners(pos1 : Vector2i, pos2 : Vector2i) -> Array[Vector2i]:
+	var x0 # Top-left corner
+	var y0 # Top-left corner
+	var x1 # Bottom-right corner
+	var y1 # Bottom-right corner
+	if pos1.x > pos2.x:
+		x1 = pos2.x
+		x0 = pos1.x
+	else:
+		x0 = pos1.x
+		x1 = pos2.x
+		
+	if pos1.y > pos2.y:
+		y1 = pos2.y
+		y0 = pos1.y
+	else:
+		y0 = pos1.y
+		y1 = pos2.y
+	
+	var top_left_corner : Vector2i = Vector2i(x0, y0)
+	var bottom_right_corner : Vector2i = Vector2i(x1, y1)
+	
+	return [top_left_corner, bottom_right_corner]
 
 # INPUT_HANDLERS
 

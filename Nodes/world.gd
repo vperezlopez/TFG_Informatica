@@ -11,6 +11,13 @@ var map_class = preload("res://Nodes/map.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if !FileAccess.file_exists(Constants.CATALOG_PATH):
+		Catalog_Creator.create_catalog()
+		await get_tree().process_frame
+
+	var cargo_catalog = load(Constants.CATALOG_PATH) as CargoResource
+	print(str(cargo_catalog.cargos.get(2, 'Not found').name))
+	
 	var map = map_class.instantiate()
 	map.initialize(map_width, map_height, n_cities, n_explotations, n_harbors)
 	add_child(map)
