@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dam2yp18gc048"]
+
+[ext_resource type="Script" path="res://Nodes/truck.gd" id="1_84hf5"]
+
+[node name="truck" type="CharacterBody2D"]
+script = ExtResource("1_84hf5")

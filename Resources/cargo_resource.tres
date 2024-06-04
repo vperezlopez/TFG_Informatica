@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="CargoResource" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://Nodes/cargo.gd" id="1_igjbe"]
+[ext_resource type="Script" path="res://Nodes/cargo_resource.gd" id="2_mkh25"]
+
+[sub_resource type="Resource" id="Resource_hyo3n"]
+script = ExtResource("1_igjbe")
+id = 1
+name = "Wood"
+value = 2.0
+img_path = "res://images/wood.png"
+
+[sub_resource type="Resource" id="Resource_v8ujr"]
+script = ExtResource("1_igjbe")
+id = 2
+name = "Aluminium"
+value = 1.8
+img_path = "res://images/aluminium.png"
+
+[sub_resource type="Resource" id="Resource_fyump"]
+script = ExtResource("1_igjbe")
+id = 3
+name = "Steel"
+value = 2.4
+img_path = "res://images/steel.png"
+
+[resource]
+script = ExtResource("2_mkh25")
+cargos = {
+1: SubResource("Resource_hyo3n"),
+2: SubResource("Resource_v8ujr"),
+3: SubResource("Resource_fyump")
+}

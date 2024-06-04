@@ -56,7 +56,7 @@ func _input(event):
 				new_pos += move_dir
 
 # Actualiza la posición de la cámara basada en la posición del ratón
-func _update_scroll_with_mouse(delta):
+func _update_scroll_with_mouse(_delta):
 	var mouse_pos = get_viewport().get_mouse_position()
 	var viewport_size = get_viewport().size
 
