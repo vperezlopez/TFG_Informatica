@@ -2,4 +2,6 @@ extends Object
 
 class_name Constants
 
-const CATALOG_PATH : String = "res://Resources/cargo_resource.tres"
+const MAX_INT = 9223372036854775807
+
+const CARGO_CATALOG_PATH : String = "res://Resources/cargo_catalog.tres"
