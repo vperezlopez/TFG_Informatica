@@ -1,0 +1,180 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp3uffmoy184x"]
+
+[ext_resource type="Script" path="res://Nodes/Menus/CanvasLayer.gd" id="1_gwsra"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.446777, 0.446777, 0.446777, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_gwsra")
+
+[node name="Main" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Main"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Main/CenterContainer"]
+custom_minimum_size = Vector2(512, 256)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Main/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Game Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonPlay" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Play"
+
+[node name="ButtonLoad" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Load
+"
+
+[node name="ButtonSettings" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Settings"
+
+[node name="ButtonQuit" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit"
+
+[node name="Load" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Load"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Load/CenterContainer"]
+custom_minimum_size = Vector2(512, 256)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Load/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Load/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LabelLoad" type="Label" parent="CanvasLayer/Load/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
+text = "Load Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonBack" type="Button" parent="CanvasLayer/Load/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back"
+
+[node name="Settings" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Settings/CenterContainer"]
+custom_minimum_size = Vector2(512, 256)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Settings/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LabelSettings" type="Label" parent="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonBack" type="Button" parent="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back"
+
+[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonPlay" to="CanvasLayer" method="_on_button_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonLoad" to="CanvasLayer" method="_on_button_load_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonSettings" to="CanvasLayer" method="_on_button_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonQuit" to="CanvasLayer" method="_on_button_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/Load/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonBack" to="CanvasLayer" method="_on_button_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonBack" to="CanvasLayer" method="_on_button_back_pressed"]
