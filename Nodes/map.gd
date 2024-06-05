@@ -169,7 +169,7 @@ func construct_path(start : Vector2i, end : Vector2i):
 	var path = []
 	path.append(current)
 	while current != end:
-		var min_d = 9223372036854775807
+		var min_d = Constants.MAX_INT
 		for neighbour in get_iso_neighbours(current):
 			var v_distance = end - (current + neighbour)
 			var distance = abs(v_distance.x) + abs(v_distance.y)
