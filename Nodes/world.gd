@@ -15,15 +15,16 @@ func _ready():
 		Catalog_Creator.create_catalog()
 		await get_tree().process_frame
 
-	var map = map_class.instantiate()
-	map.initialize(map_width, map_height, n_cities, n_explotations, n_harbors)
-	add_child(map)
-
-	test()
+	#new_game(Vector2i(map_width, map_height), n_cities, n_explotations, n_harbors)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+
+func new_game(size : Vector2i, ncities : int, nexplotations : int, nharbors : int):
+	var map = map_class.instantiate()
+	map.initialize(size.x, size.y, ncities, nexplotations, nharbors)
+	add_child(map)
 
 func _on_control_gui_input(event):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
