@@ -66,6 +66,7 @@ func initialize(width : int, height : int, n_cities : int, n_explotations : int,
 
 
 func _process(_delta):
+	#print(str(get_local_mouse_position()))
 	$CursorLabel.visible = debug_enabled
 	if debug_enabled:
 		var world_pos = get_global_mouse_position()
