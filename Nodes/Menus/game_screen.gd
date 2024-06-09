@@ -72,3 +72,54 @@ func test():
 func _on_game_container_resized():
 	if game_viewport and game_container:
 		game_viewport.size = game_container.size
+
+
+
+
+
+
+
+
+
+
+
+
+
+func _on_button_factory_pressed():
+	print('Build factory')
+	pass # Replace with function body.
+	
+
+func _on_button_warehouse_pressed():
+	print('Build warehouse')
+	pass # Replace with function body.
+
+
+func _on_button_road_depot_pressed():
+	print('Build road depot')
+	pass # Replace with function body.
+
+
+func _on_button_rail_depot_pressed():
+	print('Build rail depot')
+	pass # Replace with function body.
+
+
+func _on_button_road_pressed():
+	print('Build road')
+	pass # Replace with function body.
+
+
+func _on_button_railway_pressed():
+	print('Build railway')
+	pass # Replace with function body.
+
+
+func _on_button_demolish_pressed():
+	print('Demolish building')
+	pass # Replace with function body.
+
+
+func _on_button_demolish_path_pressed():
+	print('Demolish path')
+	pass # Replace with function body.

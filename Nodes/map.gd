@@ -22,6 +22,8 @@ const iso_dirs = [ #this has to be corrected adding + Vector2i(0, x % 2)
 
 enum PATH {ROAD = 1, RAILWAY = 2}
 enum BuildMode { NONE, BUILDING, DEMOLISH, ROAD, DEMOLISH_ROAD }
+enum Building { NONE, FACTORY, WAREHOUSE, DEPOT_ROAD, DEPOT_RAIL }
+enum Path { NONE, ROAD, RAILWAY}
 
 var map_width = 0
 var map_height = 0
@@ -155,6 +157,9 @@ func draw_roads(path):
 
 # BUILDING FUNCTIONS
 
+func build(build_mode : BuildMode, building : Building = Building.NONE, path : Path = Path.NONE):
+	pass
+
 func preview_building(actor_static_instance : Actor_Static):
 	if selected_building:
 		remove_child(selected_building)
@@ -223,8 +228,8 @@ func set_build_mode(bm : BuildMode) :
 	
 	b_mode = bm
 
-func build(pos : Vector2i, actor_static_instance : Actor_Static):
-	pass
+#func build(pos : Vector2i, actor_static_instance : Actor_Static):
+	#pass
 	
 func build_road(pos : Vector2i):
 	if !start_tile:
