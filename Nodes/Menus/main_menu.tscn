@@ -1,0 +1,294 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp3uffmoy184x"]
+
+[ext_resource type="Script" path="res://Nodes/Menus/CanvasLayer.gd" id="1_gwsra"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.446777, 0.446777, 0.446777, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_gwsra")
+
+[node name="Main" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Main"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Main/CenterContainer"]
+custom_minimum_size = Vector2(512, 256)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Main/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Game Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonNew" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "New Game"
+
+[node name="ButtonLoad" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Load
+"
+
+[node name="ButtonSettings" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Settings"
+
+[node name="ButtonQuit" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit"
+
+[node name="New" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/New"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/New/CenterContainer"]
+custom_minimum_size = Vector2(512, 256)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/New/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LabelNew" type="Label" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "New Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainerMapSize" type="HBoxContainer" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LabelMapSize" type="Label" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerMapSize"]
+layout_mode = 2
+text = "Map Size"
+
+[node name="SpinBoxWidth" type="SpinBox" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerMapSize"]
+layout_mode = 2
+min_value = 32.0
+max_value = 256.0
+value = 64.0
+
+[node name="SpinBoxHeight" type="SpinBox" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerMapSize"]
+layout_mode = 2
+min_value = 32.0
+max_value = 256.0
+value = 64.0
+
+[node name="HBoxContainerCities" type="HBoxContainer" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LabelCities" type="Label" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerCities"]
+layout_mode = 2
+text = "Number of Cities"
+
+[node name="SpinBoxCities" type="SpinBox" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerCities"]
+layout_mode = 2
+min_value = 1.0
+max_value = 40.0
+value = 8.0
+
+[node name="HBoxContainerExplotations" type="HBoxContainer" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LabelExplotations" type="Label" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerExplotations"]
+layout_mode = 2
+text = "Number of Explotations
+"
+
+[node name="SpinBoxExplotations" type="SpinBox" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerExplotations"]
+layout_mode = 2
+min_value = 1.0
+max_value = 32.0
+value = 6.0
+
+[node name="HBoxContainerHarbors" type="HBoxContainer" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LabelHarbors" type="Label" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerHarbors"]
+layout_mode = 2
+text = "Number of Harbors"
+
+[node name="SpinBoxHarbors" type="SpinBox" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerHarbors"]
+layout_mode = 2
+max_value = 16.0
+value = 4.0
+
+[node name="HBoxContainerNewButtons" type="HBoxContainer" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonPlay" type="Button" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerNewButtons"]
+layout_mode = 2
+text = "Play"
+
+[node name="ButtonBack" type="Button" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerNewButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back"
+
+[node name="Load" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Load"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Load/CenterContainer"]
+custom_minimum_size = Vector2(512, 256)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Load/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Load/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LabelLoad" type="Label" parent="CanvasLayer/Load/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
+text = "Load Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonBack" type="Button" parent="CanvasLayer/Load/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back"
+
+[node name="Settings" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Settings/CenterContainer"]
+custom_minimum_size = Vector2(512, 256)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Settings/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LabelSettings" type="Label" parent="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonBack" type="Button" parent="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back"
+
+[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonNew" to="CanvasLayer" method="_on_button_new_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonLoad" to="CanvasLayer" method="_on_button_load_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonSettings" to="CanvasLayer" method="_on_button_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonQuit" to="CanvasLayer" method="_on_button_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerNewButtons/ButtonPlay" to="CanvasLayer" method="_on_button_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerNewButtons/ButtonBack" to="CanvasLayer" method="_on_button_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/Load/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonBack" to="CanvasLayer" method="_on_button_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonBack" to="CanvasLayer" method="_on_button_back_pressed"]

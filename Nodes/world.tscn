@@ -1,20 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://6e1b2ibmskvw"]
+[gd_scene load_steps=5 format=3 uid="uid://6e1b2ibmskvw"]
 
 [ext_resource type="Script" path="res://Nodes/world.gd" id="1_onp05"]
-[ext_resource type="Script" path="res://Nodes/camera.gd" id="3_ku27r"]
-[ext_resource type="Script" path="res://Nodes/interface.gd" id="5_jxlew"]
+[ext_resource type="PackedScene" uid="uid://cfaipfii1a8i4" path="res://Nodes/map.tscn" id="2_7uqsk"]
+[ext_resource type="PackedScene" uid="uid://d25kc44qokkgf" path="res://Nodes/camera.tscn" id="3_xuvgo"]
+[ext_resource type="PackedScene" uid="uid://cel0frgdua3ir" path="res://Nodes/Menus/game_interface.tscn" id="4_lvuui"]
 
 [node name="world" type="Node2D"]
 script = ExtResource("1_onp05")
 
-[node name="camera" type="Camera2D" parent="."]
-script = ExtResource("3_ku27r")
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="interface" type="Control" parent="."]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_7uqsk")]
+
+[node name="camera" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_xuvgo")]
+
+[node name="UIContainer" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("5_jxlew")
 
-[connection signal="gui_input" from="interface" to="." method="_on_control_gui_input"]
+[node name="game_interface" parent="UIContainer" instance=ExtResource("4_lvuui")]

@@ -57,6 +57,7 @@ func initialize(width : int, height : int, n_cities : int, n_explotations : int,
 	generate_actors_static(explotation, n_explotations)
 	generate_actors_static(harbor, n_harbors)
 	generate_roads()
+	initialize_camera()
 	
 	var truck_instance = truck.instantiate()
 	add_child(truck_instance)
@@ -66,6 +67,7 @@ func initialize(width : int, height : int, n_cities : int, n_explotations : int,
 
 
 func _process(_delta):
+	#print(str(get_local_mouse_position()))
 	$CursorLabel.visible = debug_enabled
 	if debug_enabled:
 		var world_pos = get_global_mouse_position()
@@ -131,6 +133,11 @@ func generate_roads(start_pos : Vector2i = Vector2i(-1, -1), end_pos : Vector2i 
 	var path = a_star_search(start_pos, end_pos)
 	draw_roads(path)
 
+func initialize_camera():
+	var center_x = (self.tile_set.tile_size.x * map_width) / 2
+	var center_y = (self.tile_set.tile_size.y * map_height) / 2
+	# We have to half the center position because the camera itself is not centered, but anchored to the top_left corner
+	$camera.set_starting_position(Vector2i(center_x / 2, center_y / 2))
 
 # PLACING FUNCTIONS
 
