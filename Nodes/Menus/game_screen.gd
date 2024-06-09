@@ -5,6 +5,7 @@ extends Node
 @onready var game_container = 	$VBoxContainer/top_container/game_container
 @onready var game_viewport = 	$VBoxContainer/top_container/game_container/game_viewport
 @onready var map = 				$VBoxContainer/top_container/game_container/game_viewport/map
+@onready var camera = $VBoxContainer/top_container/game_container/game_viewport/map/camera
 @onready var bottom_container = $VBoxContainer/bottom_container
 
 # Called when the node enters the scene tree for the first time.
@@ -14,41 +15,14 @@ func _ready():
 		await get_tree().process_frame
 
 	new_game(Vector2i(64, 64), 5, 0, 0)
-	
-	print('top container ' + str(top_container.size))
-	print('bottom container ' + str(bottom_container.size))
-	
-	
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	#var label = $VBoxContainer/top_container/game_container/game_viewport/Label
-	#var camera = $VBoxContainer/top_container/game_container/game_viewport/map/camera
-	#label.z_index = 100
-	#label.position = Vector2(500, 200)
-	#label.text = 	'Viewport size: ' + str(camera.viewport_size) + ")\n" + \
-					#'Left margin: ' + str(camera.left_margin) + ")\n" + \
-					#'Right margin: ' + str(camera.right_margin) + ")\n" + \
-					#'Top margin: ' + str(camera.top_margin) + ")\n" + \
-					#'Bottom margin: ' + str(camera.bottom_margin) + ")\n"
 	pass
-	
-	#print('vbox container ' + str(v_box_container.size))
-	#print('-mouse position ' + str(v_box_container.get_global_mouse_position()))
-	#
-	#print('top container ' + str(top_container.size))
-	#print('-game container ' + str(game_container.size))
-	#print('--game viewport ' + str(game_viewport.size))
-	#
-	#print('bottom container ' + str(bottom_container.size))
+
 
 func new_game(size : Vector2i, ncities : int, nexplotations : int, nharbors : int):
-	#var map = map_class.instantiate()@onready var map = $SubViewportContainer/SubViewport/map
-
-	#var map = $GameContainer/map
 	map.initialize(size.x, size.y, ncities, nexplotations, nharbors)
-	#add_child(map)
 
 func test():
 	var cargo_catalog = load(Constants.CARGO_CATALOG_PATH) as CargoCatalog
@@ -96,11 +70,5 @@ func test():
 
 
 func _on_game_container_resized():
-	print('On game container resized')
 	if game_viewport and game_container:
-		print('Resizing')
-		print('Container: ' + str(game_container.size))
-		print('Viewport: ' + str(game_viewport.size))
-		
 		game_viewport.size = game_container.size
-		pass # Replace with function body.
