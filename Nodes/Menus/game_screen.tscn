@@ -33,7 +33,7 @@ events = [SubResource("InputEventKey_qmk2h")]
 [sub_resource type="InputEventKey" id="InputEventKey_ar75x"]
 device = -1
 ctrl_pressed = true
-keycode = 68
+keycode = 88
 
 [sub_resource type="Shortcut" id="Shortcut_wsr75"]
 events = [SubResource("InputEventKey_ar75x")]

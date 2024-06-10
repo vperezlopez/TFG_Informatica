@@ -1,6 +1,5 @@
 extends Node
 
-@onready var v_box_container = 	$VBoxContainer
 @onready var top_container = 	$VBoxContainer/top_container
 @onready var game_container = 	$VBoxContainer/top_container/game_container
 @onready var game_viewport = 	$VBoxContainer/top_container/game_container/game_viewport
@@ -86,40 +85,31 @@ func _on_game_container_resized():
 
 
 func _on_button_factory_pressed():
-	print('Build factory')
-	pass # Replace with function body.
-	
+	map.build(map.BuildTypes.FACTORY)
+	#map.set_build_mode(map.BuildMode.BUILDING, map.Buildings.FACTORY)
 
 func _on_button_warehouse_pressed():
-	print('Build warehouse')
-	pass # Replace with function body.
-
+	map.build(map.BuildTypes.WAREHOUSE)
+	#map.set_build_mode(map.BuildMode.BUILDING, map.Buildings.WAREHOUSE)
 
 func _on_button_road_depot_pressed():
-	print('Build road depot')
-	pass # Replace with function body.
-
+	map.build(map.BuildTypes.DEPOT_ROAD)
+	#map.set_build_mode(map.BuildMode.BUILDING, map.Buildings.DEPOT_ROAD)
 
 func _on_button_rail_depot_pressed():
-	print('Build rail depot')
-	pass # Replace with function body.
-
+	map.build(map.BuildTypes.DEPOT_RAILWAY)
+	#map.set_build_mode(map.BuildMode.BUILDING, map.Buildings.DEPOT_RAIL)
 
 func _on_button_road_pressed():
-	print('Build road')
-	pass # Replace with function body.
-
+	map.build_path(map.PathTypes.ROAD)
+	#map.set_build_mode(map.BuildMode.PATH.ROAD)
 
 func _on_button_railway_pressed():
-	print('Build railway')
-	pass # Replace with function body.
-
+	map.build_path(map.PathTypes.RAILWAY)
+	#map.set_build_mode(BuildMode.PATH.RAILWAY)
 
 func _on_button_demolish_pressed():
-	print('Demolish building')
-	pass # Replace with function body.
-
+	map.set_build_mode(map.BuildMode.DEMOLISH)
 
 func _on_button_demolish_path_pressed():
-	print('Demolish path')
-	pass # Replace with function body.
+	map.set_build_mode(map.BuildMode.DEMOLISH_PATH)

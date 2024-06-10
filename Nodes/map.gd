@@ -20,25 +20,24 @@ const iso_dirs = [ #this has to be corrected adding + Vector2i(0, x % 2)
 		Vector2i(+1, 0)		# Bottom-right
 	]
 
-enum PATH {ROAD = 1, RAILWAY = 2}
-enum BuildMode { NONE, BUILDING, DEMOLISH, ROAD, DEMOLISH_ROAD }
-enum Building { NONE, FACTORY, WAREHOUSE, DEPOT_ROAD, DEPOT_RAIL }
-enum Path { NONE, ROAD, RAILWAY}
+enum BuildMode { NONE, BUILDING, DEMOLISH, PATH, DEMOLISH_PATH }
+enum BuildTypes { NONE, FACTORY, WAREHOUSE, DEPOT_ROAD, DEPOT_RAILWAY}
+enum PathTypes { NONE = 99, ROAD = 0, RAILWAY = 1}
 
 var map_width = 0
 var map_height = 0
 
 var occupied_tiles : Dictionary = {}
 
-var b_mode : BuildMode = BuildMode.NONE
-
 var mouse_tile : Vector2i
 var mouse_tile_prev : Vector2i
 
+var build_mode = BuildMode.NONE
+var selected_building : Actor_Static
+var selected_path : int
+
 var start_tile #: Vector2i
 var start_hold : Vector2i
-
-var selected_building : Actor_Static
 
 const HUE_GREEN_T = '#00ff007f'
 const HUE_RED_T = '#ff00007f'
@@ -81,8 +80,8 @@ func _process(_delta):
 	
 	mouse_tile_prev = mouse_tile
 	mouse_tile = local_to_map(get_global_mouse_position())
-	if b_mode != BuildMode.NONE:
-		match b_mode:
+	if build_mode != BuildMode.NONE:
+		match build_mode:
 			BuildMode.BUILDING:
 				if selected_building:
 					selected_building.position = map_to_local(mouse_tile)
@@ -91,14 +90,14 @@ func _process(_delta):
 					else:
 						selected_building.sprite.self_modulate = HUE_RED_T
 						
-			BuildMode.ROAD:
+			BuildMode.PATH:
 				clear_layer(2)
 				if !start_tile:
-					set_cells_terrain_connect(2, [mouse_tile], 0, 0)
+					set_cells_terrain_connect(2, [mouse_tile], 0, selected_path)
 				else:
 					var road_end = local_to_map(get_global_mouse_position())
 					var path = construct_path(start_tile, road_end)
-					set_cells_terrain_connect(2, path, 0, 0)
+					set_cells_terrain_connect(2, path, 0, selected_path)
 			
 			BuildMode.DEMOLISH:
 				if occupied_tiles.has(mouse_tile_prev):
@@ -106,13 +105,13 @@ func _process(_delta):
 				if occupied_tiles.has(mouse_tile):
 					occupied_tiles.get(mouse_tile).sprite.self_modulate = HUE_RED
 			
-			BuildMode.DEMOLISH_ROAD:
+			BuildMode.DEMOLISH_PATH:
 				if !start_tile:
 					pass
 				else:
 					pass
 
-# GENERATION FUNCTIONS
+# INITIALIZATION FUNCTIONS
 
 func generate_map(width : int, height : int):
 	map_width = width
@@ -157,9 +156,6 @@ func draw_roads(path):
 
 # BUILDING FUNCTIONS
 
-func build(build_mode : BuildMode, building : Building = Building.NONE, path : Path = Path.NONE):
-	pass
-
 func preview_building(actor_static_instance : Actor_Static):
 	if selected_building:
 		remove_child(selected_building)
@@ -194,50 +190,64 @@ func construct_path(start : Vector2i, end : Vector2i):
 	path.append(end)
 	return path
 
-func set_build_mode(bm : BuildMode) :
-	
+#func set_build_mode(new_build_mode : BuildMode, building : BuildTypes = BuildTypes.NONE, path_type : PathTypes = PathTypes.NONE) :
+func set_build_mode(new_build_mode : BuildMode) :
 	# REMOVE PREVIOUS MODE
-	match b_mode:
+	match build_mode:
 		BuildMode.NONE:
 			pass
 		BuildMode.BUILDING:
 			if selected_building:
 				remove_child(selected_building)
 			selected_building = null
-		BuildMode.ROAD:
+		BuildMode.PATH:
 			start_tile = null
 			clear_layer(2)
 		BuildMode.DEMOLISH:
 			if occupied_tiles.has(mouse_tile):
 				occupied_tiles.get(mouse_tile).sprite.self_modulate = HUE_DEFAULT
-		BuildMode.DEMOLISH_ROAD:
+		BuildMode.DEMOLISH_PATH:
 			pass
 	
 	#SET NEW BUILD MODE
-	match bm:
+	match new_build_mode:
 		BuildMode.NONE:
 			pass
 		BuildMode.BUILDING:
 			pass
-		BuildMode.ROAD:
+			#match building:
+				#BuildTypes.NONE:
+					#printerr('Building Mode was BUILDING, but no building was provided')
+					#new_build_mode = BuildMode.NONE
+				#BuildTypes.FACTORY:
+					#preview_building(factory.instantiate())
+				#BuildTypes.WAREHOUSE:
+					#preview_building(warehouse.instantiate())
+				#BuildTypes.DEPOT_ROAD:
+					#preview_building(depot.instantiate())
+				#BuildTypes.DEPOT_RAILWAY:
+					#printerr('Train depot not implemented yet')
+					#pass
+		BuildMode.PATH:
 			pass
-		BuildMode.DEMOLISH:
-			pass
-		BuildMode.DEMOLISH_ROAD:
-			pass
+			#if path_type == PathTypes.NONE:
+				#printerr('Building Mode was PATH, but no path_type was provided')
+				#new_build_mode = BuildMode.NONE
+			#else:
+				#selected_path = path_type
 	
-	b_mode = bm
+	build_mode = new_build_mode
 
 #func build(pos : Vector2i, actor_static_instance : Actor_Static):
 	#pass
 	
-func build_road(pos : Vector2i):
+func lay_road(pos : Vector2i):
 	if !start_tile:
 		start_tile = pos
 	else:
 		var end_tile = pos
 		var path = construct_path(start_tile, end_tile)
-		set_cells_terrain_connect(1, path, 0, 0)
+		set_cells_terrain_connect(1, path, 0, selected_path)
 		start_tile =end_tile
 
 func demolish(pos : Vector2i):
@@ -299,11 +309,39 @@ func calculate_area_corners(pos1 : Vector2i, pos2 : Vector2i) -> Array[Vector2i]
 
 # INPUT_HANDLERS
 
+func build (build_type : BuildTypes):
+	var building : Actor_Static
+	match build_type:
+		BuildTypes.NONE:
+			printerr('Building different than BuildTypes.NONE required')
+			return
+		BuildTypes.FACTORY:
+			building = factory.instantiate()
+			#preview_building(factory.instantiate())
+		BuildTypes.WAREHOUSE:
+			building = warehouse.instantiate()
+			#preview_building(warehouse.instantiate())
+		BuildTypes.DEPOT_ROAD:
+			building = depot.instantiate()
+			#preview_building(depot.instantiate())
+		BuildTypes.DEPOT_RAILWAY:
+			printerr('Train depot not implemented yet')
+	if building:
+		set_build_mode(BuildMode.BUILDING)
+		preview_building(building)
+
+func build_path (path_type : PathTypes):
+	if path_type == PathTypes.NONE:
+		printerr('Building different than BuildTypes.NONE required')
+	else:
+		set_build_mode(BuildMode.PATH)
+		selected_path = path_type
+
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed:
 			if event.keycode == KEY_ESCAPE:
-				if b_mode != BuildMode.NONE:
+				if build_mode != BuildMode.NONE:
 					set_build_mode(BuildMode.NONE)
 				else:
 					get_tree().quit()
@@ -318,26 +356,26 @@ func _input(event):
 				for tile in occupied_tiles:
 					print('Structure: ' + str(occupied_tiles.get(tile)) + ', Position: ' + str(tile))
 			if event.keycode == KEY_M:
-				print('Building Mode: ' + str(b_mode))
-			if event.keycode == KEY_F:
-				set_build_mode(BuildMode.BUILDING)
-				preview_building(factory.instantiate())
-			if event.keycode == KEY_D:
-				set_build_mode(BuildMode.BUILDING)
-				preview_building(depot.instantiate())
-			if event.keycode == KEY_W:
-				set_build_mode(BuildMode.BUILDING)
-				preview_building(warehouse.instantiate())
-			if event.keycode == KEY_R:
-				set_build_mode(BuildMode.ROAD)
-			if event.keycode == KEY_X:
-				set_build_mode(BuildMode.DEMOLISH)
-			if event.keycode == KEY_Z:
-				set_build_mode(BuildMode.DEMOLISH_ROAD)
+				print('Building Mode: ' + str(build_mode))
+			#if event.keycode == KEY_F:
+				#set_build_mode(BuildMode.BUILDING)
+				#preview_building(factory.instantiate())
+			#if event.keycode == KEY_D:
+				#set_build_mode(BuildMode.BUILDING)
+				#preview_building(depot.instantiate())
+			#if event.keycode == KEY_W:
+				#set_build_mode(BuildMode.BUILDING)
+				#preview_building(warehouse.instantiate())
+			#if event.keycode == KEY_R:
+				#set_build_mode(BuildMode.PATH.ROAD)
+			#if event.keycode == KEY_X:
+				#set_build_mode(BuildMode.DEMOLISH)
+			#if event.keycode == KEY_Z:
+				#set_build_mode(BuildMode.DEMOLISH_PATH)
 				
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			match b_mode:
+			match build_mode:
 				BuildMode.BUILDING:
 					if selected_building:
 						selected_building.sprite.self_modulate = HUE_DEFAULT
@@ -346,15 +384,15 @@ func _input(event):
 							#cancel_building_mode()
 							set_build_mode(BuildMode.NONE)
 						selected_building = null
-				BuildMode.ROAD:
-					build_road(mouse_tile)
+				BuildMode.PATH:
+					lay_road(mouse_tile)
 				BuildMode.DEMOLISH:
 					demolish(mouse_tile)
-				BuildMode.DEMOLISH_ROAD:
+				BuildMode.DEMOLISH_PATH:
 					demolish_road(mouse_tile)
 
 		if event.button_index == MOUSE_BUTTON_RIGHT:
-			if b_mode == BuildMode.ROAD and start_tile:
+			if build_mode == BuildMode.PATH and start_tile:
 				start_tile = null
 			else:
 				set_build_mode(BuildMode.NONE)
