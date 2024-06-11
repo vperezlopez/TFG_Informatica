@@ -1,75 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://dk18d5e4nde6q"]
+[gd_scene load_steps=8 format=3 uid="uid://dk18d5e4nde6q"]
 
 [ext_resource type="Script" path="res://Nodes/Menus/game_screen.gd" id="1_atfre"]
 [ext_resource type="PackedScene" uid="uid://cfaipfii1a8i4" path="res://Nodes/map.tscn" id="1_qbx3c"]
 [ext_resource type="PackedScene" uid="uid://d25kc44qokkgf" path="res://Nodes/camera.tscn" id="2_ktsrh"]
-[ext_resource type="Texture2D" uid="uid://dkhpbhcgvpj43" path="res://Assets/Placeholder_4.png" id="4_1uk6w"]
 [ext_resource type="PackedScene" uid="uid://cx6ychvt2173i" path="res://Nodes/Menus/factory_menu.tscn" id="4_ca8m4"]
-[ext_resource type="Texture2D" uid="uid://biqiitlap7tnk" path="res://Assets/Placeholder_3.png" id="5_ll4vw"]
-
-[sub_resource type="InputEventKey" id="InputEventKey_qelgd"]
-device = -1
-ctrl_pressed = true
-keycode = 70
-
-[sub_resource type="Shortcut" id="Shortcut_8y6ds"]
-events = [SubResource("InputEventKey_qelgd")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_hf025"]
-device = -1
-ctrl_pressed = true
-keycode = 82
-
-[sub_resource type="Shortcut" id="Shortcut_vwigj"]
-events = [SubResource("InputEventKey_hf025")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_qmk2h"]
-device = -1
-keycode = 82
-unicode = 114
-
-[sub_resource type="Shortcut" id="Shortcut_s2645"]
-events = [SubResource("InputEventKey_qmk2h")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_ar75x"]
-device = -1
-ctrl_pressed = true
-keycode = 88
-
-[sub_resource type="Shortcut" id="Shortcut_wsr75"]
-events = [SubResource("InputEventKey_ar75x")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_ohc0p"]
-device = -1
-ctrl_pressed = true
-keycode = 72
-
-[sub_resource type="Shortcut" id="Shortcut_4e8rq"]
-events = [SubResource("InputEventKey_ohc0p")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_e7fkf"]
-device = -1
-ctrl_pressed = true
-keycode = 84
-
-[sub_resource type="Shortcut" id="Shortcut_dvbj6"]
-events = [SubResource("InputEventKey_e7fkf")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_6bwdl"]
-device = -1
-keycode = 84
-unicode = 116
-
-[sub_resource type="Shortcut" id="Shortcut_76mdy"]
-events = [SubResource("InputEventKey_6bwdl")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_sgaq2"]
-device = -1
-keycode = 88
-unicode = 120
-
-[sub_resource type="Shortcut" id="Shortcut_o3ynd"]
-events = [SubResource("InputEventKey_sgaq2")]
+[ext_resource type="PackedScene" uid="uid://c6yvx1lg154nf" path="res://Nodes/Menus/const_menu.tscn" id="5_gm3u7"]
+[ext_resource type="PackedScene" uid="uid://cs4hn2cfdlvq8" path="res://Nodes/Menus/money_menu.tscn" id="6_xadek"]
+[ext_resource type="PackedScene" uid="uid://b843jfyemoegl" path="res://Nodes/Menus/game_menu.tscn" id="7_5fp8y"]
 
 [node name="game_screen" type="Node"]
 script = ExtResource("1_atfre")
@@ -148,142 +85,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="const_menu" type="Control" parent="VBoxContainer/bottom_container/bottom_menu"]
+[node name="const_menu" parent="VBoxContainer/bottom_container/bottom_menu" instance=ExtResource("5_gm3u7")]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/bottom_container/bottom_menu/const_menu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer"]
+[node name="money_menu" parent="VBoxContainer/bottom_container/bottom_menu" instance=ExtResource("6_xadek")]
 layout_mode = 2
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-columns = 4
 
-[node name="Button_Factory" type="Button" parent="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer"]
+[node name="game_menu" parent="VBoxContainer/bottom_container/bottom_menu" instance=ExtResource("7_5fp8y")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-shortcut = SubResource("Shortcut_8y6ds")
-icon = ExtResource("4_1uk6w")
-icon_alignment = 1
-
-[node name="Button_Road_Depot" type="Button" parent="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-shortcut = SubResource("Shortcut_vwigj")
-
-[node name="Button_Road" type="Button" parent="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-shortcut = SubResource("Shortcut_s2645")
-
-[node name="Button_Demolish" type="Button" parent="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-shortcut = SubResource("Shortcut_wsr75")
-
-[node name="Button_Warehouse" type="Button" parent="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-shortcut = SubResource("Shortcut_4e8rq")
-icon = ExtResource("5_ll4vw")
-icon_alignment = 1
-
-[node name="Button_Rail_Depot" type="Button" parent="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-shortcut = SubResource("Shortcut_dvbj6")
-
-[node name="Button_Railway" type="Button" parent="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-shortcut = SubResource("Shortcut_76mdy")
-
-[node name="Button_Demolish_Path" type="Button" parent="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-shortcut = SubResource("Shortcut_o3ynd")
-
-[node name="central_menu" type="Control" parent="VBoxContainer/bottom_container/bottom_menu"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="VBoxContainer/bottom_container/bottom_menu/central_menu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -27.5
-offset_top = -11.5
-offset_right = 27.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "3.000 €"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="game_menu" type="Control" parent="VBoxContainer/bottom_container/bottom_menu"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/bottom_container/bottom_menu/game_menu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 24
-
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/bottom_container/bottom_menu/game_menu/MarginContainer2"]
-layout_mode = 2
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-columns = 4
-
-[node name="Button" type="Button" parent="VBoxContainer/bottom_container/bottom_menu/game_menu/MarginContainer2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Button2" type="Button" parent="VBoxContainer/bottom_container/bottom_menu/game_menu/MarginContainer2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Button3" type="Button" parent="VBoxContainer/bottom_container/bottom_menu/game_menu/MarginContainer2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Button4" type="Button" parent="VBoxContainer/bottom_container/bottom_menu/game_menu/MarginContainer2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="route_menu" type="HBoxContainer" parent="VBoxContainer/bottom_container"]
 layout_mode = 0
@@ -292,11 +101,3 @@ offset_bottom = 40.0
 
 [connection signal="resized" from="VBoxContainer/top_container/game_container" to="." method="_on_game_container_resized"]
 [connection signal="size_changed" from="VBoxContainer/top_container/game_container/game_viewport" to="VBoxContainer/top_container/game_container/game_viewport/map/camera" method="_on_game_viewport_size_changed"]
-[connection signal="pressed" from="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer/Button_Factory" to="." method="_on_button_factory_pressed"]
-[connection signal="pressed" from="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer/Button_Road_Depot" to="." method="_on_button_road_depot_pressed"]
-[connection signal="pressed" from="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer/Button_Road" to="." method="_on_button_road_pressed"]
-[connection signal="pressed" from="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer/Button_Demolish" to="." method="_on_button_demolish_pressed"]
-[connection signal="pressed" from="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer/Button_Warehouse" to="." method="_on_button_warehouse_pressed"]
-[connection signal="pressed" from="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer/Button_Rail_Depot" to="." method="_on_button_rail_depot_pressed"]
-[connection signal="pressed" from="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer/Button_Railway" to="." method="_on_button_railway_pressed"]
-[connection signal="pressed" from="VBoxContainer/bottom_container/bottom_menu/const_menu/MarginContainer/GridContainer/Button_Demolish_Path" to="." method="_on_button_demolish_path_pressed"]

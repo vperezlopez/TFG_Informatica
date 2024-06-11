@@ -210,6 +210,7 @@ func build_path (path_type : PathTypes):
 		selected_path = path_type
 
 func set_build_mode(new_build_mode : BuildMode) :
+	print_debug('Changing Build Mode')
 	# REMOVE PREVIOUS MODE
 	match build_mode:
 		BuildMode.NONE:
@@ -320,7 +321,8 @@ func _input(event):
 				if build_mode != BuildMode.NONE:
 					set_build_mode(BuildMode.NONE)
 				else:
-					get_tree().quit()
+					#get_tree().quit()
+					pass
 			if event.keycode == KEY_K:
 				debug_enabled = !debug_enabled
 				print("Debug mode: " + ['disabled', 'enabled'][int(debug_enabled)])
