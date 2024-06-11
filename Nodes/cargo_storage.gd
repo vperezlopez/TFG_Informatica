@@ -20,14 +20,22 @@ func init(cap : int, whitelist : Array[Cargo] = [], blacklist : Array[Cargo] = [
 func get_cargo() -> Array:
 	var res = []
 	for cargo in _cargo_dict:
-		res.append([cargo, _cargo_dict[cargo]])
+		res.append(cargo)
 	return res
+	
 
 func get_quantity(cargo : Cargo) -> int:
 	if _cargo_dict.has(cargo):
 		return _cargo_dict[cargo]
 	else:
 		return 0
+
+## Returns tuples for every cargo item in the Cargo Storage, along with its quantity
+func get_inventory() -> Array:
+	var res = []
+	for cargo in _cargo_dict:
+		res.append([cargo, _cargo_dict[cargo]])
+	return res
 
 func add_cargo(cargo : Cargo, quantity : int = Constants.MAX_INT) -> int:
 	# Checks if it can accept the cargo

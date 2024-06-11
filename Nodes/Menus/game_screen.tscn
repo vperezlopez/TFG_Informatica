@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://dk18d5e4nde6q"]
+[gd_scene load_steps=23 format=3 uid="uid://dk18d5e4nde6q"]
 
 [ext_resource type="Script" path="res://Nodes/Menus/game_screen.gd" id="1_atfre"]
 [ext_resource type="PackedScene" uid="uid://cfaipfii1a8i4" path="res://Nodes/map.tscn" id="1_qbx3c"]
 [ext_resource type="PackedScene" uid="uid://d25kc44qokkgf" path="res://Nodes/camera.tscn" id="2_ktsrh"]
 [ext_resource type="Texture2D" uid="uid://dkhpbhcgvpj43" path="res://Assets/Placeholder_4.png" id="4_1uk6w"]
+[ext_resource type="PackedScene" uid="uid://cx6ychvt2173i" path="res://Nodes/Menus/factory_menu.tscn" id="4_ca8m4"]
 [ext_resource type="Texture2D" uid="uid://biqiitlap7tnk" path="res://Assets/Placeholder_3.png" id="5_ll4vw"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_qelgd"]
@@ -102,11 +103,28 @@ snap_2d_vertices_to_pixel = true
 size = Vector2i(1152, 515)
 render_target_update_mode = 4
 
+[node name="CanvasLayer" type="CanvasLayer" parent="VBoxContainer/top_container/game_container/game_viewport"]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/top_container/game_container/game_viewport/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.6, 0.862745, 0.862745, 1)
+
 [node name="map" parent="VBoxContainer/top_container/game_container/game_viewport" instance=ExtResource("1_qbx3c")]
 layer_3/y_sort_enabled = true
 layer_3/z_index = 3
 
 [node name="camera" parent="VBoxContainer/top_container/game_container/game_viewport/map" instance=ExtResource("2_ktsrh")]
+
+[node name="factory_menu" parent="VBoxContainer/top_container" instance=ExtResource("4_ca8m4")]
+visible = false
+layout_mode = 1
 
 [node name="bottom_container" type="Control" parent="VBoxContainer"]
 layout_mode = 2

@@ -7,6 +7,8 @@ extends Node
 @onready var camera = $VBoxContainer/top_container/game_container/game_viewport/map/camera
 @onready var bottom_container = $VBoxContainer/bottom_container
 
+enum Screen {MAP, ROUTE, CITY, FACTORY, DEPOT}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if !FileAccess.file_exists(Constants.CARGO_CATALOG_PATH):
@@ -14,6 +16,7 @@ func _ready():
 		await get_tree().process_frame
 
 	new_game(Vector2i(64, 64), 5, 0, 0)
+	test()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -62,9 +65,9 @@ func test():
 	res = cs.add_cargo(cargo_catalog.get_cargo(4), 9)
 	res = cs.add_cargo(cargo_catalog.get_cargo(2), 9)
 	res = cs.remove_cargo(cargo_catalog.get_cargo(6))
-	for e in cs.get_cargo():
+	for e in cs.get_inventory():
 		print("There are %d units of %s" % [e[1], e[0].name])
-
+	$VBoxContainer/top_container/factory_menu.initialize(cs, null)
 
 
 

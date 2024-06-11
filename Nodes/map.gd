@@ -68,7 +68,6 @@ func initialize(width : int, height : int, n_cities : int, n_explotations : int,
 
 
 func _process(_delta):
-	#print(str(get_local_mouse_position()))
 	$CursorLabel.visible = debug_enabled
 	if debug_enabled:
 		var world_pos = get_global_mouse_position()
@@ -132,7 +131,7 @@ func generate_roads(start_pos : Vector2i = Vector2i(-1, -1), end_pos : Vector2i 
 	if end_pos == Vector2i(-1, -1):
 		end_pos = occupied_tiles.keys()[1]
 	var path = a_star_search(start_pos, end_pos)
-	draw_roads(path)
+	set_cells_terrain_path(1, path, 0, 0)
 
 func initialize_camera():
 	var center_x = (self.tile_set.tile_size.x * map_width) / 2
@@ -142,16 +141,17 @@ func initialize_camera():
 
 # PLACING FUNCTIONS
 
-func place_actor_static(actor_static_instance : Actor_Static, pos : Vector2i = Vector2i(-1, -1)):
+func place_actor_static(actor_static_instance : Actor_Static, pos : Vector2i = Vector2i(-1, -1)) -> bool:
 	if pos == Vector2i(-1, -1):
 		pos = get_random_pos()
-	if valid_position(pos[0], pos[1]):
+	if valid_position(pos.x, pos.y):
 		actor_static_instance.z_index = 3
 		actor_static_instance.position = map_to_local(pos)
 		occupied_tiles[pos] = actor_static_instance
+		return true
+	else:
+		return false
 
-func draw_roads(path):
-	set_cells_terrain_path(1, path, 0, 0)
 
 
 # BUILDING FUNCTIONS
@@ -163,13 +163,6 @@ func preview_building(actor_static_instance : Actor_Static):
 	add_child(selected_building)
 	selected_building.z_index = 3
 
-
-func build_actor_static(actor_static_instance : Actor_Static) -> bool:
-	var pos = local_to_map(get_global_mouse_position())
-	var valid = valid_position(pos.x, pos.y)
-	if valid:
-		place_actor_static(actor_static_instance, pos)
-	return valid
 
 func construct_path(start : Vector2i, end : Vector2i):
 	var current : Vector2i = start
@@ -190,7 +183,32 @@ func construct_path(start : Vector2i, end : Vector2i):
 	path.append(end)
 	return path
 
-#func set_build_mode(new_build_mode : BuildMode, building : BuildTypes = BuildTypes.NONE, path_type : PathTypes = PathTypes.NONE) :
+# BUILD MODE FUNCTIONS
+func build (build_type : BuildTypes):
+	var building : Actor_Static
+	match build_type:
+		BuildTypes.NONE:
+			printerr('Building different than BuildTypes.NONE required')
+			return
+		BuildTypes.FACTORY:
+			building = factory.instantiate()
+		BuildTypes.WAREHOUSE:
+			building = warehouse.instantiate()
+		BuildTypes.DEPOT_ROAD:
+			building = depot.instantiate()
+		BuildTypes.DEPOT_RAILWAY:
+			printerr('Train depot not implemented yet')
+	if building:
+		set_build_mode(BuildMode.BUILDING)
+		preview_building(building)
+
+func build_path (path_type : PathTypes):
+	if path_type == PathTypes.NONE:
+		printerr('Building different than BuildTypes.NONE required')
+	else:
+		set_build_mode(BuildMode.PATH)
+		selected_path = path_type
+
 func set_build_mode(new_build_mode : BuildMode) :
 	# REMOVE PREVIOUS MODE
 	match build_mode:
@@ -215,32 +233,16 @@ func set_build_mode(new_build_mode : BuildMode) :
 			pass
 		BuildMode.BUILDING:
 			pass
-			#match building:
-				#BuildTypes.NONE:
-					#printerr('Building Mode was BUILDING, but no building was provided')
-					#new_build_mode = BuildMode.NONE
-				#BuildTypes.FACTORY:
-					#preview_building(factory.instantiate())
-				#BuildTypes.WAREHOUSE:
-					#preview_building(warehouse.instantiate())
-				#BuildTypes.DEPOT_ROAD:
-					#preview_building(depot.instantiate())
-				#BuildTypes.DEPOT_RAILWAY:
-					#printerr('Train depot not implemented yet')
-					#pass
 		BuildMode.PATH:
 			pass
-			#if path_type == PathTypes.NONE:
-				#printerr('Building Mode was PATH, but no path_type was provided')
-				#new_build_mode = BuildMode.NONE
-			#else:
-				#selected_path = path_type
+		BuildMode.DEMOLISH:
+			pass
+		BuildMode.DEMOLISH_PATH:
+			pass
 	
 	build_mode = new_build_mode
 
-#func build(pos : Vector2i, actor_static_instance : Actor_Static):
-	#pass
-	
+
 func lay_road(pos : Vector2i):
 	if !start_tile:
 		start_tile = pos
@@ -252,8 +254,10 @@ func lay_road(pos : Vector2i):
 
 func demolish(pos : Vector2i):
 	if occupied_tiles.has(pos):
-		remove_child(occupied_tiles.get(pos))
-		occupied_tiles.erase(pos)
+		var building = occupied_tiles.get(pos)
+		if building.is_demolishable():
+			remove_child(occupied_tiles.get(pos))
+			occupied_tiles.erase(pos)
 
 func demolish_road(pos : Vector2i):
 	set_cell(1, pos, -1) # TRY TO CORRECT THE MISCONECTIONS AROUND
@@ -309,34 +313,6 @@ func calculate_area_corners(pos1 : Vector2i, pos2 : Vector2i) -> Array[Vector2i]
 
 # INPUT_HANDLERS
 
-func build (build_type : BuildTypes):
-	var building : Actor_Static
-	match build_type:
-		BuildTypes.NONE:
-			printerr('Building different than BuildTypes.NONE required')
-			return
-		BuildTypes.FACTORY:
-			building = factory.instantiate()
-			#preview_building(factory.instantiate())
-		BuildTypes.WAREHOUSE:
-			building = warehouse.instantiate()
-			#preview_building(warehouse.instantiate())
-		BuildTypes.DEPOT_ROAD:
-			building = depot.instantiate()
-			#preview_building(depot.instantiate())
-		BuildTypes.DEPOT_RAILWAY:
-			printerr('Train depot not implemented yet')
-	if building:
-		set_build_mode(BuildMode.BUILDING)
-		preview_building(building)
-
-func build_path (path_type : PathTypes):
-	if path_type == PathTypes.NONE:
-		printerr('Building different than BuildTypes.NONE required')
-	else:
-		set_build_mode(BuildMode.PATH)
-		selected_path = path_type
-
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed:
@@ -357,29 +333,15 @@ func _input(event):
 					print('Structure: ' + str(occupied_tiles.get(tile)) + ', Position: ' + str(tile))
 			if event.keycode == KEY_M:
 				print('Building Mode: ' + str(build_mode))
-			#if event.keycode == KEY_F:
-				#set_build_mode(BuildMode.BUILDING)
-				#preview_building(factory.instantiate())
-			#if event.keycode == KEY_D:
-				#set_build_mode(BuildMode.BUILDING)
-				#preview_building(depot.instantiate())
-			#if event.keycode == KEY_W:
-				#set_build_mode(BuildMode.BUILDING)
-				#preview_building(warehouse.instantiate())
-			#if event.keycode == KEY_R:
-				#set_build_mode(BuildMode.PATH.ROAD)
-			#if event.keycode == KEY_X:
-				#set_build_mode(BuildMode.DEMOLISH)
-			#if event.keycode == KEY_Z:
-				#set_build_mode(BuildMode.DEMOLISH_PATH)
-				
+
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			match build_mode:
 				BuildMode.BUILDING:
 					if selected_building:
 						selected_building.sprite.self_modulate = HUE_DEFAULT
-						var placed = build_actor_static(selected_building)
+						var pos = local_to_map(get_global_mouse_position())
+						var placed = place_actor_static(selected_building, pos)
 						if !placed: # CHECK WHY THIS LOGIC WORKS
 							#cancel_building_mode()
 							set_build_mode(BuildMode.NONE)
@@ -396,28 +358,6 @@ func _input(event):
 				start_tile = null
 			else:
 				set_build_mode(BuildMode.NONE)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # A* Algorithm PENDING IMPROVEMENTS TO GENERATE STRAIGHT ROADS MORE OFTEN
 

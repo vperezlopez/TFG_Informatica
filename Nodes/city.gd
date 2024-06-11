@@ -6,6 +6,7 @@ class_name City
 
 func _ready():
 	super._ready()
+	demolishable = false
 	sprite.texture = preload("res://Assets/Placeholder_2.png")
 
 func _on_input_event(_viewport, event, _shape_idx):

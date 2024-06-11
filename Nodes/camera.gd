@@ -36,7 +36,6 @@ func set_starting_position(pos : Vector2):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(str(pos_max))
 	if zoom != new_zoom:
 		zoom = lerp(zoom, new_zoom, zoom_speed)
 	if position != new_pos:

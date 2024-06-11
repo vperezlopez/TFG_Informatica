@@ -8,6 +8,7 @@ var grid_pos : Vector2i
 var collision_shape : CollisionShape2D
 var sprite : Sprite2D
 var label : Label
+var demolishable : bool
 #var static_actor_menu_scene = preload("res://Nodes/Menus/static_actor_menu.tscn")
 
 var static_actor_menu #: Static_Actor_Menu
@@ -33,3 +34,6 @@ func _ready(): # INITIALIZE CHILDREN NODES
 
 func _on_input_event(_viewport, _event, _shape_idx):
 	pass
+
+func is_demolishable() -> bool:
+	return demolishable
