@@ -8,8 +8,8 @@ var space : int
 
 var _cargo_dict : Dictionary
 
-var _whitelist : Array[int]
-var _blacklist : Array[int]
+var _whitelist : Array[Cargo]
+var _blacklist : Array[Cargo]
 
 func init(cap : int, whitelist : Array[Cargo] = [], blacklist : Array[Cargo] = []):
 	self._capacity = cap

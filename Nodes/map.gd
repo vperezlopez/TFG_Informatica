@@ -16,7 +16,7 @@ const priority_queue_class = preload("res://Nodes/PriorityQueue.gd")
 const iso_dirs = [ #this has to be corrected adding + Vector2i(0, x % 2)
 		Vector2i(-1, -1),	# Top-left
 		Vector2i(+1, -1),	# Top-right
-		Vector2i(-1, 0),		# Bottom-left
+		Vector2i(-1, 0),	# Bottom-left
 		Vector2i(+1, 0)		# Bottom-right
 	]
 
@@ -46,8 +46,29 @@ const HUE_DEFAULT = '#ffffffff'
 
 var debug_enabled : bool = false
 
+signal forwarded_actor_static_clicked
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#map_width = 16
+	#map_height = 16
+	var city_inst = city.instantiate()
+	add_child(city_inst)
+	place_actor_static(city_inst, Vector2i(8, 8))
+	
+	var city_inst2 = city.instantiate()
+	add_child(city_inst2)
+	place_actor_static(city_inst2, Vector2i(10, 6))
+	
+	var city_inst3 = city.instantiate()
+	add_child(city_inst3)
+	place_actor_static(city_inst3, Vector2i(6, 10))
+	
+	#initialize(64, 64, 5, 2, 2)
+	
+	if get_viewport() is SubViewport:
+		get_viewport().gui_disable_input = false
+	
 	pass
 
 func initialize(width : int, height : int, n_cities : int, n_explotations : int, n_harbors : int):
@@ -58,14 +79,12 @@ func initialize(width : int, height : int, n_cities : int, n_explotations : int,
 	generate_actors_static(explotation, n_explotations)
 	generate_actors_static(harbor, n_harbors)
 	generate_roads()
-	initialize_camera()
+	#initialize_camera()
 	
 	var truck_instance = truck.instantiate()
 	add_child(truck_instance)
 	truck_instance.z_index = 3
 	truck_instance.position = map_to_local(Vector2i(16, 16))
-	
-
 
 func _process(_delta):
 	$CursorLabel.visible = debug_enabled
@@ -148,6 +167,7 @@ func place_actor_static(actor_static_instance : Actor_Static, pos : Vector2i = V
 		actor_static_instance.z_index = 3
 		actor_static_instance.position = map_to_local(pos)
 		occupied_tiles[pos] = actor_static_instance
+		actor_static_instance.connect("actor_static_clicked", Callable(self, "_on_actor_static_clicked"))
 		return true
 	else:
 		return false
@@ -182,6 +202,26 @@ func construct_path(start : Vector2i, end : Vector2i):
 		
 	path.append(end)
 	return path
+
+# CONSTRUCTION MENU BUTTONS HANDLING
+func _on_construction_button_clicked(const_button : Constants.ConstButtons):
+	match const_button:
+		Constants.ConstButtons.FACTORY:
+			build(BuildTypes.FACTORY)
+		Constants.ConstButtons.WAREHOUSE:
+			build(BuildTypes.WAREHOUSE)
+		Constants.ConstButtons.DEPOT_ROAD:
+			build(BuildTypes.DEPOT_ROAD)
+		Constants.ConstButtons.DEPOT_RAILWAY:
+			build(BuildTypes.DEPOT_RAILWAY)
+		Constants.ConstButtons.ROAD:
+			build_path(PathTypes.ROAD)
+		Constants.ConstButtons.RAILWAY:
+			build_path(PathTypes.RAILWAY)
+		Constants.ConstButtons.DEMOLISH:
+			set_build_mode(BuildMode.DEMOLISH)
+		Constants.ConstButtons.DEMOLISH_PATH:
+			set_build_mode(BuildMode.DEMOLISH_PATH)
 
 # BUILD MODE FUNCTIONS
 func build (build_type : BuildTypes):
@@ -257,7 +297,8 @@ func demolish(pos : Vector2i):
 	if occupied_tiles.has(pos):
 		var building = occupied_tiles.get(pos)
 		if building.is_demolishable():
-			remove_child(occupied_tiles.get(pos))
+			#remove_child(building)
+			building.queue_free.call_deferred()
 			occupied_tiles.erase(pos)
 
 func demolish_road(pos : Vector2i):
@@ -314,6 +355,10 @@ func calculate_area_corners(pos1 : Vector2i, pos2 : Vector2i) -> Array[Vector2i]
 
 # INPUT_HANDLERS
 
+func _on_actor_static_clicked(actor_static_id : int):
+	print_debug('Forwarding')
+	emit_signal("forwarded_actor_static_clicked", actor_static_id)
+
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed:
@@ -337,29 +382,49 @@ func _input(event):
 				print('Building Mode: ' + str(build_mode))
 
 	if event is InputEventMouseButton and event.pressed:
+		# NOT VERY ELEGANT, BUT FOR SOME REASON, INPUT WAS NOT PROPAGATING RIGHT
+		#for child in self.get_children():
+			##print(str(child.name))
+			#if child is Actor_Static:
+				#child._gui_input(event)
+		print_debug('Click detected on MAP')
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			match build_mode:
-				BuildMode.BUILDING:
-					if selected_building:
-						selected_building.sprite.self_modulate = HUE_DEFAULT
-						var pos = local_to_map(get_global_mouse_position())
-						var placed = place_actor_static(selected_building, pos)
-						if !placed: # CHECK WHY THIS LOGIC WORKS
-							#cancel_building_mode()
+			if build_mode != BuildMode.NONE:
+				match build_mode:
+					BuildMode.BUILDING:
+						if selected_building:
+							selected_building.sprite.self_modulate = HUE_DEFAULT
+							var pos = local_to_map(get_global_mouse_position())
+							var placed = place_actor_static(selected_building, pos)
+							if placed: # COULD BE PREVIEW A NEW BUILDING
+								selected_building = null
 							set_build_mode(BuildMode.NONE)
-						selected_building = null
-				BuildMode.PATH:
-					lay_road(mouse_tile)
-				BuildMode.DEMOLISH:
-					demolish(mouse_tile)
-				BuildMode.DEMOLISH_PATH:
-					demolish_road(mouse_tile)
+							
+					BuildMode.PATH:
+						lay_road(mouse_tile)
+					BuildMode.DEMOLISH:
+						demolish(mouse_tile)
+						set_build_mode(BuildMode.NONE)
+					BuildMode.DEMOLISH_PATH:
+						demolish_road(mouse_tile)
+			else:
+				var tile_clicked = local_to_map(get_global_mouse_position())
+				if occupied_tiles.has(tile_clicked):
+					var e = occupied_tiles.get(tile_clicked)
+					print_debug('Forwarding from input handler')
+					emit_signal("forwarded_actor_static_clicked", e.get_instance_id())
+				
 
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if build_mode == BuildMode.PATH and start_tile:
 				start_tile = null
 			else:
 				set_build_mode(BuildMode.NONE)
+	#print(str(event))
+
+
+
+
 
 # A* Algorithm PENDING IMPROVEMENTS TO GENERATE STRAIGHT ROADS MORE OFTEN
 

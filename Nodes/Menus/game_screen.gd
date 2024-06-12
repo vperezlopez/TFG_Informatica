@@ -28,18 +28,21 @@ func _ready():
 	connect_signals()
 
 	new_game(Vector2i(64, 64), 5, 0, 0)
-	show_screen(ScreenMode.FACTORY)
-	test()
+	show_screen(ScreenMode.MAP)
+	#test()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
 
 func connect_signals():
-	const_menu.connect("button_clicked", Callable(self, "_on_construction_button_clicked"))
+	const_menu.connect("const_button_clicked", Callable(map, "_on_construction_button_clicked"))
+	map.connect("forwarded_actor_static_clicked", Callable(self, "_on_actor_static_clicked"))
+	#load("res://Nodes/actor_static.tscn").connect("actor_static_clicked", Callable(map, "_on_static_actor_clicked"))
 
 func new_game(size : Vector2i, ncities : int, nexplotations : int, nharbors : int):
 	map.initialize(size.x, size.y, ncities, nexplotations, nharbors)
+	pass
 
 func test():
 	var cargo_catalog = load(Constants.CARGO_CATALOG_PATH) as CargoCatalog
@@ -85,6 +88,16 @@ func test():
 	$VBoxContainer/top_container/factory_menu.initialize(cs, null)
 
 
+func _on_actor_static_clicked(actor_static_id):
+	print_debug('Connection successful')
+	print(str(instance_from_id(actor_static_id)))
+	var actor_static_clicked : Actor_Static = instance_from_id(actor_static_id)
+	print('Is factory?')
+	if actor_static_clicked is Factory:
+		print('Is factory')
+		show_screen(ScreenMode.FACTORY)
+	
+
 
 func _on_game_container_resized():
 	if game_viewport and game_container:
@@ -115,66 +128,8 @@ func hide_menus():
 	for menu in Menus:
 		menu.visible = false
 
-func _input(event):
-	if event is InputEventKey:
-		if event.pressed:
-			if event.keycode == KEY_ESCAPE:
-				show_screen(ScreenMode.MAP)
-
-
-
-
-
-
-
-func _on_construction_button_clicked(const_button : Constants.ConstButtons):
-	print_debug('Recieved construction input')
-	match const_button:
-		Constants.ConstButtons.FACTORY:
-			map.build(map.BuildTypes.FACTORY)
-		Constants.ConstButtons.WAREHOUSE:
-			map.build(map.BuildTypes.WAREHOUSE)
-		Constants.ConstButtons.DEPOT_ROAD:
-			map.build(map.BuildTypes.DEPOT_ROAD)
-		Constants.ConstButtons.DEPOT_RAILWAY:
-			map.build(map.BuildTypes.DEPOT_RAILWAY)
-		Constants.ConstButtons.ROAD:
-			map.build_path(map.PathTypes.ROAD)
-		Constants.ConstButtons.RAILWAY:
-			map.build_path(map.PathTypes.RAILWAY)
-		Constants.ConstButtons.DEMOLISH:
-			map.set_build_mode(map.BuildMode.DEMOLISH)
-		Constants.ConstButtons.DEMOLISH_PATH:
-			map.set_build_mode(map.BuildMode.DEMOLISH_PATH)
-
-
-#func _on_button_factory_pressed():
-	#print_debug('Factory')
-	#map.build(map.BuildTypes.FACTORY)
-	##map.set_build_mode(map.BuildMode.BUILDING, map.Buildings.FACTORY)
-#
-#func _on_button_warehouse_pressed():
-	#map.build(map.BuildTypes.WAREHOUSE)
-	##map.set_build_mode(map.BuildMode.BUILDING, map.Buildings.WAREHOUSE)
-#
-#func _on_button_road_depot_pressed():
-	#map.build(map.BuildTypes.DEPOT_ROAD)
-	##map.set_build_mode(map.BuildMode.BUILDING, map.Buildings.DEPOT_ROAD)
-#
-#func _on_button_rail_depot_pressed():
-	#map.build(map.BuildTypes.DEPOT_RAILWAY)
-	##map.set_build_mode(map.BuildMode.BUILDING, map.Buildings.DEPOT_RAIL)
-#
-#func _on_button_road_pressed():
-	#map.build_path(map.PathTypes.ROAD)
-	##map.set_build_mode(map.BuildMode.PATH.ROAD)
-#
-#func _on_button_railway_pressed():
-	#map.build_path(map.PathTypes.RAILWAY)
-	##map.set_build_mode(BuildMode.PATH.RAILWAY)
-#
-#func _on_button_demolish_pressed():
-	#map.set_build_mode(map.BuildMode.DEMOLISH)
-#
-#func _on_button_demolish_path_pressed():
-	#map.set_build_mode(map.BuildMode.DEMOLISH_PATH)
+#func _input(event):
+	#if event is InputEventKey:
+		#if event.pressed:
+			#if event.keycode == KEY_ESCAPE:
+				#show_screen(ScreenMode.MAP)
