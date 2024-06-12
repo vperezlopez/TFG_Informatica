@@ -4,6 +4,7 @@ class_name Depot
 
 func _ready():
 	super._ready()
+	demolishable = true
 	sprite.texture = preload("res://Assets/Placeholder_5.png")
 
 func _on_input_event(_viewport, event, _shape_idx):

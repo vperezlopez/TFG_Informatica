@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx6ychvt2173i"]
+
+[ext_resource type="Script" path="res://Nodes/Menus/factory_menu.gd" id="1_f0tkn"]
+
+[node name="factory_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_f0tkn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.650442, 0.891409, 0.768566, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="input_menu" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/input_menu"]
+layout_mode = 2
+text = "Input Storage"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/input_menu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="input_storage" type="VBoxContainer" parent="HBoxContainer/input_menu/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="lines_menu" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.6
+
+[node name="Label" type="Label" parent="HBoxContainer/lines_menu"]
+layout_mode = 2
+text = "Production Lines"
+horizontal_alignment = 1
+
+[node name="output_storage" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/output_storage"]
+layout_mode = 2
+text = "Output Storage"
+horizontal_alignment = 1
+
+[node name="cargo_display" type="HBoxContainer" parent="HBoxContainer/output_storage"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/output_storage/cargo_display"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/output_storage/cargo_display"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/output_storage/cargo_display"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1

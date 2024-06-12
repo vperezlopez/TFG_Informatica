@@ -1,0 +1,154 @@
+[gd_scene load_steps=20 format=3 uid="uid://c6yvx1lg154nf"]
+
+[ext_resource type="Script" path="res://Nodes/Menus/const_menu.gd" id="1_3y2va"]
+[ext_resource type="Texture2D" uid="uid://dkhpbhcgvpj43" path="res://Assets/Placeholder_4.png" id="1_8e7fh"]
+[ext_resource type="Texture2D" uid="uid://biqiitlap7tnk" path="res://Assets/Placeholder_3.png" id="2_hwbgg"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_qelgd"]
+device = -1
+ctrl_pressed = true
+keycode = 70
+
+[sub_resource type="Shortcut" id="Shortcut_8y6ds"]
+events = [SubResource("InputEventKey_qelgd")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_hf025"]
+device = -1
+ctrl_pressed = true
+keycode = 82
+
+[sub_resource type="Shortcut" id="Shortcut_vwigj"]
+events = [SubResource("InputEventKey_hf025")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_qmk2h"]
+device = -1
+keycode = 82
+unicode = 114
+
+[sub_resource type="Shortcut" id="Shortcut_s2645"]
+events = [SubResource("InputEventKey_qmk2h")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ar75x"]
+device = -1
+ctrl_pressed = true
+keycode = 88
+
+[sub_resource type="Shortcut" id="Shortcut_wsr75"]
+events = [SubResource("InputEventKey_ar75x")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ohc0p"]
+device = -1
+ctrl_pressed = true
+keycode = 72
+
+[sub_resource type="Shortcut" id="Shortcut_4e8rq"]
+events = [SubResource("InputEventKey_ohc0p")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_e7fkf"]
+device = -1
+ctrl_pressed = true
+keycode = 84
+
+[sub_resource type="Shortcut" id="Shortcut_dvbj6"]
+events = [SubResource("InputEventKey_e7fkf")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_6bwdl"]
+device = -1
+keycode = 84
+unicode = 116
+
+[sub_resource type="Shortcut" id="Shortcut_76mdy"]
+events = [SubResource("InputEventKey_6bwdl")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_sgaq2"]
+device = -1
+keycode = 88
+unicode = 120
+
+[sub_resource type="Shortcut" id="Shortcut_o3ynd"]
+events = [SubResource("InputEventKey_sgaq2")]
+
+[node name="const_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+script = ExtResource("1_3y2va")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 4
+
+[node name="Button_Factory" type="Button" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+shortcut = SubResource("Shortcut_8y6ds")
+icon = ExtResource("1_8e7fh")
+icon_alignment = 1
+
+[node name="Button_Road_Depot" type="Button" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+shortcut = SubResource("Shortcut_vwigj")
+
+[node name="Button_Road" type="Button" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+shortcut = SubResource("Shortcut_s2645")
+
+[node name="Button_Demolish" type="Button" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+shortcut = SubResource("Shortcut_wsr75")
+
+[node name="Button_Warehouse" type="Button" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+shortcut = SubResource("Shortcut_4e8rq")
+icon = ExtResource("2_hwbgg")
+icon_alignment = 1
+
+[node name="Button_Rail_Depot" type="Button" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+shortcut = SubResource("Shortcut_dvbj6")
+
+[node name="Button_Railway" type="Button" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+shortcut = SubResource("Shortcut_76mdy")
+
+[node name="Button_Demolish_Path" type="Button" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+shortcut = SubResource("Shortcut_o3ynd")
+
+[connection signal="pressed" from="MarginContainer/GridContainer/Button_Factory" to="." method="_on_button_factory_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Button_Road_Depot" to="." method="_on_button_road_depot_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Button_Road" to="." method="_on_button_road_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Button_Demolish" to="." method="_on_button_demolish_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Button_Warehouse" to="." method="_on_button_warehouse_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Button_Rail_Depot" to="." method="_on_button_rail_depot_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Button_Railway" to="." method="_on_button_railway_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Button_Demolish_Path" to="." method="_on_button_demolish_path_pressed"]

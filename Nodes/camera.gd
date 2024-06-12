@@ -14,8 +14,8 @@ var right_margin : float
 var top_margin : float
 var bottom_margin : float
 
-#var pos_min = Vector2(256, 128)
-#var pos_max = Vector2(768, 384)
+var pos_min = Vector2(0, 0)
+var pos_max = Vector2(3840, 2160)
 #var pos_max = Vector2(128, 128)
 var pos_step = 16
 var pos_speed = .1
@@ -45,7 +45,13 @@ func _process(delta):
 	_update_scroll_with_mouse(delta)
 
 func _on_game_viewport_size_changed():
+	_calculate_limits()
 	_calculate_margins()
+
+func _calculate_limits():
+	var viewport = get_viewport()
+	if viewport:
+		pos_max = viewport.size
 
 func _calculate_margins():
 	var viewport = get_viewport()
@@ -103,7 +109,7 @@ func _update_scroll_with_mouse(_delta):
 		#new_pos += move_dir * delta * pos_speed
 		new_pos += move_dir
 
-	#new_pos = new_pos.clamp(pos_min, pos_max - pos_min)
+	new_pos = new_pos.clamp(pos_min, pos_max)
 
 func _is_between(f : float, min : float, max : float) -> bool:
 	return min < f and f < max

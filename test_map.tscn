@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://6b1e6c1d64dd"]
+
+[ext_resource type="PackedScene" uid="uid://cfaipfii1a8i4" path="res://Nodes/map.tscn" id="1_kh05e"]
+
+[node name="Node" type="Node"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TileMap" parent="VBoxContainer/Control/SubViewportContainer" instance=ExtResource("1_kh05e")]

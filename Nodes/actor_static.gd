@@ -8,11 +8,11 @@ var grid_pos : Vector2i
 var collision_shape : CollisionShape2D
 var sprite : Sprite2D
 var label : Label
-#var static_actor_menu_scene = preload("res://Nodes/Menus/static_actor_menu.tscn")
+var demolishable : bool
 
-var static_actor_menu #: Static_Actor_Menu
+signal actor_static_clicked(instance_id)
 
-func _ready(): # INITIALIZE CHILDREN NODES
+func _ready(): 
 	# INITIALIZE COLLISION SHAPE
 	collision_shape = CollisionShape2D.new()
 	collision_shape.position = Vector2i(0, -8)
@@ -30,6 +30,29 @@ func _ready(): # INITIALIZE CHILDREN NODES
 	label.position = Vector2i(-32, -48)
 	label.text = loc_name
 	add_child(label)
+	
+	# INITIALIZE INPUT HANDLERS
+	self.input_pickable = true
+	#connect("input_event", Callable(self, "_on_input_event"))
 
-func _on_input_event(_viewport, _event, _shape_idx):
-	pass
+func _on_input_event(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.pressed:
+		print_debug('Click detected')
+		emit_signal("actor_static_clicked", self.get_instance_id())
+
+
+
+func is_demolishable() -> bool:
+	return demolishable
+	
+
+# TEST: TO BE DELETED
+func _gui_input(event):
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			print("Clicked on ", self.name)
+			
+#func _input(event):
+	#if event is InputEventMouseButton:
+		#if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			#print("Input on ", self.name)
