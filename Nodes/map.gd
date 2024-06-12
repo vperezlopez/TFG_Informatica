@@ -20,6 +20,8 @@ const iso_dirs = [ #this has to be corrected adding + Vector2i(0, x % 2)
 		Vector2i(+1, 0)		# Bottom-right
 	]
 
+enum Layers {BASE, PATH, PREVIEW, ACTOR_STATIC, VEHICLE}
+
 enum BuildMode { NONE, BUILDING, DEMOLISH, PATH, DEMOLISH_PATH }
 enum BuildTypes { NONE, FACTORY, WAREHOUSE, DEPOT_ROAD, DEPOT_RAILWAY}
 enum PathTypes { NONE = 99, ROAD = 0, RAILWAY = 1}
@@ -86,7 +88,7 @@ func initialize(width : int, height : int, n_cities : int, n_explotations : int,
 	
 	var truck_instance = truck.instantiate()
 	add_child(truck_instance)
-	truck_instance.z_index = 3
+	truck_instance.z_index = Layers.VEHICLE
 	truck_instance.position = map_to_local(Vector2i(16, 16))
 
 func _process(_delta):
@@ -94,7 +96,7 @@ func _process(_delta):
 	if debug_enabled:
 		var world_pos = get_global_mouse_position()
 		var map_pos = local_to_map(world_pos)
-		$CursorLabel.z_index = 2
+		$CursorLabel.z_index = Layers.PREVIEW
 		$CursorLabel.position = get_global_mouse_position()
 		$CursorLabel.text = "Tile Coordinates: (" + str(map_pos.x) + ", " + str(map_pos.y + 1) + ")\n" + \
 							"Global Position: (" + str(roundf(world_pos.x)) + ", " + str(roundf(world_pos.y)) + ")"
@@ -112,13 +114,13 @@ func _process(_delta):
 						selected_building.sprite.self_modulate = HUE_RED_T
 						
 			BuildMode.PATH:
-				clear_layer(2)
+				clear_layer(Layers.PREVIEW)
 				if !start_tile:
-					set_cells_terrain_connect(2, [mouse_tile], 0, selected_path)
+					set_cells_terrain_connect(Layers.PREVIEW, [mouse_tile], 0, selected_path)
 				else:
 					var road_end = local_to_map(get_global_mouse_position())
 					var path = construct_path(start_tile, road_end)
-					set_cells_terrain_connect(2, path, 0, selected_path)
+					set_cells_terrain_connect(Layers.PREVIEW, path, 0, selected_path)
 			
 			BuildMode.DEMOLISH:
 				if occupied_tiles.has(mouse_tile_prev):
@@ -139,7 +141,7 @@ func generate_map(width : int, height : int):
 	map_height = height
 	for x in range (width):
 		for y in range (floor(height/2)):
-			set_cell(0, Vector2i(x, y), 1, Vector2i(0, 3))
+			set_cell(Layers.BASE, Vector2i(x, y), 1, Vector2i(0, 3))
 
 func generate_actors_static(actor_static_class, n : int):
 	for i in range(n):
@@ -153,13 +155,13 @@ func generate_roads(start_pos : Vector2i = Vector2i(-1, -1), end_pos : Vector2i 
 	if end_pos == Vector2i(-1, -1):
 		end_pos = occupied_tiles.keys()[1]
 	var path = a_star_search(start_pos, end_pos)
-	set_cells_terrain_path(1, path, 0, 0)
+	set_cells_terrain_path(Layers.PATH, path, 0, 0)
 
-func initialize_camera():
-	var center_x = (self.tile_set.tile_size.x * map_width) / 2
-	var center_y = (self.tile_set.tile_size.y * map_height) / 2
-	# We have to half the center position because the camera itself is not centered, but anchored to the top_left corner
-	$camera.set_starting_position(Vector2i(center_x / 2, center_y / 2))
+#func initialize_camera():
+	#var center_x = (self.tile_set.tile_size.x * map_width) / 2
+	#var center_y = (self.tile_set.tile_size.y * map_height) / 2
+	## We have to half the center position because the camera itself is not centered, but anchored to the top_left corner
+	#$camera.set_starting_position(Vector2i(center_x / 2, center_y / 2))
 
 # PLACING FUNCTIONS
 
@@ -167,8 +169,9 @@ func place_actor_static(actor_static_instance : Actor_Static, pos : Vector2i = V
 	if pos == Vector2i(-1, -1):
 		pos = get_random_pos()
 	if valid_position(pos.x, pos.y):
-		actor_static_instance.z_index = 3
+		actor_static_instance.z_index = Layers.ACTOR_STATIC
 		actor_static_instance.position = map_to_local(pos)
+		set_cell(Layers.PATH, pos, 1, Vector2i(1, 3))
 		occupied_tiles[pos] = actor_static_instance
 		actor_static_instance.connect("actor_static_clicked", Callable(self, "_on_actor_static_clicked"))
 		return true
@@ -184,7 +187,7 @@ func preview_building(actor_static_instance : Actor_Static):
 		remove_child(selected_building)
 	selected_building = actor_static_instance
 	add_child(selected_building)
-	selected_building.z_index = 3
+	selected_building.z_index = Layers.ACTOR_STATIC
 
 
 func construct_path(start : Vector2i, end : Vector2i):
@@ -264,7 +267,7 @@ func set_build_mode(new_build_mode : BuildMode) :
 			selected_building = null
 		BuildMode.PATH:
 			start_tile = null
-			clear_layer(2)
+			clear_layer(Layers.PREVIEW)
 		BuildMode.DEMOLISH:
 			if occupied_tiles.has(mouse_tile):
 				occupied_tiles.get(mouse_tile).sprite.self_modulate = HUE_DEFAULT
@@ -287,14 +290,11 @@ func set_build_mode(new_build_mode : BuildMode) :
 	build_mode = new_build_mode
 
 
-func lay_road(pos : Vector2i):
-	if !start_tile:
-		start_tile = pos
-	else:
-		var end_tile = pos
-		var path = construct_path(start_tile, end_tile)
-		set_cells_terrain_connect(1, path, 0, selected_path)
-		start_tile =end_tile
+func lay_road(path):
+		for tile in path:
+			if occupied_tiles.has(tile):
+				path.erase(tile)
+		set_cells_terrain_connect(Layers.PATH, path, 0, selected_path)
 
 func demolish(pos : Vector2i):
 	if occupied_tiles.has(pos):
@@ -302,10 +302,12 @@ func demolish(pos : Vector2i):
 		if building.is_demolishable():
 			#remove_child(building)
 			building.queue_free.call_deferred()
+			set_cell(Layers.PATH, pos, -1)
 			occupied_tiles.erase(pos)
 
 func demolish_road(pos : Vector2i):
-	set_cell(1, pos, -1) # TRY TO CORRECT THE MISCONECTIONS AROUND
+	if !occupied_tiles.has(pos):
+		set_cell(Layers.PATH, pos, -1) # TRY TO CORRECT THE MISCONECTIONS AROUND
 
 # UTILITIES
 
@@ -393,18 +395,24 @@ func _input(event):
 		print_debug('Click detected on MAP')
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if build_mode != BuildMode.NONE:
+				#var pos = local_to_map(get_global_mouse_position())
 				match build_mode:
 					BuildMode.BUILDING:
 						if selected_building:
 							selected_building.sprite.self_modulate = HUE_DEFAULT
-							var pos = local_to_map(get_global_mouse_position())
-							var placed = place_actor_static(selected_building, pos)
+							var placed = place_actor_static(selected_building, mouse_tile)
 							if placed: # COULD BE PREVIEW A NEW BUILDING
 								selected_building = null
 							set_build_mode(BuildMode.NONE)
 							
 					BuildMode.PATH:
-						lay_road(mouse_tile)
+						if !start_tile:
+							start_tile = mouse_tile
+						else:
+							var end_tile = mouse_tile
+							var path = construct_path(start_tile, end_tile)
+							lay_road(path)
+							start_tile = end_tile
 					BuildMode.DEMOLISH:
 						demolish(mouse_tile)
 						set_build_mode(BuildMode.NONE)
