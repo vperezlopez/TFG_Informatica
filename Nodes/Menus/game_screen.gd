@@ -4,7 +4,7 @@ extends Node
 @onready var game_container = 	$VBoxContainer/top_container/game_container
 @onready var game_viewport = 	$VBoxContainer/top_container/game_container/game_viewport
 @onready var map = 				$VBoxContainer/top_container/game_container/game_viewport/map
-#@onready var camera = $VBoxContainer/top_container/game_container/game_viewport/map/camera
+@onready var camera = $VBoxContainer/top_container/game_container/game_viewport/camera
 @onready var factory_menu = $VBoxContainer/top_container/factory_menu
 
 @onready var bottom_container = $VBoxContainer/bottom_container
@@ -25,9 +25,11 @@ func _ready():
 
 	connect_signals()
 
-	#new_game(Vector2i(64, 64), 5, 0, 0)
+	if get_parent() is Window:
+		print_debug('Manual initialization')
+		new_game(Vector2i(64, 64), 4, 2, 2)
+
 	show_screen(ScreenMode.MAP)
-	#test()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -40,6 +42,11 @@ func connect_signals():
 
 func new_game(size : Vector2i, ncities : int, nexplotations : int, nharbors : int):
 	map.initialize(size.x, size.y, ncities, nexplotations, nharbors)
+	
+	var center_x = (map.tile_set.tile_size.x * size.x) / 2
+	var center_y = (map.tile_set.tile_size.y * size.y) / 2
+	# We have to half the center position because the camera itself is not centered, but anchored to the top_left corner
+	camera.set_starting_position(Vector2i(center_x / 2, center_y / 2))
 
 func test():
 	var cargo_catalog = load(Constants.CARGO_CATALOG_PATH) as CargoCatalog

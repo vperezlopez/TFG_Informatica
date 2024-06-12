@@ -46,7 +46,7 @@ render_target_update_mode = 4
 layer_3/y_sort_enabled = true
 layer_3/z_index = 3
 
-[node name="camera" parent="VBoxContainer/top_container/game_container/game_viewport/map" instance=ExtResource("2_ktsrh")]
+[node name="camera" parent="VBoxContainer/top_container/game_container/game_viewport" instance=ExtResource("2_ktsrh")]
 
 [node name="BackgroundCanvas" type="CanvasLayer" parent="VBoxContainer/top_container/game_container/game_viewport"]
 layer = -1
@@ -102,4 +102,5 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [connection signal="resized" from="VBoxContainer/top_container/game_container" to="." method="_on_game_container_resized"]
-[connection signal="size_changed" from="VBoxContainer/top_container/game_container/game_viewport" to="VBoxContainer/top_container/game_container/game_viewport/map/camera" method="_on_game_viewport_size_changed"]
+[connection signal="resized" from="VBoxContainer/top_container/game_container" to="VBoxContainer/top_container/game_container/game_viewport/camera" method="_on_game_container_resized"]
+[connection signal="size_changed" from="VBoxContainer/top_container/game_container/game_viewport" to="VBoxContainer/top_container/game_container/game_viewport/camera" method="_on_game_viewport_size_changed"]

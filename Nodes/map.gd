@@ -52,23 +52,26 @@ signal forwarded_actor_static_clicked
 func _ready():
 	#map_width = 16
 	#map_height = 16
-	var city_inst = city.instantiate()
-	add_child(city_inst)
-	place_actor_static(city_inst, Vector2i(8, 8))
 	
-	var city_inst2 = city.instantiate()
-	add_child(city_inst2)
-	place_actor_static(city_inst2, Vector2i(10, 6))
+	if get_parent() is Window:
+		print_debug('Manual initialization')
+		var city_inst = city.instantiate()
+		add_child(city_inst)
+		place_actor_static(city_inst, Vector2i(8, 8))
+		
+		var city_inst2 = city.instantiate()
+		add_child(city_inst2)
+		place_actor_static(city_inst2, Vector2i(10, 6))
+		
+		var city_inst3 = city.instantiate()
+		add_child(city_inst3)
+		place_actor_static(city_inst3, Vector2i(6, 10))
+		
+		#initialize(64, 64, 5, 2, 2)
 	
-	var city_inst3 = city.instantiate()
-	add_child(city_inst3)
-	place_actor_static(city_inst3, Vector2i(6, 10))
-	
-	#initialize(64, 64, 5, 2, 2)
-	
-	if get_viewport() is SubViewport:
-		get_viewport().gui_disable_input = false
-	
+	#if get_viewport() is SubViewport:
+		#get_viewport().gui_disable_input = false
+	#
 	pass
 
 func initialize(width : int, height : int, n_cities : int, n_explotations : int, n_harbors : int):
