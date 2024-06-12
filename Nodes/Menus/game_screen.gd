@@ -17,8 +17,6 @@ extends Node
 enum ScreenMode {MAP, ROUTE, CITY, FACTORY, DEPOT}
 var selected_screen : ScreenMode
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if !FileAccess.file_exists(Constants.CARGO_CATALOG_PATH):
@@ -27,7 +25,7 @@ func _ready():
 
 	connect_signals()
 
-	new_game(Vector2i(64, 64), 5, 0, 0)
+	#new_game(Vector2i(64, 64), 5, 0, 0)
 	show_screen(ScreenMode.MAP)
 	#test()
 
@@ -42,7 +40,6 @@ func connect_signals():
 
 func new_game(size : Vector2i, ncities : int, nexplotations : int, nharbors : int):
 	map.initialize(size.x, size.y, ncities, nexplotations, nharbors)
-	pass
 
 func test():
 	var cargo_catalog = load(Constants.CARGO_CATALOG_PATH) as CargoCatalog

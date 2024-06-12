@@ -1,6 +1,55 @@
 [gd_scene load_steps=2 format=3 uid="uid://bp3uffmoy184x"]
 
-[ext_resource type="Script" path="res://Nodes/Menus/CanvasLayer.gd" id="1_gwsra"]
+[sub_resource type="GDScript" id="GDScript_2yp7u"]
+script/source = "extends CanvasLayer
+@onready var main = $Main
+@onready var load = $Load
+@onready var settings = $Settings
+@onready var new = $New
+
+@onready var spin_box_width = $New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerMapSize/SpinBoxWidth
+@onready var spin_box_height = $New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerMapSize/SpinBoxHeight
+@onready var spin_box_cities = $New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerCities/SpinBoxCities
+@onready var spin_box_explotations = $New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerExplotations/SpinBoxExplotations
+@onready var spin_box_harbors = $New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerHarbors/SpinBoxHarbors
+
+
+
+func _on_button_new_pressed():
+	_goto(new)
+
+
+func _on_button_play_pressed():
+	#var game_screen = load(\"res://Nodes/world.tscn\").instantiate()
+	var game_screen = load(\"res://Nodes/Menus/game_screen.tscn\").instantiate()
+	get_tree().root.add_child(game_screen)
+	game_screen.new_game(Vector2i(spin_box_width.value, spin_box_height.value), spin_box_cities.value, spin_box_explotations.value, spin_box_harbors.value)
+	queue_free()
+	#get_tree().change_scene_to_file(\"res://Nodes/world.tscn\")
+
+
+func _on_button_load_pressed():
+	_goto(load)
+
+
+func _on_button_settings_pressed():
+	_goto(settings)
+
+
+func _on_button_back_pressed():
+	_goto(main)
+
+
+func _on_button_quit_pressed():
+	get_tree().quit()
+	pass # Replace with function body.
+	
+func _goto(menu : Control):
+	for child in get_children():
+		child.visible = (child == menu)
+	#menu.visible = true
+
+"
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -20,7 +69,7 @@ grow_vertical = 2
 color = Color(0.446777, 0.446777, 0.446777, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("1_gwsra")
+script = SubResource("GDScript_2yp7u")
 
 [node name="Main" type="Control" parent="CanvasLayer"]
 layout_mode = 3

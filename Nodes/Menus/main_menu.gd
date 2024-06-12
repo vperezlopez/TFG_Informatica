@@ -17,9 +17,10 @@ func _on_button_new_pressed():
 
 
 func _on_button_play_pressed():
-	var world = load("res://Nodes/world.tscn").instantiate()
-	world.new_game(Vector2i(spin_box_width.value, spin_box_height.value), spin_box_cities.value, spin_box_explotations.value, spin_box_harbors.value)
-	get_tree().root.add_child(world)
+	#var game_screen = load("res://Nodes/world.tscn").instantiate()
+	var game_screen = load("res://Nodes/Menus/game_screen.tscn").instantiate()
+	game_screen.new_game(Vector2i(spin_box_width.value, spin_box_height.value), spin_box_cities.value, spin_box_explotations.value, spin_box_harbors.value)
+	get_tree().root.add_child(game_screen)
 	queue_free()
 	#get_tree().change_scene_to_file("res://Nodes/world.tscn")
 
