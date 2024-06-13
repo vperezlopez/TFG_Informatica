@@ -23,6 +23,7 @@ func _ready():
 func initialize(fleet : Array[Vehicle]):
 	print('Depot initialization')
 	for vehicle in fleet:
+		print(slot_0.size)
 		var vehicle_menu = VEHICLE_MENU.instantiate()
 		#$GridContainer.add_child(vehicle_menu)
 		slot_0.add_child(vehicle_menu)
@@ -32,7 +33,7 @@ func initialize(fleet : Array[Vehicle]):
 		#slot_4.add_child(vehicle_menu)
 		#print_debug(str(vehicle_menu.get_class()))
 		#print_debug(str(vehicle_menu.has_method(\"initialize\")))
-		vehicle_menu.initialize(vehicle)
+		vehicle_menu.add_vehicle(vehicle)
 		print(slot_0.size)
 	for slot in slots:
 		print('Child: ' + str(slot.get_children()))
