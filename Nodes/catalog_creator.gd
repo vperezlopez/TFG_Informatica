@@ -5,6 +5,7 @@ class_name Catalog_Creator
 static func create_catalogs():
 	create_cargo_catalog()
 	create_vehicle_model_catalog()
+	create_explotation_type_catalog()
 
 static func create_cargo_catalog():
 	var catalog = CargoCatalog.new()
@@ -93,3 +94,56 @@ static func create_vehicle_model_catalog():
 	catalog.vehicle_models[vehicle_model.id] = vehicle_model
 
 	ResourceSaver.save(catalog, Constants.VEHICLE_MODEL_CATALOG_PATH)
+
+
+static func create_explotation_type_catalog():
+	var cargo_catalog = load(Constants.CARGO_CATALOG_PATH) as CargoCatalog
+	
+	var catalog = ExplotationTypeCatalog.new()
+	var explotation_type
+	
+	explotation_type = ExplotationType.new()
+	explotation_type.id = 1
+	explotation_type.explotation_name = "Sawmill"
+	explotation_type.output = [
+		cargo_catalog.get_cargo_from_name("Wood") as Cargo
+	]
+	explotation_type.img_path = "res://Assets/Explotation/" + explotation_type.explotation_name.to_lower() + ".png"
+	catalog.explotation_types[explotation_type.id] = explotation_type
+	
+	
+	
+	explotation_type = ExplotationType.new()
+	explotation_type.id = 2
+	explotation_type.explotation_name = "Steel Mill"
+	explotation_type.output = [
+		cargo_catalog.get_cargo_from_name("Steel") as Cargo,
+		cargo_catalog.get_cargo_from_name("Aluminium") as Cargo,
+		cargo_catalog.get_cargo_from_name("Copper") as Cargo
+	]
+	explotation_type.img_path = "res://Assets/Explotation/" + explotation_type.explotation_name.to_lower() + ".png"
+	catalog.explotation_types[explotation_type.id] = explotation_type
+
+
+
+	explotation_type = ExplotationType.new()
+	explotation_type.id = 3
+	explotation_type.explotation_name = "Textile Mill"
+	explotation_type.output = [
+		cargo_catalog.get_cargo_from_name("Fabric") as Cargo
+	]
+	explotation_type.img_path = "res://Assets/Explotation/" + explotation_type.explotation_name.to_lower() + ".png"
+	catalog.explotation_types[explotation_type.id] = explotation_type
+	
+	
+	
+	explotation_type = ExplotationType.new()
+	explotation_type.id = 4
+	explotation_type.explotation_name = "Refinery"
+	explotation_type.output = [
+		cargo_catalog.get_cargo_from_name("Plastic") as Cargo
+	]
+	explotation_type.img_path = "res://Assets/Explotation/" + explotation_type.explotation_name.to_lower() + ".png"
+	catalog.explotation_types[explotation_type.id] = explotation_type
+	
+	ResourceSaver.save(catalog, Constants.EXPLOTATION_TYPE_CATALOG_PATH)
