@@ -2,13 +2,13 @@ extends Resource
 
 class_name VehicleModel
 
-var id : int
+@export var id : int
 
-var navigation : int
+@export var navigation : int
 
-var model_name : String
-var img_path : String
+@export var model_name : String
+@export var img_path : String
 
-var speed : float
-var travel_cost : float
-var value : float
+@export var speed : float
+@export var travel_cost : float
+@export var value : float

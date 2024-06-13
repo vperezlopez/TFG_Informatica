@@ -1,11 +1,14 @@
 extends Node
 
+const vehicle = preload("res://Nodes/vehicle.tscn")
+
 @onready var top_container = 	$VBoxContainer/top_container
 @onready var game_container = 	$VBoxContainer/top_container/game_container
 @onready var game_viewport = 	$VBoxContainer/top_container/game_container/game_viewport
 @onready var map = 				$VBoxContainer/top_container/game_container/game_viewport/map
 @onready var camera = $VBoxContainer/top_container/game_container/game_viewport/camera
 @onready var factory_menu = $VBoxContainer/top_container/factory_menu
+@onready var depot_road_menu = $VBoxContainer/top_container/depot_road_menu
 
 @onready var bottom_container = $VBoxContainer/bottom_container
 @onready var const_menu = $VBoxContainer/bottom_container/bottom_menu/const_menu
@@ -31,7 +34,10 @@ func _ready():
 		print_debug('Manual initialization')
 		new_game(Vector2i(64, 64), 4, 2, 2)
 
-	show_screen(ScreenMode.MAP)
+	test_cargo()
+	test_vehicle()
+
+	show_screen(ScreenMode.DEPOT)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -50,7 +56,7 @@ func new_game(size : Vector2i, ncities : int, nexplotations : int, nharbors : in
 	# We have to half the center position because the camera itself is not centered, but anchored to the top_left corner
 	camera.set_starting_position(Vector2i(center_x / 2, center_y / 2))
 
-func test():
+func test_cargo():
 	var cargo_catalog = load(Constants.CARGO_CATALOG_PATH) as CargoCatalog
 	var cs = CargoStorage.new()
 	var c = cargo_catalog.get_cargo(2)
@@ -93,6 +99,17 @@ func test():
 		print("There are %d units of %s" % [e[1], e[0].name])
 	$VBoxContainer/top_container/factory_menu.initialize(cs, null)
 
+func test_vehicle():
+	var fleet : Array[Vehicle]
+	var v = vehicle.instantiate()
+	add_child(v)
+	var vehicle_model_catalog = load(Constants.VEHICLE_MODEL_CATALOG_PATH) as VehicleModelCatalog
+	v.initialize(vehicle_model_catalog.get_vehicle_model(1))
+	fleet.append(v)
+	
+	$VBoxContainer/top_container/depot_road_menu.initialize(fleet)
+	
+	pass
 
 func _on_actor_static_clicked(actor_static_id):
 	print_debug('Connection successful')
@@ -126,7 +143,8 @@ func show_screen(new_screen : ScreenMode):
 			factory_menu.visible = true
 			money_menu.visible = true
 		ScreenMode.DEPOT:
-			pass
+			depot_road_menu.visible = true
+			money_menu.visible = true
 	pass
 	
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dk18d5e4nde6q"]
+[gd_scene load_steps=9 format=3 uid="uid://dk18d5e4nde6q"]
 
 [ext_resource type="Script" path="res://Nodes/Menus/game_screen.gd" id="1_atfre"]
 [ext_resource type="PackedScene" uid="uid://cfaipfii1a8i4" path="res://Nodes/map.tscn" id="1_qbx3c"]
 [ext_resource type="PackedScene" uid="uid://d25kc44qokkgf" path="res://Nodes/camera.tscn" id="2_ktsrh"]
 [ext_resource type="PackedScene" uid="uid://cx6ychvt2173i" path="res://Nodes/Menus/factory_menu.tscn" id="4_ca8m4"]
 [ext_resource type="PackedScene" uid="uid://c6yvx1lg154nf" path="res://Nodes/Menus/const_menu.tscn" id="5_gm3u7"]
+[ext_resource type="PackedScene" uid="uid://bxwd0v8oyoaad" path="res://Nodes/Menus/depot_road_menu.tscn" id="5_v0cl0"]
 [ext_resource type="PackedScene" uid="uid://cs4hn2cfdlvq8" path="res://Nodes/Menus/money_menu.tscn" id="6_xadek"]
 [ext_resource type="PackedScene" uid="uid://b843jfyemoegl" path="res://Nodes/Menus/game_menu.tscn" id="7_5fp8y"]
 
@@ -26,6 +27,7 @@ size_flags_stretch_ratio = 0.8
 mouse_filter = 2
 
 [node name="game_container" type="SubViewportContainer" parent="VBoxContainer/top_container"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,7 +42,7 @@ handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
 size = Vector2i(1152, 515)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="map" parent="VBoxContainer/top_container/game_container/game_viewport" instance=ExtResource("1_qbx3c")]
 layer_3/y_sort_enabled = true
@@ -62,6 +64,10 @@ size_flags_vertical = 3
 color = Color(0.6, 0.862745, 0.862745, 1)
 
 [node name="factory_menu" parent="VBoxContainer/top_container" instance=ExtResource("4_ca8m4")]
+visible = false
+layout_mode = 1
+
+[node name="depot_road_menu" parent="VBoxContainer/top_container" instance=ExtResource("5_v0cl0")]
 visible = false
 layout_mode = 1
 

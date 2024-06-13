@@ -91,13 +91,12 @@ func initialize(width : int, height : int, n_cities : int, n_explotations : int,
 	#truck_instance.z_index = Layers.VEHICLE
 	#truck_instance.position = map_to_local(Vector2i(16, 16))
 	
-	var vehicle_instance = vehicle.instantiate()
-	var vehicle_model_catalog = preload(Constants.VEHICLE_MODEL_CATALOG_PATH) as VehicleModelCatalog
-	var v = vehicle_model_catalog.get_vehicle_model(1)
-	vehicle_instance.initialize(v)
-	add_child(vehicle_instance)
-	vehicle_instance.z_index = Layers.VEHICLE
-	vehicle_instance.position = map_to_local(Vector2i(4, 24))
+	#var vehicle_instance = vehicle.instantiate()
+	#add_child(vehicle_instance)
+	#var vehicle_model_catalog = load(Constants.VEHICLE_MODEL_CATALOG_PATH) as VehicleModelCatalog
+	#vehicle_instance.initialize(vehicle_model_catalog.get_vehicle_model(1))
+	#vehicle_instance.z_index = Layers.VEHICLE
+	#vehicle_instance.position = map_to_local(Vector2i(4, 24))
 
 func _process(_delta):
 	$CursorLabel.visible = debug_enabled

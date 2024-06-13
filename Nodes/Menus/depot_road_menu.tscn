@@ -1,6 +1,43 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxwd0v8oyoaad"]
+[gd_scene load_steps=2 format=3 uid="uid://bevejx46wwyr3"]
 
-[ext_resource type="Script" path="res://Nodes/Menus/depot_road_menu.gd" id="1_u8vjy"]
+[sub_resource type="GDScript" id="GDScript_xekh3"]
+script/source = "extends Control
+
+const VEHICLE_MENU = preload(\"res://Nodes/Menus/vehicle_menu.tscn\")
+
+@onready var slot_0 = $GridContainer/Slot0
+@onready var slot_1 = $GridContainer/Slot1
+@onready var slot_2 = $GridContainer/Slot2
+@onready var slot_3 = $GridContainer/Slot3
+@onready var slot_4 = $GridContainer/Slot4
+@onready var slot_5 = $GridContainer/Slot5
+
+@onready var slots = [slot_0, slot_1, slot_2, slot_3, slot_4, slot_5]
+
+func _ready():
+	pass
+	#for child in self.get_children():
+		#print('Child: ' + str(child))
+	##initialize.call_deferred(null)
+
+func initialize(fleet : Array[Vehicle]):
+	print('Depot initialization')
+	for vehicle in fleet:
+		var vehicle_menu = VEHICLE_MENU.instantiate()
+		#$GridContainer.add_child(vehicle_menu)
+		slot_0.add_child(vehicle_menu)
+		#slot_1.add_child(vehicle_menu)
+		#slot_2.add_child(vehicle_menu)
+		#slot_3.add_child(vehicle_menu)
+		#slot_4.add_child(vehicle_menu)
+		#print_debug(str(vehicle_menu.get_class()))
+		#print_debug(str(vehicle_menu.has_method(\"initialize\")))
+		vehicle_menu.initialize(vehicle)
+		print(slot_0.size)
+	for slot in slots:
+		print('Child: ' + str(slot.get_children()))
+	print('Grid child: ' + str($GridContainer.get_children()))
+"
 
 [node name="depot_road_menu" type="Control"]
 layout_mode = 3
@@ -9,24 +46,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
-script = ExtResource("1_u8vjy")
+script = SubResource("GDScript_xekh3")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.650442, 0.891409, 0.768566, 1)
 
 [node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 2
-offset_right = 1152.0
-offset_bottom = 648.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 columns = 3
 
 [node name="Slot0" type="Control" parent="GridContainer"]

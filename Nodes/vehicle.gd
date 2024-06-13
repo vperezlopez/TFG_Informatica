@@ -21,7 +21,7 @@ func _ready(): # INITIALIZE CHILDREN NODES
 	sprite.position = Vector2i(0, -8)
 	add_child(sprite)
 	
-func initialize(vehicle_model : VehicleModel):
-	self.vehicle_model = vehicle_model
-	sprite.texture = load(vehicle_model.img_path)
+func initialize(vm : VehicleModel):
+	self.vehicle_model = vm
+	sprite.texture = load(vm.img_path)
 	pass
