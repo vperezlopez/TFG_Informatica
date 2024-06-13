@@ -5,9 +5,7 @@ class_name Vehicle
 var collision_shape : CollisionShape2D
 var sprite : Sprite2D
 
-var speed : float
-var travel_cost : float
-var value : float
+var vehicle_model : VehicleModel
 var usage : float
 
 func _ready(): # INITIALIZE CHILDREN NODES
@@ -22,3 +20,8 @@ func _ready(): # INITIALIZE CHILDREN NODES
 	sprite = Sprite2D.new()
 	sprite.position = Vector2i(0, -8)
 	add_child(sprite)
+	
+func initialize(vehicle_model : VehicleModel):
+	self.vehicle_model = vehicle_model
+	sprite.texture = load(vehicle_model.img_path)
+	pass

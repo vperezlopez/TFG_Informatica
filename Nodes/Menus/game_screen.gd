@@ -19,10 +19,12 @@ var selected_screen : ScreenMode
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if !FileAccess.file_exists(Constants.CARGO_CATALOG_PATH):
-		Catalog_Creator.create_catalog()
-		await get_tree().process_frame
-
+	#if !FileAccess.file_exists(Constants.CARGO_CATALOG_PATH):
+		#Catalog_Creator.create_catalogs()
+		#await get_tree().process_frame
+	
+	Catalog_Creator.create_catalogs()
+	
 	connect_signals()
 
 	if get_parent() is Window:

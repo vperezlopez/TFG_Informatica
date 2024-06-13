@@ -1,10 +1,12 @@
-extends Node
+extends Resource
 
-class_name Vehicle_Class
+class_name VehicleModel
+
+var id : int
 
 var navigation : int
 
-var vehicle_name : String
+var model_name : String
 var img_path : String
 
 var speed : float
