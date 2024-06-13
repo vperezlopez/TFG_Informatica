@@ -5,8 +5,9 @@ extends Control
 @onready var vehicle_box = $VBoxContainer/VehicleContainer/MarginContainer/VehicleBox
 @onready var vehicle_icon = $VBoxContainer/VehicleContainer/MarginContainer/VehicleBox/VehicleIcon
 
-
 var vehicle : Vehicle
+
+signal remove_vehicle_clicked(sender)
 
 #func initialize(vehicle_instance : Vehicle):
 	#$VBoxContainer/Title_Container/Title_Label.text = vehicle_instance.vehicle_model.model_name
@@ -21,16 +22,18 @@ func add_vehicle(vehicle_instance : Vehicle):
 	vehicle_box.visible = true
 	show_new_vehicle_button(false)
 
-func remove_vehicle():
+func remove_vehicle() -> Vehicle:
+	var res : Vehicle = self.vehicle
 	self.vehicle = null
 	title_label.text = ""
 	vehicle_icon.texture = null
 	vehicle_box.visible = false
+	return res
 
 func has_vehicle():
 	return vehicle != null
 
-func show_new_vehicle_button(b : bool):
+func show_new_vehicle_button(b : bool = true):
 	button_new.visible = b
 
 func _on_button_find_pressed():
@@ -40,4 +43,4 @@ func _on_button_edit_pressed():
 	printerr('Route setting not implemented yet')
 
 func _on_button_delete_pressed():
-	remove_vehicle()
+	emit_signal("remove_vehicle_clicked", self)

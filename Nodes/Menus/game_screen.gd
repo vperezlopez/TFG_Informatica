@@ -68,25 +68,25 @@ func test_cargo():
 	
 	cs.init(q, [cargo_catalog.get_cargo(3), cargo_catalog.get_cargo(2), cargo_catalog.get_cargo(1)], [cargo_catalog.get_cargo(3)])
 	res = cs.add_cargo(cargo_catalog.get_cargo(2))
-	print("Added %d units of %s" % [res, c.name])
+	#print("Added %d units of %s" % [res, c.name])
 	
 	res = cs.get_quantity(c)
-	print("There are %d units of %s" % [res, c.name])
+	#print("There are %d units of %s" % [res, c.name])
 	
 	c = cargo_catalog.get_cargo(1)
 	res = cs.remove_cargo(c, 4)
-	print("Removed %d units of %s" % [res, c.name])
+	#print("Removed %d units of %s" % [res, c.name])
 	
 	c = cargo_catalog.get_cargo(2)
 	res = cs.remove_cargo(c, 1)
-	print("Removed %d units of %s" % [res, c.name])
+	#print("Removed %d units of %s" % [res, c.name])
 	
 	c = cargo_catalog.get_cargo(2)
 	res = cs.remove_cargo(c, 18)
-	print("Removed %d units of %s" % [res, c.name])
+	#print("Removed %d units of %s" % [res, c.name])
 	
 	res = cs.get_quantity(c)
-	print("There are %d units of %s" % [res, c.name])
+	#print("There are %d units of %s" % [res, c.name])
 	
 	res = cs.add_cargo(cargo_catalog.get_cargo(1), 3)
 	res = cs.add_cargo(cargo_catalog.get_cargo(3), 3)
@@ -100,12 +100,37 @@ func test_cargo():
 	$VBoxContainer/top_container/factory_menu.initialize(cs, null)
 
 func test_vehicle():
+	var vehicle_model_catalog = load(Constants.VEHICLE_MODEL_CATALOG_PATH) as VehicleModelCatalog
+	
 	var fleet : Array[Vehicle]
 	var v = vehicle.instantiate()
 	add_child(v)
-	var vehicle_model_catalog = load(Constants.VEHICLE_MODEL_CATALOG_PATH) as VehicleModelCatalog
 	v.initialize(vehicle_model_catalog.get_vehicle_model(1))
 	fleet.append(v)
+	
+	var v2 = vehicle.instantiate()
+	add_child(v2)
+	#var vehicle_model_catalog = load(Constants.VEHICLE_MODEL_CATALOG_PATH) as VehicleModelCatalog
+	v2.initialize(vehicle_model_catalog.get_vehicle_model(2))
+	fleet.append(v2)
+	
+	var v3 = vehicle.instantiate()
+	add_child(v3)
+	#var vehicle_model_catalog = load(Constants.VEHICLE_MODEL_CATALOG_PATH) as VehicleModelCatalog
+	v3.initialize(vehicle_model_catalog.get_vehicle_model(1))
+	fleet.append(v3)
+	
+	var v4 = vehicle.instantiate()
+	add_child(v4)
+	#var vehicle_model_catalog = load(Constants.VEHICLE_MODEL_CATALOG_PATH) as VehicleModelCatalog
+	v4.initialize(vehicle_model_catalog.get_vehicle_model(2))
+	fleet.append(v4)
+	
+	var v5 = vehicle.instantiate()
+	add_child(v5)
+	#var vehicle_model_catalog = load(Constants.VEHICLE_MODEL_CATALOG_PATH) as VehicleModelCatalog
+	v5.initialize(vehicle_model_catalog.get_vehicle_model(1))
+	fleet.append(v5)
 	
 	$VBoxContainer/top_container/depot_road_menu.initialize(fleet)
 	

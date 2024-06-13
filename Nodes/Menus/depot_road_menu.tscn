@@ -4,43 +4,58 @@
 script/source = "extends Control
 
 const VEHICLE_MENU = preload(\"res://Nodes/Menus/vehicle_menu.tscn\")
+@onready var slots_container = $SlotsContainer
+#
+#@onready var slot_0 = $GridContainer/Slot0
+#@onready var slot_1 = $GridContainer/Slot1
+#@onready var slot_2 = $GridContainer/Slot2
+#@onready var slot_3 = $GridContainer/Slot3
+#@onready var slot_4 = $GridContainer/Slot4
+#@onready var slot_5 = $GridContainer/Slot5
+#
+#@onready var slots = [slot_0, slot_1, slot_2, slot_3, slot_4, slot_5]
 
-@onready var slot_0 = $GridContainer/Slot0
-@onready var slot_1 = $GridContainer/Slot1
-@onready var slot_2 = $GridContainer/Slot2
-@onready var slot_3 = $GridContainer/Slot3
-@onready var slot_4 = $GridContainer/Slot4
-@onready var slot_5 = $GridContainer/Slot5
-
-@onready var slots = [slot_0, slot_1, slot_2, slot_3, slot_4, slot_5]
+var capacity = 6
+var _index = 0
 
 func _ready():
+	for n in capacity:
+		var vehicle_menu = VEHICLE_MENU.instantiate()
+		slots_container.add_child(vehicle_menu)
+		vehicle_menu.connect(\"remove_vehicle_clicked\", Callable(self, \"_on_remove_vehicle_clicked\"))
 	
-	
-	
-	pass
+	slots_container.get_child(_index).show_new_vehicle_button()
 	#for child in self.get_children():
 		#print('Child: ' + str(child))
 	##initialize.call_deferred(null)
 
 func initialize(fleet : Array[Vehicle]):
-	print('Depot initialization')
+	#print('Depot initialization')
+	#print(str(slots_container.get_child(0)))
 	for vehicle in fleet:
-		print(slot_0.size)
-		var vehicle_menu = VEHICLE_MENU.instantiate()
-		#$GridContainer.add_child(vehicle_menu)
-		slot_0.add_child(vehicle_menu)
-		#slot_1.add_child(vehicle_menu)
-		#slot_2.add_child(vehicle_menu)
-		#slot_3.add_child(vehicle_menu)
-		#slot_4.add_child(vehicle_menu)
-		#print_debug(str(vehicle_menu.get_class()))
-		#print_debug(str(vehicle_menu.has_method(\"initialize\")))
-		vehicle_menu.add_vehicle(vehicle)
-		print(slot_0.size)
-	for slot in slots:
-		print('Child: ' + str(slot.get_children()))
-	print('Grid child: ' + str($GridContainer.get_children()))
+		add_vehicle(vehicle)
+
+func add_vehicle(vehicle : Vehicle):
+	slots_container.get_child(_index).add_vehicle(vehicle)
+	_index += 1
+	slots_container.get_child(_index).show_new_vehicle_button()
+	
+func remove_vehicle(i : int):
+	slots_container.get_child(i).remove_vehicle()
+	slots_container.get_child(_index).show_new_vehicle_button(false)
+	_index -= 1
+	for n in range(i, _index):
+		#slots_container.get_child(n).add_vehicle(slots_container.get_child(n + 1).vehicle)
+		#slots_container.get_child(n + 1).remove_vehicle()
+		var v = slots_container.get_child(n + 1).remove_vehicle()
+		slots_container.get_child(n).add_vehicle(v)
+	
+	slots_container.get_child(_index).show_new_vehicle_button()
+
+func _on_remove_vehicle_clicked(sender):
+	var index = slots_container.get_children().find(sender)
+	#print_debug('Deleting index: ' + str(index))
+	remove_vehicle(index)
 "
 
 [node name="depot_road_menu" type="Control"]
@@ -53,49 +68,21 @@ grow_vertical = 2
 script = SubResource("GDScript_xekh3")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="SlotsContainer" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
 columns = 3
-
-[node name="Slot0" type="Control" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Slot1" type="Control" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Slot2" type="Control" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Slot3" type="Control" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Slot4" type="Control" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Slot5" type="Control" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3

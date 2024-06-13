@@ -19,5 +19,5 @@ func initialize(input_storage : CargoStorage, output_storage : CargoStorage):
 		var cargo_menu = CARGO_MENU.instantiate()
 		cargo_menu.initialize(cargo, quantity)
 		input_storage_menu.add_child(cargo_menu)
-		print_debug(str(cargo))
+		#print_debug(str(cargo))
 	pass
