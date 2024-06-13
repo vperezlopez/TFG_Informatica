@@ -112,6 +112,7 @@ size_flags_vertical = 3
 icon = ExtResource("3_y06jo")
 icon_alignment = 1
 
+[connection signal="pressed" from="VBoxContainer/TitleContainer/ButtonNew" to="." method="_on_button_new_pressed"]
 [connection signal="pressed" from="VBoxContainer/VehicleContainer/MarginContainer/VehicleBox/VBoxContainer/ButtonFind" to="." method="_on_button_find_pressed"]
 [connection signal="pressed" from="VBoxContainer/VehicleContainer/MarginContainer/VehicleBox/VBoxContainer/ButtonEdit" to="." method="_on_button_edit_pressed"]
 [connection signal="pressed" from="VBoxContainer/VehicleContainer/MarginContainer/VehicleBox/VBoxContainer/ButtonDelete" to="." method="_on_button_delete_pressed"]

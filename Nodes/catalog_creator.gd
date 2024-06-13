@@ -70,7 +70,7 @@ static func create_vehicle_model_catalog():
 	vehicle_model.capacity = 1
 	vehicle_model.speed = 10
 	vehicle_model.travel_cost = 10
-	vehicle_model.value = 10000
+	vehicle_model.price = 10000
 	
 	vehicle_model.img_path = "res://Assets/Vehicle_Models/" + vehicle_model.model_name.to_lower() + ".png"
 	catalog.vehicle_models[vehicle_model.id] = vehicle_model
@@ -87,7 +87,7 @@ static func create_vehicle_model_catalog():
 	vehicle_model.capacity = 2
 	vehicle_model.speed = 8
 	vehicle_model.travel_cost = 14
-	vehicle_model.value = 32000
+	vehicle_model.price = 32000
 	
 	vehicle_model.img_path = "res://Assets/Vehicle_Models/" + vehicle_model.model_name.to_lower() + ".png"
 	catalog.vehicle_models[vehicle_model.id] = vehicle_model

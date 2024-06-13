@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="VehicleModelCatalog" load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://Nodes/vehicle_model_catalog.gd" id="1_l53xx"]
-[ext_resource type="Script" path="res://Nodes/vehicle_model.gd" id="2_cr2pb"]
+[ext_resource type="Script" path="res://Nodes/vehicle_model_catalog.gd" id="1_2aw22"]
+[ext_resource type="Script" path="res://Nodes/vehicle_model.gd" id="2_8726d"]
 
-[sub_resource type="Resource" id="Resource_etajj"]
-script = ExtResource("2_cr2pb")
+[sub_resource type="Resource" id="Resource_j5mhg"]
+script = ExtResource("2_8726d")
 id = 1
 navigation = 1
 model_name = "Truck"
@@ -12,10 +12,10 @@ img_path = "res://Assets/Vehicle_Models/truck.png"
 capacity = 1
 speed = 10.0
 travel_cost = 10.0
-value = 10000.0
+price = 10000.0
 
-[sub_resource type="Resource" id="Resource_rniys"]
-script = ExtResource("2_cr2pb")
+[sub_resource type="Resource" id="Resource_mktmr"]
+script = ExtResource("2_8726d")
 id = 2
 navigation = 1
 model_name = "Trailer"
@@ -23,11 +23,11 @@ img_path = "res://Assets/Vehicle_Models/trailer.png"
 capacity = 2
 speed = 8.0
 travel_cost = 14.0
-value = 32000.0
+price = 32000.0
 
 [resource]
-script = ExtResource("1_l53xx")
+script = ExtResource("1_2aw22")
 vehicle_models = {
-1: SubResource("Resource_etajj"),
-2: SubResource("Resource_rniys")
+1: SubResource("Resource_j5mhg"),
+2: SubResource("Resource_mktmr")
 }

@@ -3,28 +3,41 @@
 [sub_resource type="GDScript" id="GDScript_xekh3"]
 script/source = "extends Control
 
+const VehicleModelCatalog = preload(Constants.VEHICLE_MODEL_CATALOG_PATH)
 const VEHICLE_MENU = preload(\"res://Nodes/Menus/vehicle_menu.tscn\")
+const BUY_VEHICLE_MENU = preload(\"res://Nodes/Menus/buy_vehicle_menu.tscn\")
 @onready var slots_container = $SlotsContainer
-#
+@onready var models_container = $ModelsContainer
+
 #@onready var slot_0 = $GridContainer/Slot0
 #@onready var slot_1 = $GridContainer/Slot1
 #@onready var slot_2 = $GridContainer/Slot2
 #@onready var slot_3 = $GridContainer/Slot3
 #@onready var slot_4 = $GridContainer/Slot4
 #@onready var slot_5 = $GridContainer/Slot5
-#
+
 #@onready var slots = [slot_0, slot_1, slot_2, slot_3, slot_4, slot_5]
 
+var navigation = 1
 var capacity = 6
 var _index = 0
 
 func _ready():
+	# SLOTSCONTAINER
 	for n in capacity:
 		var vehicle_menu = VEHICLE_MENU.instantiate()
 		slots_container.add_child(vehicle_menu)
 		vehicle_menu.connect(\"remove_vehicle_clicked\", Callable(self, \"_on_remove_vehicle_clicked\"))
-	
+		vehicle_menu.connect(\"new_vehicle_clicked\", Callable(self, \"_on_new_vehicle_clicked\"))
 	slots_container.get_child(_index).show_new_vehicle_button()
+	
+	# MODELSCONTAINER
+	for vehicle_model in VehicleModelCatalog.get_vehicle_model_with_navigation(navigation):
+		var model_info = BUY_VEHICLE_MENU.instantiate()
+		models_container.add_child(model_info)
+		model_info.initialize(vehicle_model)
+		model_info.connect(\"buy_button_pressed\", Callable(self, \"_on_buy_button_pressed\"))
+	
 	#for child in self.get_children():
 		#print('Child: ' + str(child))
 	##initialize.call_deferred(null)
@@ -52,10 +65,20 @@ func remove_vehicle(i : int):
 	
 	slots_container.get_child(_index).show_new_vehicle_button()
 
+func _on_new_vehicle_clicked():
+	slots_container.visible = false
+	models_container.visible = true
+
 func _on_remove_vehicle_clicked(sender):
 	var index = slots_container.get_children().find(sender)
 	#print_debug('Deleting index: ' + str(index))
 	remove_vehicle(index)
+
+func _on_buy_button_pressed(vehicle_model):
+	#var vehicle = vehicle.instantiate()
+	models_container.visible = false
+	slots_container.visible = true
+	print(vehicle_model)
 "
 
 [node name="depot_road_menu" type="Control"]
@@ -86,3 +109,13 @@ grow_vertical = 2
 theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 4
 columns = 3
+
+[node name="ModelsContainer" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4

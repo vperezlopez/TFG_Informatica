@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1evquqk3hwxq"]
+
+[ext_resource type="Script" path="res://Nodes/Menus/buy_vehicle_menu.gd" id="1_lwf5q"]
+[ext_resource type="PackedScene" uid="uid://1wtgrvyf3p0a" path="res://Nodes/Menus/vehicle_info.tscn" id="1_xfh4o"]
+
+[node name="buy_vehicle_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_lwf5q")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="vehicle_info" parent="VBoxContainer" instance=ExtResource("1_xfh4o")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_stretch_ratio = 7.0
+
+[node name="ButtonContainer" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.201415, 0.544424, 0.324355, 1)
+
+[node name="ButtonBuy" type="Button" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+text = "Buy"
+
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/ButtonBuy" to="." method="_on_button_buy_pressed"]
