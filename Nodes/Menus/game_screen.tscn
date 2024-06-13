@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d25kc44qokkgf" path="res://Nodes/camera.tscn" id="2_ktsrh"]
 [ext_resource type="PackedScene" uid="uid://cx6ychvt2173i" path="res://Nodes/Menus/factory_menu.tscn" id="4_ca8m4"]
 [ext_resource type="PackedScene" uid="uid://c6yvx1lg154nf" path="res://Nodes/Menus/const_menu.tscn" id="5_gm3u7"]
-[ext_resource type="PackedScene" uid="uid://bxwd0v8oyoaad" path="res://Nodes/Menus/depot_road_menu.tscn" id="5_v0cl0"]
+[ext_resource type="PackedScene" uid="uid://bevejx46wwyr3" path="res://Nodes/Menus/depot_road_menu.tscn" id="5_v0cl0"]
 [ext_resource type="PackedScene" uid="uid://cs4hn2cfdlvq8" path="res://Nodes/Menus/money_menu.tscn" id="6_xadek"]
 [ext_resource type="PackedScene" uid="uid://b843jfyemoegl" path="res://Nodes/Menus/game_menu.tscn" id="7_5fp8y"]
 

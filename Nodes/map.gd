@@ -185,7 +185,20 @@ func place_actor_static(actor_static_instance : Actor_Static, pos : Vector2i = V
 	else:
 		return false
 
+#func place_vehicle(vehicle_instance : Vehicle, pos : Vector2i):
+	#vehicle_instance.position = pos
 
+func create_vehicle(vehicle_model : VehicleModel, depot : Depot):
+	var vehicle_instance = vehicle.instantiate()
+	add_child(vehicle_instance)
+	vehicle_instance.initialize(vehicle_model)
+	vehicle_instance.z_index = Layers.VEHICLE
+	vehicle_instance.position = depot.position
+	depot.add_vehicle(vehicle_instance)
+
+func delete_vehicle(index : int, depot : Depot):
+	depot.remove_vehicle(index).queue_free.call_deferred()
+	#vehicle.queue_free.call_deferred()
 
 # BUILDING FUNCTIONS
 

@@ -7,8 +7,10 @@ extends Control
 
 var vehicle : Vehicle
 
-signal remove_vehicle_clicked(sender)
 signal new_vehicle_clicked
+signal find_clicked(sender)
+signal remove_vehicle_clicked(sender)
+
 
 #func initialize(vehicle_instance : Vehicle):
 	#$VBoxContainer/Title_Container/Title_Label.text = vehicle_instance.vehicle_model.model_name
@@ -41,7 +43,8 @@ func _on_button_new_pressed():
 	emit_signal("new_vehicle_clicked")
 
 func _on_button_find_pressed():
-	print_debug(vehicle.position)
+	emit_signal("find_clicked", self)
+	#print_debug(vehicle.position)
 
 func _on_button_edit_pressed():
 	printerr('Route setting not implemented yet')

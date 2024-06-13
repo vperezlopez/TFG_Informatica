@@ -15,7 +15,7 @@ const vehicle = preload("res://Nodes/vehicle.tscn")
 @onready var money_menu = $VBoxContainer/bottom_container/bottom_menu/money_menu
 @onready var game_menu = $VBoxContainer/bottom_container/bottom_menu/game_menu
 
-@onready var Menus = [game_container, factory_menu, const_menu, money_menu, game_menu]
+@onready var Menus = [game_container, factory_menu, depot_road_menu, const_menu, money_menu, game_menu]
 
 enum ScreenMode {MAP, ROUTE, CITY, FACTORY, DEPOT}
 var selected_screen : ScreenMode
@@ -35,9 +35,9 @@ func _ready():
 		new_game(Vector2i(64, 64), 4, 2, 2)
 
 	test_cargo()
-	test_vehicle()
+	#test_vehicle()
 
-	show_screen(ScreenMode.DEPOT)
+	show_screen(ScreenMode.MAP)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -46,6 +46,10 @@ func _process(_delta):
 func connect_signals():
 	const_menu.connect("const_button_clicked", Callable(map, "_on_construction_button_clicked"))
 	map.connect("forwarded_actor_static_clicked", Callable(self, "_on_actor_static_clicked"))
+	depot_road_menu.connect("buy_vehicle", Callable(self, "_on_buy_vehicle"))
+	depot_road_menu.connect("find_vehicle", Callable(self, "_on_find_vehicle"))
+	depot_road_menu.connect("sell_vehicle", Callable(self, "_on_sell_vehicle"))
+	
 	#load("res://Nodes/actor_static.tscn").connect("actor_static_clicked", Callable(map, "_on_static_actor_clicked"))
 
 func new_game(size : Vector2i, ncities : int, nexplotations : int, nharbors : int):
@@ -97,7 +101,7 @@ func test_cargo():
 	res = cs.remove_cargo(cargo_catalog.get_cargo(6))
 	for e in cs.get_inventory():
 		print("There are %d units of %s" % [e[1], e[0].name])
-	$VBoxContainer/top_container/factory_menu.initialize(cs, null)
+	$VBoxContainer/top_container/factory_menu.initialize_storage(cs, null)
 
 func test_vehicle():
 	var vehicle_model_catalog = load(Constants.VEHICLE_MODEL_CATALOG_PATH) as VehicleModelCatalog
@@ -132,20 +136,32 @@ func test_vehicle():
 	v5.initialize(vehicle_model_catalog.get_vehicle_model(1))
 	fleet.append(v5)
 	
-	$VBoxContainer/top_container/depot_road_menu.initialize(fleet)
+	$VBoxContainer/top_container/depot_road_menu.initialize_fleet(fleet)
 	
 	pass
 
 func _on_actor_static_clicked(actor_static_id):
 	print_debug('Connection successful')
-	print(str(instance_from_id(actor_static_id)))
 	var actor_static_clicked : Actor_Static = instance_from_id(actor_static_id)
-	print('Is factory?')
 	if actor_static_clicked is Factory:
-		print('Is factory')
+		factory_menu.initialize(actor_static_clicked)
 		show_screen(ScreenMode.FACTORY)
+	if actor_static_clicked is Depot:
+		depot_road_menu.initialize(actor_static_clicked)
+		show_screen(ScreenMode.DEPOT)
 	
+func _on_buy_vehicle(vehicle_model : VehicleModel, depot : Depot):
+	# VALIDATE MONEY: TODO
+	map.create_vehicle(vehicle_model, depot)
 
+func _on_find_vehicle(pos : Vector2i):
+	show_screen(ScreenMode.MAP)
+	camera.set_starting_position(pos)
+
+func _on_sell_vehicle(index, depot):
+	# VALIDATE MONEY: TODO
+	print_debug(str(vehicle.get_class()))
+	map.delete_vehicle(index, depot)
 
 func _on_game_container_resized():
 	if game_viewport and game_container:
@@ -177,8 +193,8 @@ func hide_menus():
 	for menu in Menus:
 		menu.visible = false
 
-#func _input(event):
-	#if event is InputEventKey:
-		#if event.pressed:
-			#if event.keycode == KEY_ESCAPE:
-				#show_screen(ScreenMode.MAP)
+func _input(event):
+	if event is InputEventKey:
+		if event.pressed:
+			if event.keycode == KEY_ESCAPE:
+				show_screen(ScreenMode.MAP)

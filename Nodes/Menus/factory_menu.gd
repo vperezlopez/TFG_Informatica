@@ -4,6 +4,8 @@ extends Control
 
 const CARGO_MENU = preload("res://Nodes/Menus/cargo_menu.tscn")
 
+var factory : Factory
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -13,7 +15,10 @@ func _ready():
 func _process(delta):
 	pass
 
-func initialize(input_storage : CargoStorage, output_storage : CargoStorage):
+func initialize(f : Factory):
+	factory = f
+
+func initialize_storage(input_storage : CargoStorage, output_storage : CargoStorage):
 	for cargo in input_storage.get_cargo():
 		var quantity = input_storage.get_quantity(cargo)
 		var cargo_menu = CARGO_MENU.instantiate()

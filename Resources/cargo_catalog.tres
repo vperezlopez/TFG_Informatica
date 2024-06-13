@@ -1,57 +1,57 @@
 [gd_resource type="Resource" script_class="CargoCatalog" load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://Nodes/cargo.gd" id="1_xoq60"]
-[ext_resource type="Script" path="res://Nodes/cargo_catalog.gd" id="2_c0j10"]
+[ext_resource type="Script" path="res://Nodes/cargo.gd" id="1_6ccfv"]
+[ext_resource type="Script" path="res://Nodes/cargo_catalog.gd" id="2_lcrnu"]
 
-[sub_resource type="Resource" id="Resource_knq25"]
-script = ExtResource("1_xoq60")
+[sub_resource type="Resource" id="Resource_j3nvj"]
+script = ExtResource("1_6ccfv")
 id = 1
 name = "Wood"
 value = 2.0
 img_path = "res://Assets/Cargo/wood.png"
 
-[sub_resource type="Resource" id="Resource_eki7n"]
-script = ExtResource("1_xoq60")
+[sub_resource type="Resource" id="Resource_xh2tu"]
+script = ExtResource("1_6ccfv")
 id = 2
 name = "Aluminium"
 value = 1.8
 img_path = "res://Assets/Cargo/aluminium.png"
 
-[sub_resource type="Resource" id="Resource_gfdow"]
-script = ExtResource("1_xoq60")
+[sub_resource type="Resource" id="Resource_x8mrk"]
+script = ExtResource("1_6ccfv")
 id = 3
 name = "Steel"
 value = 2.4
 img_path = "res://Assets/Cargo/steel.png"
 
-[sub_resource type="Resource" id="Resource_g5860"]
-script = ExtResource("1_xoq60")
+[sub_resource type="Resource" id="Resource_2gxep"]
+script = ExtResource("1_6ccfv")
 id = 4
 name = "Plastic"
 value = 1.2
 img_path = "res://Assets/Cargo/plastic.png"
 
-[sub_resource type="Resource" id="Resource_r770l"]
-script = ExtResource("1_xoq60")
+[sub_resource type="Resource" id="Resource_w3k6t"]
+script = ExtResource("1_6ccfv")
 id = 5
 name = "Copper"
 value = 2.1
 img_path = "res://Assets/Cargo/copper.png"
 
-[sub_resource type="Resource" id="Resource_l7ttq"]
-script = ExtResource("1_xoq60")
+[sub_resource type="Resource" id="Resource_o4h2b"]
+script = ExtResource("1_6ccfv")
 id = 6
 name = "Fabric"
 value = 1.9
 img_path = "res://Assets/Cargo/fabric.png"
 
 [resource]
-script = ExtResource("2_c0j10")
+script = ExtResource("2_lcrnu")
 cargos = {
-1: SubResource("Resource_knq25"),
-2: SubResource("Resource_eki7n"),
-3: SubResource("Resource_gfdow"),
-4: SubResource("Resource_g5860"),
-5: SubResource("Resource_r770l"),
-6: SubResource("Resource_l7ttq")
+1: SubResource("Resource_j3nvj"),
+2: SubResource("Resource_xh2tu"),
+3: SubResource("Resource_x8mrk"),
+4: SubResource("Resource_2gxep"),
+5: SubResource("Resource_w3k6t"),
+6: SubResource("Resource_o4h2b")
 }
