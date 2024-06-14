@@ -15,8 +15,10 @@ const vehicle = preload("res://Nodes/vehicle.tscn")
 @onready var cargo_mini_menu = $VBoxContainer/bottom_container/bottom_menu/cargo_mini_menu
 @onready var money_menu = $VBoxContainer/bottom_container/bottom_menu/money_menu
 @onready var game_menu = $VBoxContainer/bottom_container/bottom_menu/game_menu
+@onready var route_menu = $VBoxContainer/bottom_container/bottom_menu/route_menu
 
-@onready var Menus = [game_container, factory_menu, depot_road_menu, const_menu, cargo_mini_menu, money_menu, game_menu]
+
+@onready var Menus = [game_container, factory_menu, depot_road_menu, const_menu, cargo_mini_menu, money_menu, game_menu, route_menu]
 
 enum ScreenMode {MAP, ROUTE, CITY, FACTORY, DEPOT, EXPLOTATION}
 var selected_screen : ScreenMode
@@ -49,6 +51,7 @@ func connect_signals():
 	map.connect("forwarded_actor_static_clicked", Callable(self, "_on_actor_static_clicked"))
 	depot_road_menu.connect("buy_vehicle", Callable(self, "_on_buy_vehicle"))
 	depot_road_menu.connect("find_vehicle", Callable(self, "_on_find_vehicle"))
+	depot_road_menu.connect("set_route", Callable(self, "_on_set_route_vehicle"))
 	depot_road_menu.connect("sell_vehicle", Callable(self, "_on_sell_vehicle"))
 	
 	#load("res://Nodes/actor_static.tscn").connect("actor_static_clicked", Callable(map, "_on_static_actor_clicked"))
@@ -142,17 +145,23 @@ func test_vehicle():
 	pass
 
 func _on_actor_static_clicked(actor_static_id):
-	print_debug('Connection successful')
+	#print_debug('Connection successful')
 	var actor_static_clicked : Actor_Static = instance_from_id(actor_static_id)
-	if actor_static_clicked is Factory:
-		factory_menu.initialize(actor_static_clicked)
-		show_screen(ScreenMode.FACTORY)
-	if actor_static_clicked is Depot:
-		depot_road_menu.initialize(actor_static_clicked)
-		show_screen(ScreenMode.DEPOT)
-	if actor_static_clicked is Explotation:
-		cargo_mini_menu.initialize(actor_static_clicked)
-		show_screen(ScreenMode.EXPLOTATION)
+	if selected_screen == ScreenMode.MAP:
+		#print_debug('Construction')
+		if actor_static_clicked is Factory:
+			factory_menu.initialize(actor_static_clicked)
+			show_screen(ScreenMode.FACTORY)
+		if actor_static_clicked is Depot:
+			depot_road_menu.initialize(actor_static_clicked)
+			show_screen(ScreenMode.DEPOT)
+		if actor_static_clicked is Explotation:
+			cargo_mini_menu.initialize(actor_static_clicked)
+			show_screen(ScreenMode.EXPLOTATION)
+		
+	elif selected_screen == ScreenMode.ROUTE:
+		#print_debug('Route setting')
+		route_menu.add_destination(actor_static_clicked)
 	
 func _on_buy_vehicle(vehicle_model : VehicleModel, depot : Depot):
 	# VALIDATE MONEY: TODO
@@ -161,6 +170,10 @@ func _on_buy_vehicle(vehicle_model : VehicleModel, depot : Depot):
 func _on_find_vehicle(pos : Vector2i):
 	show_screen(ScreenMode.MAP)
 	camera.set_starting_position(pos)
+
+func _on_set_route_vehicle(vehicle : Vehicle):
+	route_menu.initialize(vehicle)
+	show_screen(ScreenMode.ROUTE)
 
 func _on_sell_vehicle(index, depot):
 	# VALIDATE MONEY: TODO
@@ -179,9 +192,9 @@ func show_screen(new_screen : ScreenMode):
 			const_menu.visible = true
 			money_menu.visible = true
 			game_menu.visible = true
-			pass
 		ScreenMode.ROUTE:
-			pass
+			game_container.visible = true
+			route_menu.visible = true
 		ScreenMode.CITY:
 			pass
 		ScreenMode.FACTORY:
@@ -195,7 +208,7 @@ func show_screen(new_screen : ScreenMode):
 			cargo_mini_menu.visible = true
 			money_menu.visible = true
 			game_menu.visible = true
-	pass
+	selected_screen = new_screen
 	
 
 func hide_menus():

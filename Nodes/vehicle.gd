@@ -8,6 +8,8 @@ var sprite : Sprite2D
 var vehicle_model : VehicleModel
 var usage : float
 
+var route : Route
+
 func _ready(): # INITIALIZE CHILDREN NODES
 	# INITIALIZE COLLISION SHAPE
 	collision_shape = CollisionShape2D.new()
@@ -24,4 +26,8 @@ func _ready(): # INITIALIZE CHILDREN NODES
 func initialize(vm : VehicleModel):
 	self.vehicle_model = vm
 	sprite.texture = load(vm.img_path)
-	pass
+	
+	route = Route.new()
+	
+func get_route() -> Route:
+	return route

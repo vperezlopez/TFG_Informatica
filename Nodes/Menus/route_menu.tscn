@@ -1,0 +1,217 @@
+[gd_scene load_steps=6 format=3 uid="uid://bu3k02bj871dl"]
+
+[ext_resource type="Script" path="res://Nodes/Menus/route_menu.gd" id="1_gnda6"]
+[ext_resource type="Texture2D" uid="uid://ckd536xcx7hqa" path="res://Assets/GUI_Icons/Load_Icon.png" id="1_pcisx"]
+[ext_resource type="Texture2D" uid="uid://dylwk44agkrxr" path="res://Assets/GUI_Icons/Unload_Icon.png" id="2_85akn"]
+[ext_resource type="Texture2D" uid="uid://diud52mysj42s" path="res://Assets/GUI_Icons/Green_Tick.png" id="2_xd2mp"]
+[ext_resource type="Texture2D" uid="uid://bhqa5hmpw7nvo" path="res://Assets/GUI_Icons/Red_X.png" id="3_toa50"]
+
+[node name="RouteMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gnda6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="LoadContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LoadTitleBox" type="Control" parent="HBoxContainer/LoadContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/LoadContainer/LoadTitleBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.341213, 0.624276, 0.311093, 1)
+
+[node name="IconLoad" type="TextureRect" parent="HBoxContainer/LoadContainer/LoadTitleBox"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+texture = ExtResource("1_pcisx")
+
+[node name="LabelLoad" type="Label" parent="HBoxContainer/LoadContainer/LoadTitleBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Load"
+horizontal_alignment = 1
+
+[node name="ButtonWait" type="CheckButton" parent="HBoxContainer/LoadContainer/LoadTitleBox"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -12.0
+offset_bottom = 12.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Wait until
+loaded"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/LoadContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="LoadCargoContainer" type="VBoxContainer" parent="HBoxContainer/LoadContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="DestinationContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RouteTitleBox" type="Control" parent="HBoxContainer/DestinationContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/DestinationContainer/RouteTitleBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.341176, 0.623529, 0.309804, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/DestinationContainer/RouteTitleBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelTitle" type="Label" parent="HBoxContainer/DestinationContainer/RouteTitleBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 3.0
+text = "Route"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonAccept" type="Button" parent="HBoxContainer/DestinationContainer/RouteTitleBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("2_xd2mp")
+icon_alignment = 1
+
+[node name="ButtonCancel" type="Button" parent="HBoxContainer/DestinationContainer/RouteTitleBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("3_toa50")
+icon_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/DestinationContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="DestinationsContainer" type="VBoxContainer" parent="HBoxContainer/DestinationContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="UnloadContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UnloadTitleBox" type="Control" parent="HBoxContainer/UnloadContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/UnloadContainer/UnloadTitleBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.341213, 0.624276, 0.311093, 1)
+
+[node name="IconUnload" type="TextureRect" parent="HBoxContainer/UnloadContainer/UnloadTitleBox"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("2_85akn")
+
+[node name="LabelUnload" type="Label" parent="HBoxContainer/UnloadContainer/UnloadTitleBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Unoad"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/UnloadContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="UnloadCargoContainer" type="VBoxContainer" parent="HBoxContainer/UnloadContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0

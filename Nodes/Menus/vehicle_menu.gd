@@ -9,6 +9,7 @@ var vehicle : Vehicle
 
 signal new_vehicle_clicked
 signal find_clicked(sender)
+signal set_route_clicked(sender)
 signal remove_vehicle_clicked(sender)
 
 
@@ -47,7 +48,8 @@ func _on_button_find_pressed():
 	#print_debug(vehicle.position)
 
 func _on_button_edit_pressed():
-	printerr('Route setting not implemented yet')
+	emit_signal("set_route_clicked", vehicle)
+	#printerr('Route setting not implemented yet')
 
 func _on_button_delete_pressed():
 	emit_signal("remove_vehicle_clicked", self)

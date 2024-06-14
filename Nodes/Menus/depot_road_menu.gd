@@ -17,6 +17,7 @@ const BUY_VEHICLE_MENU = preload("res://Nodes/Menus/buy_vehicle_menu.tscn")
 
 signal buy_vehicle(vehicle_model : VehicleModel, d : Depot)
 signal find_vehicle(pos : Vector2i)
+signal set_route(v : Vehicle)
 signal sell_vehicle(index : int, d : Depot)
 
 var depot : Depot
@@ -32,6 +33,7 @@ func _ready():
 		slots_container.add_child(vehicle_menu)
 		vehicle_menu.connect("new_vehicle_clicked", Callable(self, "_on_new_vehicle_clicked"))
 		vehicle_menu.connect("find_clicked", Callable(self, "_on_find_clicked"))
+		vehicle_menu.connect("set_route_clicked", Callable(self, "_on_set_route_clicked"))
 		vehicle_menu.connect("remove_vehicle_clicked", Callable(self, "_on_remove_vehicle_clicked"))
 		
 	slots_container.get_child(_index).show_new_vehicle_button()
@@ -95,6 +97,9 @@ func _on_buy_button_pressed(vehicle_model : VehicleModel):
 func _on_find_clicked(sender):
 	var pos = depot.fleet[slots_container.get_children().find(sender)].position
 	emit_signal("find_vehicle", pos)
+
+func _on_set_route_clicked(veh):
+	emit_signal("set_route", veh)
 
 func _on_remove_vehicle_clicked(sender):
 	var index = slots_container.get_children().find(sender)

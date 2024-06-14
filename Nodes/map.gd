@@ -282,7 +282,7 @@ func build_path (path_type : PathTypes):
 		selected_path = path_type
 
 func set_build_mode(new_build_mode : BuildMode) :
-	print_debug('Changing Build Mode')
+	#print_debug('Changing Build Mode')
 	# REMOVE PREVIOUS MODE
 	match build_mode:
 		BuildMode.NONE:
@@ -387,7 +387,7 @@ func calculate_area_corners(pos1 : Vector2i, pos2 : Vector2i) -> Array[Vector2i]
 # INPUT_HANDLERS
 
 func _on_actor_static_clicked(actor_static_id : int):
-	print_debug('Forwarding')
+	#print_debug('Forwarding')
 	emit_signal("forwarded_actor_static_clicked", actor_static_id)
 
 func _input(event):
