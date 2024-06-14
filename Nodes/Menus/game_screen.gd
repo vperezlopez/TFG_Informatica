@@ -12,12 +12,13 @@ const vehicle = preload("res://Nodes/vehicle.tscn")
 
 @onready var bottom_container = $VBoxContainer/bottom_container
 @onready var const_menu = $VBoxContainer/bottom_container/bottom_menu/const_menu
+@onready var cargo_mini_menu = $VBoxContainer/bottom_container/bottom_menu/cargo_mini_menu
 @onready var money_menu = $VBoxContainer/bottom_container/bottom_menu/money_menu
 @onready var game_menu = $VBoxContainer/bottom_container/bottom_menu/game_menu
 
-@onready var Menus = [game_container, factory_menu, depot_road_menu, const_menu, money_menu, game_menu]
+@onready var Menus = [game_container, factory_menu, depot_road_menu, const_menu, cargo_mini_menu, money_menu, game_menu]
 
-enum ScreenMode {MAP, ROUTE, CITY, FACTORY, DEPOT}
+enum ScreenMode {MAP, ROUTE, CITY, FACTORY, DEPOT, EXPLOTATION}
 var selected_screen : ScreenMode
 
 # Called when the node enters the scene tree for the first time.
@@ -32,7 +33,7 @@ func _ready():
 
 	if get_parent() is Window:
 		print_debug('Manual initialization')
-		new_game(Vector2i(64, 64), 4, 2, 2)
+		new_game(Vector2i(64, 64), 4, 8, 2)
 
 	test_cargo()
 	#test_vehicle()
@@ -149,6 +150,9 @@ func _on_actor_static_clicked(actor_static_id):
 	if actor_static_clicked is Depot:
 		depot_road_menu.initialize(actor_static_clicked)
 		show_screen(ScreenMode.DEPOT)
+	if actor_static_clicked is Explotation:
+		cargo_mini_menu.initialize(actor_static_clicked)
+		show_screen(ScreenMode.EXPLOTATION)
 	
 func _on_buy_vehicle(vehicle_model : VehicleModel, depot : Depot):
 	# VALIDATE MONEY: TODO
@@ -186,6 +190,11 @@ func show_screen(new_screen : ScreenMode):
 		ScreenMode.DEPOT:
 			depot_road_menu.visible = true
 			money_menu.visible = true
+		ScreenMode.EXPLOTATION:
+			game_container.visible = true
+			cargo_mini_menu.visible = true
+			money_menu.visible = true
+			game_menu.visible = true
 	pass
 	
 

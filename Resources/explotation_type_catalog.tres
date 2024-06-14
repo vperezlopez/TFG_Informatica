@@ -1,84 +1,84 @@
 [gd_resource type="Resource" script_class="ExplotationTypeCatalog" load_steps=14 format=3]
 
-[ext_resource type="Script" path="res://Nodes/cargo.gd" id="1_ar7tg"]
-[ext_resource type="Script" path="res://Nodes/explotation_type.gd" id="2_rihuh"]
-[ext_resource type="Script" path="res://Nodes/explotation_type_catalog.gd" id="3_s27ej"]
+[ext_resource type="Script" path="res://Nodes/cargo.gd" id="1_ugqje"]
+[ext_resource type="Script" path="res://Nodes/explotation_type.gd" id="2_a54xw"]
+[ext_resource type="Script" path="res://Nodes/explotation_type_catalog.gd" id="3_oaikv"]
 
-[sub_resource type="Resource" id="Resource_y2ay2"]
-script = ExtResource("1_ar7tg")
+[sub_resource type="Resource" id="Resource_bsts5"]
+script = ExtResource("1_ugqje")
 id = 1
 name = "Wood"
 value = 2.0
 img_path = "res://Assets/Cargo/wood.png"
 
-[sub_resource type="Resource" id="Resource_f1xbn"]
-script = ExtResource("2_rihuh")
+[sub_resource type="Resource" id="Resource_uo4ym"]
+script = ExtResource("2_a54xw")
 id = 1
 explotation_name = "Sawmill"
-output = [SubResource("Resource_y2ay2")]
-img_path = "res://Assets/Explotation/sawmill.png"
+output = [SubResource("Resource_bsts5")]
+img_path = "res://Assets/Buildings/exp_sawmill.png"
 
-[sub_resource type="Resource" id="Resource_byxis"]
-script = ExtResource("1_ar7tg")
+[sub_resource type="Resource" id="Resource_xgyuc"]
+script = ExtResource("1_ugqje")
 id = 3
 name = "Steel"
 value = 2.4
 img_path = "res://Assets/Cargo/steel.png"
 
-[sub_resource type="Resource" id="Resource_opkin"]
-script = ExtResource("1_ar7tg")
+[sub_resource type="Resource" id="Resource_abbmy"]
+script = ExtResource("1_ugqje")
 id = 2
 name = "Aluminium"
 value = 1.8
 img_path = "res://Assets/Cargo/aluminium.png"
 
-[sub_resource type="Resource" id="Resource_hy8pq"]
-script = ExtResource("1_ar7tg")
+[sub_resource type="Resource" id="Resource_4f2xe"]
+script = ExtResource("1_ugqje")
 id = 5
 name = "Copper"
 value = 2.1
 img_path = "res://Assets/Cargo/copper.png"
 
-[sub_resource type="Resource" id="Resource_5wrw4"]
-script = ExtResource("2_rihuh")
+[sub_resource type="Resource" id="Resource_xjgnt"]
+script = ExtResource("2_a54xw")
 id = 2
 explotation_name = "Steel Mill"
-output = [SubResource("Resource_byxis"), SubResource("Resource_opkin"), SubResource("Resource_hy8pq")]
-img_path = "res://Assets/Explotation/steel mill.png"
+output = [SubResource("Resource_xgyuc"), SubResource("Resource_abbmy"), SubResource("Resource_4f2xe")]
+img_path = "res://Assets/Buildings/exp_steel_mill.png"
 
-[sub_resource type="Resource" id="Resource_3ug3p"]
-script = ExtResource("1_ar7tg")
+[sub_resource type="Resource" id="Resource_nj8wl"]
+script = ExtResource("1_ugqje")
 id = 6
 name = "Fabric"
 value = 1.9
 img_path = "res://Assets/Cargo/fabric.png"
 
-[sub_resource type="Resource" id="Resource_368b3"]
-script = ExtResource("2_rihuh")
+[sub_resource type="Resource" id="Resource_b10d5"]
+script = ExtResource("2_a54xw")
 id = 3
 explotation_name = "Textile Mill"
-output = [SubResource("Resource_3ug3p")]
-img_path = "res://Assets/Explotation/textile mill.png"
+output = [SubResource("Resource_nj8wl")]
+img_path = "res://Assets/Buildings/exp_textile_mill.png"
 
-[sub_resource type="Resource" id="Resource_gbpwy"]
-script = ExtResource("1_ar7tg")
+[sub_resource type="Resource" id="Resource_plc70"]
+script = ExtResource("1_ugqje")
 id = 4
 name = "Plastic"
 value = 1.2
 img_path = "res://Assets/Cargo/plastic.png"
 
-[sub_resource type="Resource" id="Resource_vao05"]
-script = ExtResource("2_rihuh")
+[sub_resource type="Resource" id="Resource_owmaq"]
+script = ExtResource("2_a54xw")
 id = 4
 explotation_name = "Refinery"
-output = [SubResource("Resource_gbpwy")]
-img_path = "res://Assets/Explotation/refinery.png"
+output = [SubResource("Resource_plc70")]
+img_path = "res://Assets/Buildings/exp_refinery.png"
 
 [resource]
-script = ExtResource("3_s27ej")
+script = ExtResource("3_oaikv")
 explotation_types = {
-1: SubResource("Resource_f1xbn"),
-2: SubResource("Resource_5wrw4"),
-3: SubResource("Resource_368b3"),
-4: SubResource("Resource_vao05")
+1: SubResource("Resource_uo4ym"),
+2: SubResource("Resource_xjgnt"),
+3: SubResource("Resource_b10d5"),
+4: SubResource("Resource_owmaq")
 }

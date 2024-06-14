@@ -48,10 +48,13 @@ const HUE_DEFAULT = '#ffffffff'
 
 var debug_enabled : bool = false
 
+var explotation_type_catalog : ExplotationTypeCatalog
+
 signal forwarded_actor_static_clicked
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	explotation_type_catalog = load(Constants.EXPLOTATION_TYPE_CATALOG_PATH) as ExplotationTypeCatalog
 	#map_width = 16
 	#map_height = 16
 	
@@ -152,9 +155,12 @@ func generate_map(width : int, height : int):
 
 func generate_actors_static(actor_static_class, n : int):
 	for i in range(n):
-		var static_actor_instance = actor_static_class.instantiate()
-		add_child(static_actor_instance)
-		place_actor_static(static_actor_instance)
+		var actor_static_instance = actor_static_class.instantiate()
+		add_child(actor_static_instance)
+		if actor_static_class == explotation:
+			var type = explotation_type_catalog.get_random_explotation_type()
+			actor_static_instance.initialize(type)
+		place_actor_static(actor_static_instance)
 
 func generate_roads(start_pos : Vector2i = Vector2i(-1, -1), end_pos : Vector2i = Vector2i(-1, -1)) :
 	if start_pos == Vector2i(-1, -1):

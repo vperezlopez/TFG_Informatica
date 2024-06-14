@@ -108,7 +108,7 @@ static func create_explotation_type_catalog():
 	explotation_type.output = [
 		cargo_catalog.get_cargo_from_name("Wood") as Cargo
 	]
-	explotation_type.img_path = "res://Assets/Explotation/" + explotation_type.explotation_name.to_lower() + ".png"
+	explotation_type.img_path = Constants.PATH_ASSETS_BUILDINGS + Constants.EXPLOTATION_TYPE_PREFIX + Utils.name_to_file_name(explotation_type.explotation_name) + Constants.ASSET_FORMAT
 	catalog.explotation_types[explotation_type.id] = explotation_type
 	
 	
@@ -121,7 +121,7 @@ static func create_explotation_type_catalog():
 		cargo_catalog.get_cargo_from_name("Aluminium") as Cargo,
 		cargo_catalog.get_cargo_from_name("Copper") as Cargo
 	]
-	explotation_type.img_path = "res://Assets/Explotation/" + explotation_type.explotation_name.to_lower() + ".png"
+	explotation_type.img_path = Constants.PATH_ASSETS_BUILDINGS + Constants.EXPLOTATION_TYPE_PREFIX + Utils.name_to_file_name(explotation_type.explotation_name) + Constants.ASSET_FORMAT
 	catalog.explotation_types[explotation_type.id] = explotation_type
 
 
@@ -132,7 +132,7 @@ static func create_explotation_type_catalog():
 	explotation_type.output = [
 		cargo_catalog.get_cargo_from_name("Fabric") as Cargo
 	]
-	explotation_type.img_path = "res://Assets/Explotation/" + explotation_type.explotation_name.to_lower() + ".png"
+	explotation_type.img_path = Constants.PATH_ASSETS_BUILDINGS + Constants.EXPLOTATION_TYPE_PREFIX + Utils.name_to_file_name(explotation_type.explotation_name) + Constants.ASSET_FORMAT
 	catalog.explotation_types[explotation_type.id] = explotation_type
 	
 	
@@ -143,7 +143,7 @@ static func create_explotation_type_catalog():
 	explotation_type.output = [
 		cargo_catalog.get_cargo_from_name("Plastic") as Cargo
 	]
-	explotation_type.img_path = "res://Assets/Explotation/" + explotation_type.explotation_name.to_lower() + ".png"
+	explotation_type.img_path = Constants.PATH_ASSETS_BUILDINGS + Constants.EXPLOTATION_TYPE_PREFIX + Utils.name_to_file_name(explotation_type.explotation_name) + Constants.ASSET_FORMAT
 	catalog.explotation_types[explotation_type.id] = explotation_type
 	
 	ResourceSaver.save(catalog, Constants.EXPLOTATION_TYPE_CATALOG_PATH)
