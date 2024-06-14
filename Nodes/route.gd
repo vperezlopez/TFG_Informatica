@@ -12,6 +12,12 @@ func get_operations_size():
 
 func get_operation(i : int) -> Operation:
 	return operations[i]
+	
+func get_operations() -> Array[Operation]:
+	return operations
+
+func set_operations(ops : Array[Operation]):
+	operations = ops
 
 func add_operation(operation : Operation):
 	operations.append(operation)

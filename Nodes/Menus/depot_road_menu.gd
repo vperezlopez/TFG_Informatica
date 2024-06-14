@@ -49,9 +49,10 @@ func _ready():
 		#print('Child: ' + str(child))
 	##initialize.call_deferred(null)
 
-func initialize(d : Depot):
-	depot = d
-	initialize_fleet(d.fleet)
+func initialize(d : Depot = null):
+	if d:
+		depot = d
+	initialize_fleet(depot.fleet)
 
 func initialize_fleet(fleet : Array[Vehicle]):
 	_index = 0
@@ -110,9 +111,10 @@ func _on_remove_vehicle_clicked(sender):
 
 
 func _on_visibility_changed():
-	if self.visible == false:
-		depot = null
-		_index = 0
-		if slots_container:
-			for child in slots_container.get_children():
-				child.remove_vehicle()
+	pass
+	#if self.visible == false:
+		#depot = null
+		#_index = 0
+		#if slots_container:
+			#for child in slots_container.get_children():
+				#child.remove_vehicle()

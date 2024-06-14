@@ -53,6 +53,7 @@ func connect_signals():
 	depot_road_menu.connect("find_vehicle", Callable(self, "_on_find_vehicle"))
 	depot_road_menu.connect("set_route", Callable(self, "_on_set_route_vehicle"))
 	depot_road_menu.connect("sell_vehicle", Callable(self, "_on_sell_vehicle"))
+	route_menu.connect("close_route_menu", Callable(self, "_on_close_route_menu"))
 	
 	#load("res://Nodes/actor_static.tscn").connect("actor_static_clicked", Callable(map, "_on_static_actor_clicked"))
 
@@ -144,6 +145,10 @@ func test_vehicle():
 	
 	pass
 
+func _on_game_container_resized():
+	if game_viewport and game_container:
+		game_viewport.size = game_container.size
+
 func _on_actor_static_clicked(actor_static_id):
 	#print_debug('Connection successful')
 	var actor_static_clicked : Actor_Static = instance_from_id(actor_static_id)
@@ -180,9 +185,8 @@ func _on_sell_vehicle(index, depot):
 	print_debug(str(vehicle.get_class()))
 	map.delete_vehicle(index, depot)
 
-func _on_game_container_resized():
-	if game_viewport and game_container:
-		game_viewport.size = game_container.size
+func _on_close_route_menu():
+	show_screen(ScreenMode.DEPOT)
 
 func show_screen(new_screen : ScreenMode):
 	hide_menus()

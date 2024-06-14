@@ -217,6 +217,3 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
-
-[connection signal="pressed" from="HBoxContainer/DestinationContainer/RouteTitleBox/HBoxContainer/ButtonAccept" to="." method="_on_button_accept_pressed"]
-[connection signal="pressed" from="HBoxContainer/DestinationContainer/RouteTitleBox/HBoxContainer/ButtonCancel" to="." method="_on_button_cancel_pressed"]

@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://dylwk44agkrxr" path="res://Assets/GUI_Icons/Unload_Icon.png" id="5_n4uku"]
 [ext_resource type="Texture2D" uid="uid://bhqa5hmpw7nvo" path="res://Assets/GUI_Icons/Red_X.png" id="6_4vjfi"]
 
-[node name="DestinationMenu" type="HBoxContainer"]
+[node name="DestinationMenu" type="Control"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,64 +18,87 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_grf08")
 
-[node name="ArrowsContainer" type="HBoxContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.746786, 0.935343, 0.761165, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="ArrowsContainer" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 0
 
-[node name="ButtonUp" type="Button" parent="ArrowsContainer"]
+[node name="ButtonUp" type="Button" parent="HBoxContainer/ArrowsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("1_lu4ni")
-flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="ButtonDown" type="Button" parent="ArrowsContainer"]
+[node name="ButtonDown" type="Button" parent="HBoxContainer/ArrowsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("2_dpm3i")
-flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="ButtonFind" type="Button" parent="."]
+[node name="ButtonFind" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("3_b8ibx")
 icon_alignment = 1
 expand_icon = true
 
-[node name="LabelName" type="Label" parent="."]
+[node name="BuildingIcon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch_mode = 5
+
+[node name="LabelName" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
 text = "label"
 vertical_alignment = 1
 
-[node name="IconsContainer" type="HBoxContainer" parent="."]
+[node name="IconsContainer" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LoadIcon" type="TextureRect" parent="IconsContainer"]
+[node name="LoadIcon" type="TextureRect" parent="HBoxContainer/IconsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("4_pksko")
 stretch_mode = 5
 
-[node name="UnloadIcon" type="TextureRect" parent="IconsContainer"]
+[node name="UnloadIcon" type="TextureRect" parent="HBoxContainer/IconsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("5_n4uku")
 stretch_mode = 5
 
-[node name="ButtonRemove" type="Button" parent="."]
+[node name="ButtonRemove" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("6_4vjfi")
 icon_alignment = 1
 expand_icon = true
 
-[connection signal="pressed" from="ArrowsContainer/ButtonUp" to="." method="_on_button_up_pressed"]
-[connection signal="pressed" from="ArrowsContainer/ButtonDown" to="." method="_on_button_down_pressed"]
-[connection signal="pressed" from="ButtonFind" to="." method="_on_button_find_pressed"]
-[connection signal="pressed" from="ButtonRemove" to="." method="_on_button_remove_pressed"]
+[connection signal="pressed" from="HBoxContainer/ArrowsContainer/ButtonUp" to="." method="_on_button_up_pressed"]
+[connection signal="pressed" from="HBoxContainer/ArrowsContainer/ButtonDown" to="." method="_on_button_down_pressed"]
+[connection signal="pressed" from="HBoxContainer/ButtonFind" to="." method="_on_button_find_pressed"]
+[connection signal="pressed" from="HBoxContainer/ButtonRemove" to="." method="_on_button_remove_pressed"]

@@ -1,14 +1,15 @@
-extends HBoxContainer
+extends Control
 
-@onready var arrows_container = $ArrowsContainer
-@onready var button_up = $ArrowsContainer/ButtonUp
-@onready var button_down = $ArrowsContainer/ButtonDown
-@onready var button_find = $ButtonFind
-@onready var label_name = $LabelName
-@onready var icons_container = $IconsContainer
-@onready var load_icon = $IconsContainer/LoadIcon
-@onready var unload_icon = $IconsContainer/UnloadIcon
-@onready var button_remove = $ButtonRemove
+@onready var arrows_container = $HBoxContainer/ArrowsContainer
+@onready var button_up = $HBoxContainer/ArrowsContainer/ButtonUp
+@onready var button_down = $HBoxContainer/ArrowsContainer/ButtonDown
+@onready var button_find = $HBoxContainer/ButtonFind
+@onready var building_icon = $HBoxContainer/BuildingIcon
+@onready var label_name = $HBoxContainer/LabelName
+@onready var icons_container = $HBoxContainer/IconsContainer
+@onready var load_icon = $HBoxContainer/IconsContainer/LoadIcon
+@onready var unload_icon = $HBoxContainer/IconsContainer/UnloadIcon
+@onready var button_remove = $HBoxContainer/ButtonRemove
 
 var destination : Actor_Static
 
@@ -20,6 +21,7 @@ signal remove_clicked(sender)
 
 func initialize(actor_static : Actor_Static):
 	destination = actor_static
+	building_icon.texture = actor_static.sprite.texture
 	label_name.text = destination.loc_name
 
 
