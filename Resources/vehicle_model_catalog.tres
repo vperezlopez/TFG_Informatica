@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Nodes/vehicle_model_catalog.gd" id="1_2aw22"]
 [ext_resource type="Script" path="res://Nodes/vehicle_model.gd" id="2_8726d"]
 
-[sub_resource type="Resource" id="Resource_r8i8a"]
+[sub_resource type="Resource" id="Resource_dnnem"]
 script = ExtResource("2_8726d")
 id = 1
 navigation = 1
@@ -14,7 +14,7 @@ speed = 10.0
 travel_cost = 10.0
 price = 10000.0
 
-[sub_resource type="Resource" id="Resource_qt1pc"]
+[sub_resource type="Resource" id="Resource_or1tu"]
 script = ExtResource("2_8726d")
 id = 2
 navigation = 1
@@ -28,6 +28,6 @@ price = 32000.0
 [resource]
 script = ExtResource("1_2aw22")
 vehicle_models = {
-1: SubResource("Resource_r8i8a"),
-2: SubResource("Resource_qt1pc")
+1: SubResource("Resource_dnnem"),
+2: SubResource("Resource_or1tu")
 }

@@ -1,21 +1,42 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7hc48jjno1n6"]
+[gd_scene load_steps=3 format=3 uid="uid://b7hc48jjno1n6"]
 
+[ext_resource type="Script" path="res://Nodes/Menus/load_cargo_menu.gd" id="1_fo61u"]
 [ext_resource type="Texture2D" uid="uid://bhqa5hmpw7nvo" path="res://Assets/GUI_Icons/Red_X.png" id="1_lje7i"]
 
-[node name="LoadCargoMenu" type="HBoxContainer"]
+[node name="LoadCargoMenu" type="Control"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_fo61u")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.715799, 0.892732, 0.688738, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 
 [node name="CargoSelect" type="OptionButton" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
 
 [node name="QuantityBox" type="SpinBox" parent="HBoxContainer"]
 layout_mode = 2
@@ -27,7 +48,9 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.6
 
 [node name="ButtonDelete" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-size_flags_horizontal = 3
 icon = ExtResource("1_lje7i")
 icon_alignment = 1
+
+[connection signal="pressed" from="HBoxContainer/ButtonDelete" to="." method="_on_button_delete_pressed"]

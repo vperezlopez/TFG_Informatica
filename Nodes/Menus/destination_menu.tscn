@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://ce2suto2wkfms"]
+[gd_scene load_steps=9 format=3 uid="uid://ce2suto2wkfms"]
 
 [ext_resource type="Script" path="res://Nodes/Menus/destination_menu.gd" id="1_grf08"]
 [ext_resource type="Texture2D" uid="uid://jghqwu5vts" path="res://Assets/GUI_Icons/Arrow_Up.png" id="1_lu4ni"]
 [ext_resource type="Texture2D" uid="uid://cek4f1qxniex2" path="res://Assets/GUI_Icons/Arrow_Down.png" id="2_dpm3i"]
 [ext_resource type="Texture2D" uid="uid://um1k1tl2reub" path="res://Assets/GUI_Icons/MagnifyingGlass.png" id="3_b8ibx"]
 [ext_resource type="Texture2D" uid="uid://ckd536xcx7hqa" path="res://Assets/GUI_Icons/Load_Icon.png" id="4_pksko"]
+[ext_resource type="Texture2D" uid="uid://bu874y5045idk" path="res://Assets/GUI_Icons/Trade_Icon.png" id="4_rgy2p"]
 [ext_resource type="Texture2D" uid="uid://dylwk44agkrxr" path="res://Assets/GUI_Icons/Unload_Icon.png" id="5_n4uku"]
 [ext_resource type="Texture2D" uid="uid://bhqa5hmpw7nvo" path="res://Assets/GUI_Icons/Red_X.png" id="6_4vjfi"]
 
@@ -18,7 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_grf08")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,10 +39,11 @@ theme_override_constants/separation = 4
 
 [node name="ArrowsContainer" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 theme_override_constants/separation = 0
 
 [node name="ButtonUp" type="Button" parent="HBoxContainer/ArrowsContainer"]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("1_lu4ni")
@@ -49,6 +51,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="ButtonDown" type="Button" parent="HBoxContainer/ArrowsContainer"]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("2_dpm3i")
@@ -56,15 +59,16 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="ButtonFind" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 icon = ExtResource("3_b8ibx")
 icon_alignment = 1
 expand_icon = true
 
 [node name="BuildingIcon" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 stretch_mode = 5
 
 [node name="LabelName" type="Label" parent="HBoxContainer"]
@@ -72,14 +76,22 @@ custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-size_flags_stretch_ratio = 2.0
+size_flags_stretch_ratio = 0.8
 text = "label"
 vertical_alignment = 1
 text_overrun_behavior = 1
 
 [node name="IconsContainer" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 1.5
+
+[node name="ButtonEditLoad" type="Button" parent="HBoxContainer/IconsContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
 size_flags_horizontal = 3
+icon = ExtResource("4_rgy2p")
+icon_alignment = 1
 
 [node name="LoadIcon" type="TextureRect" parent="HBoxContainer/IconsContainer"]
 layout_mode = 2
@@ -94,13 +106,16 @@ texture = ExtResource("5_n4uku")
 stretch_mode = 5
 
 [node name="ButtonRemove" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 8
 icon = ExtResource("6_4vjfi")
 icon_alignment = 1
 expand_icon = true
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="pressed" from="HBoxContainer/ArrowsContainer/ButtonUp" to="." method="_on_button_up_pressed"]
 [connection signal="pressed" from="HBoxContainer/ArrowsContainer/ButtonDown" to="." method="_on_button_down_pressed"]
 [connection signal="pressed" from="HBoxContainer/ButtonFind" to="." method="_on_button_find_pressed"]
+[connection signal="pressed" from="HBoxContainer/IconsContainer/ButtonEditLoad" to="." method="_on_button_edit_load_pressed"]
 [connection signal="pressed" from="HBoxContainer/ButtonRemove" to="." method="_on_button_remove_pressed"]

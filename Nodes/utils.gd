@@ -48,7 +48,7 @@ static func random_city_name() -> String:
 	#res = pre_arr[(randi() % pre_arr.size()) - 1] + mid + suf_arr[(randi() % suf_arr.size())]
 	
 	var names = [
-		'Villacara',
+		'Villarona',
 		'Ferrarca',
 		'Yagado',
 		'Teorramas',
@@ -60,18 +60,21 @@ static func random_city_name() -> String:
 		'Lunaremo',
 		'Numira',
 		'Salara',
-		'Lunio',
 		'Reginia',
 		'Rea',
+		'Allita',
 		'Ruécamo',
 		'Merensia',
-		'Bearona',
+		'Bearana',
 		'Olofrana',
 		'Urdago',
-		'Iplasia',
+		#'Iplasia',
 		'Anarema',
 		'Diomado',
-		'Damasia'
+		'Damasia',
+		'Telenia',
+		'Tamador',
+		'Hemeria'
 	]
 	res = names[(randi() % names.size()) - 1]
 	

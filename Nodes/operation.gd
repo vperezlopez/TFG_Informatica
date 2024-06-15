@@ -77,3 +77,11 @@ func remove_unload_cargo(cargo : Cargo) -> int:
 		
 func set_wait_load(b : bool):
 	wait_load = b
+
+
+func set_load_dict(ld : Dictionary):
+	load_dict = ld
+
+
+func set_unload_dict(ud : Dictionary):
+	unload_dict = ud

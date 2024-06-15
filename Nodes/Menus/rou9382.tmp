@@ -125,17 +125,16 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="LoadDefault" type="Control" parent="HBoxContainer/LoadContainer/LoadBox/ScrollContainer/LoadCargoContainer"]
-custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_vertical = 3
 
 [node name="ButtonNewLoad" type="Button" parent="HBoxContainer/LoadContainer/LoadBox/ScrollContainer/LoadCargoContainer/LoadDefault"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 40.0
 grow_horizontal = 2
-grow_vertical = 2
 text = "Load New Cargo"
 icon = ExtResource("3_64pig")
 
@@ -329,18 +328,16 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="UnloadDefault" type="Control" parent="HBoxContainer/UnloadContainer/UnloadBox/ScrollContainer/UnloadCargoContainer"]
-custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_vertical = 3
 
 [node name="ButtonNewUnload" type="Button" parent="HBoxContainer/UnloadContainer/UnloadBox/ScrollContainer/UnloadCargoContainer/UnloadDefault"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 40.0
 grow_horizontal = 2
-grow_vertical = 2
 text = "Unload New Cargo"
 icon = ExtResource("3_64pig")
 

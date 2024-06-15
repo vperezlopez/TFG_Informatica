@@ -16,3 +16,6 @@ func get_cargo_from_name(n : String) -> Cargo:
 			return cargos[cargo_id]
 	push_error(n + ' is not a type of cargo!')
 	return null
+
+func get_cargo_all() -> Dictionary:
+	return cargos.duplicate(true)
