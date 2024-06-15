@@ -68,12 +68,14 @@ size_flags_horizontal = 3
 stretch_mode = 5
 
 [node name="LabelName" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 2.0
 text = "label"
 vertical_alignment = 1
+text_overrun_behavior = 1
 
 [node name="IconsContainer" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2

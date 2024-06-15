@@ -1,5 +1,7 @@
 extends Control
 
+class_name DestinationMenu
+
 @onready var arrows_container = $HBoxContainer/ArrowsContainer
 @onready var button_up = $HBoxContainer/ArrowsContainer/ButtonUp
 @onready var button_down = $HBoxContainer/ArrowsContainer/ButtonDown

@@ -15,6 +15,8 @@ func _ready():
 func initialize(type : ExplotationType):
 	var q = 100
 	explotation_type = type
+	loc_name = type.explotation_name
+	label.text = loc_name
 	cargo_storage.init(q * explotation_type.output.size())
 	for cargo in explotation_type.output:
 		cargo_storage.add_cargo(cargo, q)

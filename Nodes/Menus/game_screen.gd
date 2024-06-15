@@ -35,7 +35,7 @@ func _ready():
 
 	if get_parent() is Window:
 		print_debug('Manual initialization')
-		new_game(Vector2i(64, 64), 4, 8, 2)
+		new_game(Vector2i(64, 64), 12, 4, 2)
 
 	test_cargo()
 	#test_vehicle()
