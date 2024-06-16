@@ -8,7 +8,7 @@ var capacity : int
 func _ready():
 	super._ready()
 	demolishable = true
-	sprite.texture = preload("res://Assets/Placeholder_5.png")
+	sprite.texture = preload("res://Assets/Buildings/Depot.png")
 	
 	fleet = []
 	capacity = 9

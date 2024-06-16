@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxqbsjt3xkldr"
-path="res://.godot/imported/Wood.png-49b8af878f715a2000b6285dddee1210.ctex"
+uid="uid://dff6cq0n7cdn5"
+path="res://.godot/imported/Depot.png-e1c49535536ce04ae1169abb91d2a49f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cargo/Wood.png"
-dest_files=["res://.godot/imported/Wood.png-49b8af878f715a2000b6285dddee1210.ctex"]
+source_file="res://Assets/Buildings/Depot.png"
+dest_files=["res://.godot/imported/Depot.png-e1c49535536ce04ae1169abb91d2a49f.ctex"]
 
 [params]
 

@@ -53,6 +53,7 @@ func connect_signals():
 	depot_road_menu.connect("find_vehicle", Callable(self, "_on_find_vehicle"))
 	depot_road_menu.connect("set_route", Callable(self, "_on_set_route_vehicle"))
 	depot_road_menu.connect("sell_vehicle", Callable(self, "_on_sell_vehicle"))
+	route_menu.connect("find_destination", Callable(self, "_on_find_destination"))
 	route_menu.connect("close_route_menu", Callable(self, "_on_close_route_menu"))
 	
 	#load("res://Nodes/actor_static.tscn").connect("actor_static_clicked", Callable(map, "_on_static_actor_clicked"))
@@ -182,8 +183,10 @@ func _on_set_route_vehicle(vehicle : Vehicle):
 
 func _on_sell_vehicle(index, depot):
 	# VALIDATE MONEY: TODO
-	print_debug(str(vehicle.get_class()))
 	map.delete_vehicle(index, depot)
+
+func _on_find_destination(pos : Vector2i):
+	camera.set_starting_position(pos)
 
 func _on_close_route_menu():
 	show_screen(ScreenMode.DEPOT)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jhkmea7y7xjv"
-path="res://.godot/imported/steel.png-47bbdf94fe7a828179482b00721985c7.ctex"
+uid="uid://8a46wspnkigb"
+path="res://.godot/imported/Steel.png-4d1adb001d2d47e29b6ff7daf7df30a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cargo/steel.png"
-dest_files=["res://.godot/imported/steel.png-47bbdf94fe7a828179482b00721985c7.ctex"]
+source_file="res://Assets/Cargo/Steel.png"
+dest_files=["res://.godot/imported/Steel.png-4d1adb001d2d47e29b6ff7daf7df30a6.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uvqn58hbqqqo"
-path="res://.godot/imported/aluminium.png-f8d8582393f97b1573c8d9d0dbcaf2f0.ctex"
+uid="uid://7uinuufju6g0"
+path="res://.godot/imported/Aluminium.png-dbbd4a388da2e446c211769358c348a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cargo/aluminium.png"
-dest_files=["res://.godot/imported/aluminium.png-f8d8582393f97b1573c8d9d0dbcaf2f0.ctex"]
+source_file="res://Assets/Cargo/Aluminium.png"
+dest_files=["res://.godot/imported/Aluminium.png-dbbd4a388da2e446c211769358c348a1.ctex"]
 
 [params]
 

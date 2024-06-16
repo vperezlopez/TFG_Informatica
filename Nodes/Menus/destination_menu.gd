@@ -19,7 +19,7 @@ var operation : Operation
 signal up_clicked(sender)
 signal down_clicked(sender)
 signal edit_clicked(sender)
-signal find_clicked(position)
+signal find_clicked(pos)
 signal remove_clicked(sender)
 
 func initialize(operation : Operation):

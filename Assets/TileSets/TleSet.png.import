@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxqbsjt3xkldr"
-path="res://.godot/imported/Wood.png-49b8af878f715a2000b6285dddee1210.ctex"
+uid="uid://c0sye3401iavc"
+path="res://.godot/imported/TleSet.png-c5b81c1262436c0bdb122aaeabf5e316.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cargo/Wood.png"
-dest_files=["res://.godot/imported/Wood.png-49b8af878f715a2000b6285dddee1210.ctex"]
+source_file="res://Assets/TileSets/TleSet.png"
+dest_files=["res://.godot/imported/TleSet.png-c5b81c1262436c0bdb122aaeabf5e316.ctex"]
 
 [params]
 

@@ -3,42 +3,42 @@
 [ext_resource type="Script" path="res://Nodes/cargo.gd" id="1_0x2g3"]
 [ext_resource type="Script" path="res://Nodes/cargo_catalog.gd" id="2_k2eca"]
 
-[sub_resource type="Resource" id="Resource_6m7da"]
+[sub_resource type="Resource" id="Resource_b48yj"]
 script = ExtResource("1_0x2g3")
 id = 1
 name = "Wood"
 value = 2.0
 img_path = "res://Assets/Cargo/wood.png"
 
-[sub_resource type="Resource" id="Resource_jx551"]
+[sub_resource type="Resource" id="Resource_bj442"]
 script = ExtResource("1_0x2g3")
 id = 2
 name = "Aluminium"
 value = 1.8
 img_path = "res://Assets/Cargo/aluminium.png"
 
-[sub_resource type="Resource" id="Resource_8uk6b"]
+[sub_resource type="Resource" id="Resource_jv457"]
 script = ExtResource("1_0x2g3")
 id = 3
 name = "Steel"
 value = 2.4
 img_path = "res://Assets/Cargo/steel.png"
 
-[sub_resource type="Resource" id="Resource_3d0ms"]
+[sub_resource type="Resource" id="Resource_svgow"]
 script = ExtResource("1_0x2g3")
 id = 4
 name = "Plastic"
 value = 1.2
 img_path = "res://Assets/Cargo/plastic.png"
 
-[sub_resource type="Resource" id="Resource_fg6sw"]
+[sub_resource type="Resource" id="Resource_nwnya"]
 script = ExtResource("1_0x2g3")
 id = 5
 name = "Copper"
 value = 2.1
 img_path = "res://Assets/Cargo/copper.png"
 
-[sub_resource type="Resource" id="Resource_ee8qt"]
+[sub_resource type="Resource" id="Resource_0imtg"]
 script = ExtResource("1_0x2g3")
 id = 6
 name = "Fabric"
@@ -48,10 +48,10 @@ img_path = "res://Assets/Cargo/fabric.png"
 [resource]
 script = ExtResource("2_k2eca")
 cargos = {
-1: SubResource("Resource_6m7da"),
-2: SubResource("Resource_jx551"),
-3: SubResource("Resource_8uk6b"),
-4: SubResource("Resource_3d0ms"),
-5: SubResource("Resource_fg6sw"),
-6: SubResource("Resource_ee8qt")
+1: SubResource("Resource_b48yj"),
+2: SubResource("Resource_bj442"),
+3: SubResource("Resource_jv457"),
+4: SubResource("Resource_svgow"),
+5: SubResource("Resource_nwnya"),
+6: SubResource("Resource_0imtg")
 }

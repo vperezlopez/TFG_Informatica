@@ -4,81 +4,81 @@
 [ext_resource type="Script" path="res://Nodes/explotation_type.gd" id="2_a54xw"]
 [ext_resource type="Script" path="res://Nodes/explotation_type_catalog.gd" id="3_oaikv"]
 
-[sub_resource type="Resource" id="Resource_ncqc2"]
+[sub_resource type="Resource" id="Resource_cml53"]
 script = ExtResource("1_ugqje")
 id = 1
 name = "Wood"
 value = 2.0
 img_path = "res://Assets/Cargo/wood.png"
 
-[sub_resource type="Resource" id="Resource_dc8t3"]
+[sub_resource type="Resource" id="Resource_txmmj"]
 script = ExtResource("2_a54xw")
 id = 1
 explotation_name = "Sawmill"
-output = [SubResource("Resource_ncqc2")]
+output = [SubResource("Resource_cml53")]
 img_path = "res://Assets/Buildings/exp_sawmill.png"
 
-[sub_resource type="Resource" id="Resource_ymb3t"]
+[sub_resource type="Resource" id="Resource_b6tva"]
 script = ExtResource("1_ugqje")
 id = 3
 name = "Steel"
 value = 2.4
 img_path = "res://Assets/Cargo/steel.png"
 
-[sub_resource type="Resource" id="Resource_x3i5t"]
+[sub_resource type="Resource" id="Resource_m5ae7"]
 script = ExtResource("1_ugqje")
 id = 2
 name = "Aluminium"
 value = 1.8
 img_path = "res://Assets/Cargo/aluminium.png"
 
-[sub_resource type="Resource" id="Resource_qxhei"]
+[sub_resource type="Resource" id="Resource_84l0l"]
 script = ExtResource("1_ugqje")
 id = 5
 name = "Copper"
 value = 2.1
 img_path = "res://Assets/Cargo/copper.png"
 
-[sub_resource type="Resource" id="Resource_o2cw5"]
+[sub_resource type="Resource" id="Resource_ikgtb"]
 script = ExtResource("2_a54xw")
 id = 2
 explotation_name = "Steel Mill"
-output = [SubResource("Resource_ymb3t"), SubResource("Resource_x3i5t"), SubResource("Resource_qxhei")]
+output = [SubResource("Resource_b6tva"), SubResource("Resource_m5ae7"), SubResource("Resource_84l0l")]
 img_path = "res://Assets/Buildings/exp_steel_mill.png"
 
-[sub_resource type="Resource" id="Resource_g37pn"]
+[sub_resource type="Resource" id="Resource_s30v0"]
 script = ExtResource("1_ugqje")
 id = 6
 name = "Fabric"
 value = 1.9
 img_path = "res://Assets/Cargo/fabric.png"
 
-[sub_resource type="Resource" id="Resource_ll2it"]
+[sub_resource type="Resource" id="Resource_u4ptf"]
 script = ExtResource("2_a54xw")
 id = 3
 explotation_name = "Textile Mill"
-output = [SubResource("Resource_g37pn")]
+output = [SubResource("Resource_s30v0")]
 img_path = "res://Assets/Buildings/exp_textile_mill.png"
 
-[sub_resource type="Resource" id="Resource_qhkug"]
+[sub_resource type="Resource" id="Resource_excnp"]
 script = ExtResource("1_ugqje")
 id = 4
 name = "Plastic"
 value = 1.2
 img_path = "res://Assets/Cargo/plastic.png"
 
-[sub_resource type="Resource" id="Resource_xggwu"]
+[sub_resource type="Resource" id="Resource_i5vak"]
 script = ExtResource("2_a54xw")
 id = 4
 explotation_name = "Refinery"
-output = [SubResource("Resource_qhkug")]
+output = [SubResource("Resource_excnp")]
 img_path = "res://Assets/Buildings/exp_refinery.png"
 
 [resource]
 script = ExtResource("3_oaikv")
 explotation_types = {
-1: SubResource("Resource_dc8t3"),
-2: SubResource("Resource_o2cw5"),
-3: SubResource("Resource_ll2it"),
-4: SubResource("Resource_xggwu")
+1: SubResource("Resource_txmmj"),
+2: SubResource("Resource_ikgtb"),
+3: SubResource("Resource_u4ptf"),
+4: SubResource("Resource_i5vak")
 }
