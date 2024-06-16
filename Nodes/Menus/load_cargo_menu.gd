@@ -11,17 +11,17 @@ signal remove_load(sender)
 
 func initialize(options : Array[Cargo], cargo : Cargo, quantity : int):
 	cargo_select.clear()
-	
+
 	for i in range(options.size()):
 		var option = options[i]
 		var texture = load(option.img_path)
 		cargo_select.add_icon_item(texture, option.name, i)
 
 	var selected_index = options.find(cargo)
-	if selected_index != -1:
+	if selected_index == -1:
+		cargo_select.selected =  0
+	else: 
 		cargo_select.selected = selected_index
-	else:
-		cargo_select.selected = 0
 
 	quantity_box.value = quantity
 

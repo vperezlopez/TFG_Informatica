@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=70 format=3 uid="uid://r1qnxk0jv3fq"]
 
-[ext_resource type="Texture2D" uid="uid://bmkavgfuojq7y" path="res://Assets/TileSets/Iso_Placeholders.png" id="1_3ywet"]
-[ext_resource type="Texture2D" uid="uid://ufwwmy8vwdvq" path="res://Assets/TileSets/Paths_Isometric_Edges.png" id="2_mjg60"]
+[ext_resource type="Texture2D" uid="uid://bmkavgfuojq7y" path="res://Nodes/Assets/TileSets/Iso_Placeholders.png" id="1_3ywet"]
+[ext_resource type="Texture2D" uid="uid://ufwwmy8vwdvq" path="res://Nodes/Assets/TileSets/Paths_Isometric_Edges.png" id="2_mjg60"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pr2wt"]
 vertices = PackedVector2Array(16, 0, 0, 8, -16, 0, 0, -8)

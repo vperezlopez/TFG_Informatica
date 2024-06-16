@@ -17,5 +17,12 @@ func get_cargo_from_name(n : String) -> Cargo:
 	push_error(n + ' is not a type of cargo!')
 	return null
 
-func get_cargo_all() -> Dictionary:
+func get_duplicate() -> Dictionary:
 	return cargos.duplicate(true)
+
+func get_all_cargo() -> Array[Cargo]:
+	var cargo_array: Array[Cargo] = []
+	for key in cargos.keys():
+		cargo_array.append(cargos[key])
+	return cargo_array
+	#return cargos.duplicate(true).keys()

@@ -3,7 +3,6 @@ extends Control
 class_name DestinationMenu
 
 @onready var background = $Background
-
 @onready var arrows_container = $HBoxContainer/ArrowsContainer
 @onready var button_up = $HBoxContainer/ArrowsContainer/ButtonUp
 @onready var button_down = $HBoxContainer/ArrowsContainer/ButtonDown
@@ -15,9 +14,7 @@ class_name DestinationMenu
 @onready var unload_icon = $HBoxContainer/IconsContainer/UnloadIcon
 @onready var button_remove = $HBoxContainer/ButtonRemove
 
-var destination : Actor_Static
-
-#signal destination_selected(sender)
+var operation : Operation
 
 signal up_clicked(sender)
 signal down_clicked(sender)
@@ -25,11 +22,13 @@ signal edit_clicked(sender)
 signal find_clicked(position)
 signal remove_clicked(sender)
 
+func initialize(operation : Operation):
+	self.operation = operation
+	building_icon.texture = operation.get_destination().sprite.texture
+	label_name.text = operation.get_destination().loc_name
 
-func initialize(actor_static : Actor_Static):
-	destination = actor_static
-	building_icon.texture = actor_static.sprite.texture
-	label_name.text = destination.loc_name
+func get_operation():
+	return operation
 
 func highlight(highlighted : bool):
 	if highlighted:
@@ -47,12 +46,7 @@ func _on_button_edit_load_pressed():
 	emit_signal("edit_clicked", self)
 
 func _on_button_find_pressed():
-	emit_signal("find_clicked", destination.position)
+	emit_signal("find_clicked", operation.get_destination().position)
 
 func _on_button_remove_pressed():
 	emit_signal("remove_clicked", self)
-
-
-#func _on_gui_input(event):
-	#if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		#emit_signal("destination_selected", self)
