@@ -185,6 +185,7 @@ func place_actor_static(actor_static_instance : Actor_Static, pos : Vector2i = V
 		actor_static_instance.z_index = Layers.ACTOR_STATIC
 		actor_static_instance.position = map_to_local(pos)
 		set_cell(Layers.PATH, pos, 1, Vector2i(1, 3))
+		
 		occupied_tiles[pos] = actor_static_instance
 		actor_static_instance.connect("actor_static_clicked", Callable(self, "_on_actor_static_clicked"))
 		return true

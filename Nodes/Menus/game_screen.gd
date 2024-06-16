@@ -189,7 +189,7 @@ func _on_find_destination(pos : Vector2i):
 	camera.set_starting_position(pos)
 
 func _on_close_route_menu():
-	show_screen(ScreenMode.DEPOT)
+	show_screen(ScreenMode.MAP)
 
 func show_screen(new_screen : ScreenMode):
 	hide_menus()
