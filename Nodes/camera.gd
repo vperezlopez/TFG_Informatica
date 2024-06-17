@@ -113,4 +113,3 @@ func _update_scroll_with_mouse(_delta):
 
 func _is_between(f : float, min : float, max : float) -> bool:
 	return min < f and f < max
-

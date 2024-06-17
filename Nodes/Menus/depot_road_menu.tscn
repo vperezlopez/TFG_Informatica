@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxwd0v8oyoaad"]
+[gd_scene load_steps=2 format=3 uid="uid://bevejx46wwyr3"]
 
-[ext_resource type="Script" path="res://Nodes/Menus/depot_road_menu.gd" id="1_u8vjy"]
+[ext_resource type="Script" path="res://Nodes/Menus/depot_road_menu.gd" id="1_06idb"]
 
 [node name="depot_road_menu" type="Control"]
 layout_mode = 3
@@ -9,8 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
-script = ExtResource("1_u8vjy")
+script = ExtResource("1_06idb")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -19,42 +18,27 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.650442, 0.891409, 0.768566, 1)
+color = Color(0, 0, 0, 1)
 
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 2
-offset_right = 1152.0
-offset_bottom = 648.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="SlotsContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
 columns = 3
 
-[node name="Slot0" type="Control" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="ModelsContainer" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
 
-[node name="Slot1" type="Control" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Slot2" type="Control" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Slot3" type="Control" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Slot4" type="Control" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Slot5" type="Control" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

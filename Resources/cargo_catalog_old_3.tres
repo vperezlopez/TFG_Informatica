@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="CargoCatalog" load_steps=9 format=3 uid="uid://l0lvsvxri34g"]
+
+[ext_resource type="Script" path="res://Nodes/cargo.gd" id="1_xja7q"]
+[ext_resource type="Script" path="res://Nodes/cargo_catalog.gd" id="2_dmeyk"]
+
+[sub_resource type="Resource" id="Resource_1jpln"]
+script = ExtResource("1_xja7q")
+id = 1
+name = "Wood"
+value = 2.0
+img_path = "res://Assets/Cargo/wood.png"
+
+[sub_resource type="Resource" id="Resource_7lbq6"]
+script = ExtResource("1_xja7q")
+id = 2
+name = "Aluminium"
+value = 1.8
+img_path = "res://Assets/Cargo/aluminium.png"
+
+[sub_resource type="Resource" id="Resource_rww56"]
+script = ExtResource("1_xja7q")
+id = 3
+name = "Steel"
+value = 2.4
+img_path = "res://Assets/Cargo/steel.png"
+
+[sub_resource type="Resource" id="Resource_ybqii"]
+script = ExtResource("1_xja7q")
+id = 4
+name = "Plastic"
+value = 1.2
+img_path = "res://Assets/Cargo/plastic.png"
+
+[sub_resource type="Resource" id="Resource_e2uou"]
+script = ExtResource("1_xja7q")
+id = 5
+name = "Copper"
+value = 2.1
+img_path = "res://Assets/Cargo/copper.png"
+
+[sub_resource type="Resource" id="Resource_yyogb"]
+script = ExtResource("1_xja7q")
+id = 6
+name = "Fabric"
+value = 1.9
+img_path = "res://Assets/Cargo/fabric.png"
+
+[resource]
+script = ExtResource("2_dmeyk")
+cargos = {
+1: SubResource("Resource_1jpln"),
+2: SubResource("Resource_7lbq6"),
+3: SubResource("Resource_rww56"),
+4: SubResource("Resource_ybqii"),
+5: SubResource("Resource_e2uou"),
+6: SubResource("Resource_yyogb")
+}

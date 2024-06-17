@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="VehicleModelCatalog" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://Nodes/vehicle_model_catalog.gd" id="1_2aw22"]
+[ext_resource type="Script" path="res://Nodes/vehicle_model.gd" id="2_8726d"]
+
+[sub_resource type="Resource" id="Resource_37lho"]
+script = ExtResource("2_8726d")
+id = 1
+navigation = 1
+model_name = "Truck"
+img_path = "res://Assets/Vehicle_Models/truck.png"
+capacity = 1
+speed = 30.0
+travel_cost = 10.0
+price = 10000.0
+
+[sub_resource type="Resource" id="Resource_1i8ms"]
+script = ExtResource("2_8726d")
+id = 2
+navigation = 1
+model_name = "Trailer"
+img_path = "res://Assets/Vehicle_Models/trailer.png"
+capacity = 2
+speed = 24.0
+travel_cost = 14.0
+price = 32000.0
+
+[resource]
+script = ExtResource("1_2aw22")
+vehicle_models = {
+1: SubResource("Resource_37lho"),
+2: SubResource("Resource_1i8ms")
+}

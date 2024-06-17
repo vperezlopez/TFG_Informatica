@@ -1,8 +1,8 @@
 [gd_scene load_steps=20 format=3 uid="uid://c6yvx1lg154nf"]
 
 [ext_resource type="Script" path="res://Nodes/Menus/const_menu.gd" id="1_3y2va"]
-[ext_resource type="Texture2D" uid="uid://dkhpbhcgvpj43" path="res://Assets/Placeholder_4.png" id="1_8e7fh"]
-[ext_resource type="Texture2D" uid="uid://biqiitlap7tnk" path="res://Assets/Placeholder_3.png" id="2_hwbgg"]
+[ext_resource type="Texture2D" uid="uid://dkhpbhcgvpj43" path="res://Nodes/Assets/Placeholder_4.png" id="1_8e7fh"]
+[ext_resource type="Texture2D" uid="uid://biqiitlap7tnk" path="res://Nodes/Assets/Placeholder_3.png" id="2_hwbgg"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_qelgd"]
 device = -1
