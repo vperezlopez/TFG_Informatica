@@ -23,7 +23,7 @@ func _ready():
 	# INITIALIZE SPRITE
 	sprite = Sprite2D.new()
 	add_child(sprite)
-	sprite.position = Vector2i(0, -8)
+	sprite.position = Vector2i(0, 0) # 0, -8
 	
 	# INITIALIZE LABEL
 	label = Label.new()
@@ -41,10 +41,17 @@ func _on_input_event(_viewport, event, _shape_idx):
 		emit_signal("actor_static_clicked", self.get_instance_id())
 
 
-
 func is_demolishable() -> bool:
 	return demolishable
 	
+
+func unload_cargo(cargo : Cargo, quantity : int) -> int:
+	print_debug("This building does not accept cargo: " + str(self.get_class()))
+	return -1
+
+func load_cargo(cargo : Cargo, quantity : int) -> int:
+	print_debug("This building does not offer cargo: " + str(self.get_class()))
+	return -1
 
 # TEST: TO BE DELETED
 func _gui_input(event):

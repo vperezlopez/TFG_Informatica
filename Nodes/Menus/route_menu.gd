@@ -113,9 +113,13 @@ func _on_button_accept_pressed():
 	for child in destinations_container.get_children():
 		if child is DestinationMenu:
 			operations.append(child.operation)
-	vehicle.get_route().set_operations(operations)
+	save_route.call_deferred(operations)
+	#vehicle.get_route().set_operations(operations)
 	
 	emit_signal("close_route_menu")
+
+func save_route(operations : Array[Operation]):
+	vehicle.get_route().set_operations(operations)
 
 func _on_button_cancel_pressed():
 	select_destination(null)

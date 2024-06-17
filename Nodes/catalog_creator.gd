@@ -52,6 +52,34 @@ static func create_cargo_catalog():
 	cargo.value = 1.9
 	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
 	catalog.cargos[cargo.id] = cargo
+	
+	cargo = Cargo.new()
+	cargo.id = 7
+	cargo.name = "Furniture"
+	cargo.value = 10
+	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
+	catalog.cargos[cargo.id] = cargo
+	
+	cargo = Cargo.new()
+	cargo.id = 8
+	cargo.name = "Toys"
+	cargo.value = 3.2
+	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
+	catalog.cargos[cargo.id] = cargo
+	
+	cargo = Cargo.new()
+	cargo.id = 9
+	cargo.name = "Tools"
+	cargo.value = 5.8
+	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
+	catalog.cargos[cargo.id] = cargo
+	
+	cargo = Cargo.new()
+	cargo.id = 10
+	cargo.name = "Blankets"
+	cargo.value = 4.6
+	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
+	catalog.cargos[cargo.id] = cargo
 
 	ResourceSaver.save(catalog, Constants.CARGO_CATALOG_PATH)
 
@@ -69,7 +97,7 @@ static func create_vehicle_model_catalog():
 	vehicle_model.model_name = 'Truck'
 
 	vehicle_model.capacity = 1
-	vehicle_model.speed = 10
+	vehicle_model.speed = 30
 	vehicle_model.travel_cost = 10
 	vehicle_model.price = 10000
 	
@@ -86,7 +114,7 @@ static func create_vehicle_model_catalog():
 	vehicle_model.model_name = 'Trailer'
 
 	vehicle_model.capacity = 2
-	vehicle_model.speed = 8
+	vehicle_model.speed = 24
 	vehicle_model.travel_cost = 14
 	vehicle_model.price = 32000
 	
@@ -147,3 +175,54 @@ static func create_explotation_type_catalog():
 	catalog.explotation_types[explotation_type.id] = explotation_type
 	
 	ResourceSaver.save(catalog, Constants.EXPLOTATION_TYPE_CATALOG_PATH)
+
+static func create_production_line_catalog():
+	var cargo_catalog = load(Constants.CARGO_CATALOG_PATH) as CargoCatalog
+	#var production_line_catalog = load(Constants.PRODUCTION_LINE_CATALOG_PATH) as ProductionLineCatalog
+	
+	var catalog = ProductionLineCatalog.new()
+	var production_line
+	
+	production_line = ProductionLine.new()
+	production_line.id = 1
+	production_line.input = {
+		cargo_catalog.get_cargo_from_name("Wood"): 2
+	}
+	production_line.output = cargo_catalog.get_cargo_from_name("Furniture")
+	production_line.production_time = 2.0
+	
+	catalog.production_lines[production_line.id] = production_line
+	
+	
+	
+	production_line = ProductionLine.new()
+	production_line.id = 2
+	production_line.input = {
+		cargo_catalog.get_cargo_from_name("Plastic"): 1
+	}
+	production_line.output = cargo_catalog.get_cargo_from_name("Toys")
+	production_line.production_time = 0.6
+	
+	catalog.production_lines[production_line.id] = production_line
+	
+	
+	
+	production_line = ProductionLine.new()
+	production_line.id = 3
+	production_line.input = {
+		cargo_catalog.get_cargo_from_name("Steel"): 1
+	}
+	production_line.output = cargo_catalog.get_cargo_from_name("Toys")
+	production_line.production_time = 1.3
+	
+	catalog.production_lines[production_line.id] = production_line
+	
+	production_line = ProductionLine.new()
+	production_line.id = 4
+	production_line.input = {
+		cargo_catalog.get_cargo_from_name("Fabric"): 1
+	}
+	production_line.output = cargo_catalog.get_cargo_from_name("Blanket")
+	production_line.production_time = 0.9
+	
+	catalog.production_lines[production_line.id] = production_line

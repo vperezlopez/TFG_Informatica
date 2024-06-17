@@ -21,23 +21,29 @@ func get_destination() -> Actor_Static:
 func get_destination_pos() -> Vector2:
 	return destination.position
 
-func get_load_list() -> Array[Cargo]:
-	return load_dict.keys()
+func get_load_duplicate() -> Dictionary:
+	return load_dict.duplicate(true)
 
-func get_unload_list() -> Array[Cargo]:
-	return unload_dict.keys()
-	
-func get_load_quantity(cargo : Cargo) -> int:
-	if load_dict.has(cargo):
-		return load_dict[cargo]
-	else:
-		return -1
+func get_unload_duplicate() -> Dictionary:
+	return unload_dict.duplicate(true)
 
-func get_unload_quantity(cargo : Cargo) -> int:
-	if unload_dict.has(cargo):
-		return unload_dict[cargo]
-	else:
-		return -1
+#func get_load_list() -> Array[Cargo]:
+	#return load_dict.keys()
+#
+#func get_unload_list() -> Array[Cargo]:
+	#return unload_dict.keys()
+	#
+#func get_load_quantity(cargo : Cargo) -> int:
+	#if load_dict.has(cargo):
+		#return load_dict[cargo]
+	#else:
+		#return -1
+#
+#func get_unload_quantity(cargo : Cargo) -> int:
+	#if unload_dict.has(cargo):
+		#return unload_dict[cargo]
+	#else:
+		#return -1
 
 func get_wait_load() -> bool:
 	return wait_load

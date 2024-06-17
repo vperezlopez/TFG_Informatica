@@ -13,3 +13,16 @@ func _ready():
 	
 	population = randi()
 
+func unload_cargo(cargo : Cargo, quantity : int) -> int:
+	var earnings : float = cargo.value * quantity
+	print('You earned: ' + str(earnings))
+	return quantity
+
+
+#func unload_cargo(cargo : Cargo, quantity : int) -> int:
+	#print_debug("This building does not accept cargo: " + str(self.get_class()))
+	#return -1
+#
+#func load_cargo(cargo : Cargo, quantity : int) -> int:
+	#print_debug("This building does not offer cargo: " + str(self.get_class()))
+	#return -1

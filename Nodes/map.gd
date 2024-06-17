@@ -117,7 +117,7 @@ func _process(_delta):
 		match build_mode:
 			BuildMode.BUILDING:
 				if selected_building:
-					selected_building.position = map_to_local(mouse_tile)
+					selected_building.position = map_to_local(mouse_tile) + Vector2(0, -8)
 					if valid_position(floor(selected_building.position.x), floor(selected_building.position.y)):
 						selected_building.sprite.self_modulate = HUE_GREEN_T
 					else:
@@ -183,7 +183,7 @@ func place_actor_static(actor_static_instance : Actor_Static, pos : Vector2i = V
 		pos = get_random_pos()
 	if valid_position(pos.x, pos.y):
 		actor_static_instance.z_index = Layers.ACTOR_STATIC
-		actor_static_instance.position = map_to_local(pos)
+		actor_static_instance.position = map_to_local(pos) + Vector2(0, -8)
 		set_cell(Layers.PATH, pos, 1, Vector2i(1, 3))
 		
 		occupied_tiles[pos] = actor_static_instance
