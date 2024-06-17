@@ -52,8 +52,6 @@ func _physics_process(delta):
 			time += delta
 				#navigation_agent.target_position = route.get_destinations()[current_destination_index].position
 			if time > travel_time:
-				print('Moving to: ' + str(current_destination_index))
-				#print(str(time))
 				self.position = route.get_destinations()[current_destination_index].position
 				dispatching = true
 				time -= travel_time
@@ -93,7 +91,14 @@ func initialize(vm : VehicleModel):
 	
 func get_route() -> Route:
 	return route
-	
+
+func set_new_route(operations):
+	var new_route = Route.new()
+	new_route.initialize(operations)
+	route = new_route
+	cargo_storage.flush()
+	#route.set_operations(operations)
+
 func add_destination(operation : Operation):
 	self.route.add_operation(operation)
 	operation.get_destination().connect("accept_unload", Callable(self, "_on_accept_unload"))
@@ -108,23 +113,28 @@ func dispatch():
 	var wait_load = current_operation.get_wait_load()
 	
 	for cargo in unload_dict:
-		var quantity = unload_dict[cargo]
+		var quantity: int = min(unload_dict[cargo], cargo_storage.get_quantity(cargo))
 		var unloaded : int = destination.unload_cargo(cargo, quantity)
 		if unloaded == -1: break
+		cargo_storage.remove_cargo(cargo, unloaded)
 		unload_dict[cargo] = quantity - unloaded
-		print(cargo.name)
 	
 	var do_while = true
 	while (do_while):
 		var load_remaining : int = 0
 		for cargo in load_dict:
-			var quantity = load_dict[cargo]
+			var quantity: int = min(load_dict[cargo], cargo_storage.get_free_space())
 			var loaded : int = destination.load_cargo(cargo, quantity)
 			if loaded == -1: break
+			cargo_storage.add_cargo(cargo, loaded)
 			load_dict[cargo] = quantity - loaded
 			load_remaining += load_dict[cargo]
-			print(cargo.name)
-		do_while = current_operation.get_wait_load() and load_remaining
+		do_while = wait_load and load_remaining and cargo_storage.get_free_space() > 0
+	
+	#print('This vehicle is now transporting:')
+	#var inventory = cargo_storage.get_inventory()
+	#for tuple in inventory:
+		#print('(' + tuple[0].name + ', ' + str(tuple[1]) + ')')
 	
 	dispatching = false
 

@@ -119,7 +119,8 @@ func _on_button_accept_pressed():
 	emit_signal("close_route_menu")
 
 func save_route(operations : Array[Operation]):
-	vehicle.get_route().set_operations(operations)
+	vehicle.set_new_route(operations)
+	#vehicle.get_route().set_operations(operations)
 
 func _on_button_cancel_pressed():
 	select_destination(null)

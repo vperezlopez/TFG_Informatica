@@ -4,8 +4,8 @@ class_name Route
 
 var operations : Array[Operation]
 
-func initialize():
-	operations = []
+func initialize(ops : Array[Operation] = []):
+	operations = ops
 
 func get_operations_size():
 	return operations.size()
