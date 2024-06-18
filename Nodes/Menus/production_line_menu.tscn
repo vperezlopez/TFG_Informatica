@@ -135,12 +135,14 @@ theme_override_constants/separation = 16
 [node name="ButtonAccept" type="Button" parent="HBoxContainer/OutputContainer/OutputSelectorContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Confirm Production Line"
 icon = ExtResource("4_a27os")
 icon_alignment = 1
 
 [node name="ButtonCancel" type="Button" parent="HBoxContainer/OutputContainer/OutputSelectorContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Cancel Production Line"
 icon = ExtResource("5_v1ggv")
 icon_alignment = 1
 
@@ -185,6 +187,7 @@ vertical_alignment = 1
 [node name="ButtonRemove" type="Button" parent="HBoxContainer/OutputContainer/OutputDisplayContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+tooltip_text = "Remove Production Line"
 icon = ExtResource("5_v1ggv")
 icon_alignment = 1
 

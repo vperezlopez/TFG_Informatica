@@ -32,7 +32,7 @@ func get_operation():
 
 func highlight(highlighted : bool):
 	if highlighted:
-		background.color = '#f6f7f7'
+		background.color = '#96ff9f' #'#f6f7f7'
 	else:
 		background.color = '#beefc2'
 

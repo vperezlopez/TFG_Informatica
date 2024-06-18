@@ -2,11 +2,11 @@ extends VBoxContainer
 
 const CARGO_MENU = preload("res://Nodes/Menus/cargo_menu.tscn")
 
-func initialize(exp : Explotation):
+func initialize(expl : Explotation):
 	for child in get_children():
 		child.queue_free.call_deferred()
 	
-	initialize_storage(exp.cargo_storage)
+	initialize_storage(expl.cargo_storage)
 
 func initialize_storage(cs : CargoStorage):
 	for cargo in cs.get_cargo():

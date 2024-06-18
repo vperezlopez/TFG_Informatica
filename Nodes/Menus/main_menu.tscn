@@ -200,8 +200,8 @@ text = "Number of Cities"
 [node name="SpinBoxCities" type="SpinBox" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerCities"]
 layout_mode = 2
 min_value = 1.0
-max_value = 40.0
-value = 8.0
+max_value = 128.0
+value = 16.0
 
 [node name="HBoxContainerExplotations" type="HBoxContainer" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -215,8 +215,8 @@ text = "Number of Explotations
 [node name="SpinBoxExplotations" type="SpinBox" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerExplotations"]
 layout_mode = 2
 min_value = 1.0
-max_value = 32.0
-value = 6.0
+max_value = 96.0
+value = 12.0
 
 [node name="HBoxContainerHarbors" type="HBoxContainer" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -228,8 +228,7 @@ text = "Number of Harbors"
 
 [node name="SpinBoxHarbors" type="SpinBox" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainerHarbors"]
 layout_mode = 2
-max_value = 16.0
-value = 4.0
+max_value = 0.0
 
 [node name="HBoxContainerNewButtons" type="HBoxContainer" parent="CanvasLayer/New/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

@@ -52,6 +52,7 @@ size_flags_stretch_ratio = 0.6
 [node name="ButtonDelete" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+tooltip_text = "Eliminate this operation"
 icon = ExtResource("1_lje7i")
 icon_alignment = 1
 

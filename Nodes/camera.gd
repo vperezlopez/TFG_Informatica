@@ -34,6 +34,9 @@ func set_starting_position(pos : Vector2):
 	new_pos = pos
 	position = pos
 
+func set_map_limits(limit : Vector2):
+	pos_max = limit
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if zoom != new_zoom:
@@ -49,9 +52,10 @@ func _on_game_viewport_size_changed():
 	_calculate_margins()
 
 func _calculate_limits():
-	var viewport = get_viewport()
-	if viewport:
-		pos_max = viewport.size
+	pass
+	#var viewport = get_viewport()
+	#if viewport:
+		#pos_max = viewport.size
 
 func _calculate_margins():
 	var viewport = get_viewport()

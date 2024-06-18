@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://eipnyabyfx6q"
-path="res://.godot/imported/Blankets.png-d8b1f7ba24141e608ef0539180c25424.ctex"
+uid="uid://c1oa1xuk65m7y"
+path="res://.godot/imported/blankets.png-37210d7c9a991c3a0c41ba35a6a74e73.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cargo/Blankets.png"
-dest_files=["res://.godot/imported/Blankets.png-d8b1f7ba24141e608ef0539180c25424.ctex"]
+source_file="res://Assets/Cargo/blankets.png"
+dest_files=["res://.godot/imported/blankets.png-37210d7c9a991c3a0c41ba35a6a74e73.ctex"]
 
 [params]
 

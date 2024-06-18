@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bafm8puo4ru46"
-path="res://.godot/imported/Fabric.png-d5fc313b002bb43bf140701e291d074d.ctex"
+uid="uid://bh587ng481r8e"
+path="res://.godot/imported/fabric.png-e99be108998d249a7444a2bdb7200311.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cargo/Fabric.png"
-dest_files=["res://.godot/imported/Fabric.png-d5fc313b002bb43bf140701e291d074d.ctex"]
+source_file="res://Assets/Cargo/fabric.png"
+dest_files=["res://.godot/imported/fabric.png-e99be108998d249a7444a2bdb7200311.ctex"]
 
 [params]
 

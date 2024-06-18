@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bflpab7vyygt7"]
-
-[ext_resource type="PackedScene" uid="uid://cehmbyytppd8q" path="res://Nodes/Menus/game_interface_bad.tscn" id="1_1oqsc"]
-
-[node name="Node2D" type="Node2D"]
-
-[node name="game_interface" parent="." instance=ExtResource("1_1oqsc")]
-size_flags_horizontal = 3
-size_flags_vertical = 3

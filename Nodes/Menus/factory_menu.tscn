@@ -112,6 +112,7 @@ offset_top = -20.0
 offset_right = 40.0
 offset_bottom = 20.0
 grow_vertical = 2
+tooltip_text = "Add new Production Line"
 icon = ExtResource("2_a8t51")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/lines_menu/Control"]
@@ -129,11 +130,13 @@ grow_vertical = 2
 
 [node name="ButtonAccept" type="Button" parent="HBoxContainer/lines_menu/Control/HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Confirm changes"
 icon = ExtResource("3_1618h")
 icon_alignment = 1
 
 [node name="ButtonCancel" type="Button" parent="HBoxContainer/lines_menu/Control/HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Discard changes"
 icon = ExtResource("4_p7wn6")
 
 [node name="lines_container" type="VBoxContainer" parent="HBoxContainer/lines_menu"]
@@ -191,8 +194,8 @@ size_flags_stretch_ratio = 9.0
 [node name="output_storage_list" type="VBoxContainer" parent="HBoxContainer/output_storage/ScrollContainer"]
 layout_mode = 2
 
-[connection signal="pressed" from="HBoxContainer/lines_menu/Control/ButtonAdd" to="." method="_on_button_add_pressed"]
 [connection signal="pressed" from="HBoxContainer/lines_menu/Control/ButtonAdd" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/lines_menu/Control/HBoxContainer/ButtonAccept" to="." method="_on_button_accept_pressed"]
+[connection signal="pressed" from="HBoxContainer/lines_menu/Control/ButtonAdd" to="." method="_on_button_add_pressed"]
 [connection signal="pressed" from="HBoxContainer/lines_menu/Control/HBoxContainer/ButtonAccept" to="." method="_on_button_close_pressed"]
+[connection signal="pressed" from="HBoxContainer/lines_menu/Control/HBoxContainer/ButtonAccept" to="." method="_on_button_accept_pressed"]
 [connection signal="pressed" from="HBoxContainer/lines_menu/Control/HBoxContainer/ButtonCancel" to="." method="_on_button_cancel_pressed"]

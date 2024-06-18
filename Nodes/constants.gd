@@ -12,6 +12,7 @@ const PRODUCTION_LINE_CATALOG_PATH : String = "res://Resources/production_line_c
 const PATH_ASSETS_CARGO : String = "res://Assets/Cargo/"
 const PATH_ASSETS_VEHICLE_MODELS : String = "res://Assets/Vehicle_Models/"
 const PATH_ASSETS_BUILDINGS : String = "res://Assets/Buildings/"
+const PATH_ASSETS_EXPLOTATIONS : String = "res://Assets/Buildings/Explotations/"
 
 const EXPLOTATION_TYPE_PREFIX : String = "exp_"
 const ASSET_FORMAT : String = ".png"
