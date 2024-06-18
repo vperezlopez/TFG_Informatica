@@ -16,3 +16,10 @@ func get_production_line_from_output(output : Cargo) -> ProductionLine:
 		if production_line.output == output:
 			return production_line
 	return null
+
+func get_all_production_lines() -> Array[ProductionLine]:
+	var res : Array[ProductionLine]= []
+	for production_line_id in production_lines:
+		var production_line = get_production_line(production_line_id)
+		res.append(production_line)
+	return res

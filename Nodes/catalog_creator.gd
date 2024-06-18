@@ -6,6 +6,7 @@ static func create_catalogs():
 	create_cargo_catalog()
 	create_vehicle_model_catalog()
 	create_explotation_type_catalog()
+	create_production_line_catalog()
 
 static func create_cargo_catalog():
 	var catalog = CargoCatalog.new()
@@ -189,6 +190,11 @@ static func create_production_line_catalog():
 		cargo_catalog.get_cargo_from_name("Wood"): 2
 	}
 	production_line.output = cargo_catalog.get_cargo_from_name("Furniture")
+	#var c : Cargo = cargo_catalog.get_cargo_from_name("Furniture")
+	#production_line.output = c
+	#print(cargo_catalog.get_cargo_from_name("Furniture"))
+	#print(production_line.output)
+
 	production_line.production_time = 2.0
 	
 	catalog.production_lines[production_line.id] = production_line
@@ -212,7 +218,7 @@ static func create_production_line_catalog():
 	production_line.input = {
 		cargo_catalog.get_cargo_from_name("Steel"): 1
 	}
-	production_line.output = cargo_catalog.get_cargo_from_name("Toys")
+	production_line.output = cargo_catalog.get_cargo_from_name("Tools")
 	production_line.production_time = 1.3
 	
 	catalog.production_lines[production_line.id] = production_line
@@ -222,7 +228,9 @@ static func create_production_line_catalog():
 	production_line.input = {
 		cargo_catalog.get_cargo_from_name("Fabric"): 1
 	}
-	production_line.output = cargo_catalog.get_cargo_from_name("Blanket")
+	production_line.output = cargo_catalog.get_cargo_from_name("Blankets")
 	production_line.production_time = 0.9
 	
 	catalog.production_lines[production_line.id] = production_line
+
+	ResourceSaver.save(catalog, Constants.PRODUCTION_LINE_CATALOG_PATH)

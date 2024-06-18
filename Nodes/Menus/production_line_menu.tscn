@@ -1,0 +1,198 @@
+[gd_scene load_steps=6 format=3 uid="uid://bx1qc2gms54ys"]
+
+[ext_resource type="Script" path="res://Nodes/Menus/production_line_menu.gd" id="1_j3kkm"]
+[ext_resource type="Texture2D" uid="uid://34m2e2ab3imf" path="res://Assets/GUI_Icons/Arrow_Right.png" id="1_uhtdo"]
+[ext_resource type="Texture2D" uid="uid://cyopwsx7b2a6b" path="res://Assets/GUI_Icons/Pie.png" id="2_7yu1l"]
+[ext_resource type="Texture2D" uid="uid://diud52mysj42s" path="res://Assets/GUI_Icons/Green_Tick.png" id="4_a27os"]
+[ext_resource type="Texture2D" uid="uid://bhqa5hmpw7nvo" path="res://Assets/GUI_Icons/Red_X.png" id="5_v1ggv"]
+
+[node name="ProductionLineMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j3kkm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.764743, 0.922972, 0.821617, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InputContainer" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/InputContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/InputContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="InputBox" type="VBoxContainer" parent="HBoxContainer/InputContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SeparatorContainer" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SeparatorContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="SeparatorUpper" type="Control" parent="HBoxContainer/SeparatorContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="IconArrow" type="TextureRect" parent="HBoxContainer/SeparatorContainer/VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("1_uhtdo")
+stretch_mode = 5
+
+[node name="IconTimer" type="TextureRect" parent="HBoxContainer/SeparatorContainer/VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("2_7yu1l")
+stretch_mode = 5
+
+[node name="LabelTime" type="Label" parent="HBoxContainer/SeparatorContainer/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SeparatorBottom" type="Control" parent="HBoxContainer/SeparatorContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OutputContainer" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="OutputSelectorContainer" type="Control" parent="HBoxContainer/OutputContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/OutputContainer/OutputSelectorContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Control" type="Control" parent="HBoxContainer/OutputContainer/OutputSelectorContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="OutputSelector" type="OptionButton" parent="HBoxContainer/OutputContainer/OutputSelectorContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/OutputContainer/OutputSelectorContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="ButtonAccept" type="Button" parent="HBoxContainer/OutputContainer/OutputSelectorContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("4_a27os")
+icon_alignment = 1
+
+[node name="ButtonCancel" type="Button" parent="HBoxContainer/OutputContainer/OutputSelectorContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("5_v1ggv")
+icon_alignment = 1
+
+[node name="Control2" type="Control" parent="HBoxContainer/OutputContainer/OutputSelectorContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="OutputDisplayContainer" type="Control" parent="HBoxContainer/OutputContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/OutputContainer/OutputDisplayContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="HBoxContainer/OutputContainer/OutputDisplayContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/OutputContainer/OutputDisplayContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="IconOutput" type="TextureRect" parent="HBoxContainer/OutputContainer/OutputDisplayContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="LabelOutput" type="Label" parent="HBoxContainer/OutputContainer/OutputDisplayContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_alignment = 1
+
+[node name="ButtonRemove" type="Button" parent="HBoxContainer/OutputContainer/OutputDisplayContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("5_v1ggv")
+icon_alignment = 1
+
+[node name="Control2" type="Control" parent="HBoxContainer/OutputContainer/OutputDisplayContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[connection signal="pressed" from="HBoxContainer/OutputContainer/OutputSelectorContainer/VBoxContainer/HBoxContainer/ButtonAccept" to="." method="_on_button_accept_pressed"]
+[connection signal="pressed" from="HBoxContainer/OutputContainer/OutputSelectorContainer/VBoxContainer/HBoxContainer/ButtonCancel" to="." method="_on_button_cancel_pressed"]
+[connection signal="pressed" from="HBoxContainer/OutputContainer/OutputDisplayContainer/VBoxContainer/ButtonRemove" to="." method="_on_button_remove_pressed"]

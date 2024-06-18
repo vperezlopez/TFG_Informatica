@@ -37,7 +37,7 @@ func _ready():
 		print_debug('Manual initialization')
 		new_game(Vector2i(64, 64), 12, 4, 2)
 
-	test_cargo()
+	#test_cargo()
 	#test_vehicle()
 
 	show_screen(ScreenMode.MAP)
@@ -49,6 +49,7 @@ func _process(_delta):
 func connect_signals():
 	const_menu.connect("const_button_clicked", Callable(map, "_on_construction_button_clicked"))
 	map.connect("forwarded_actor_static_clicked", Callable(self, "_on_actor_static_clicked"))
+	factory_menu.connect("close_factory_menu", Callable(self, "_on_close_factory_menu"))
 	depot_road_menu.connect("buy_vehicle", Callable(self, "_on_buy_vehicle"))
 	depot_road_menu.connect("find_vehicle", Callable(self, "_on_find_vehicle"))
 	depot_road_menu.connect("set_route", Callable(self, "_on_set_route_vehicle"))
@@ -107,7 +108,7 @@ func test_cargo():
 	res = cs.remove_cargo(cargo_catalog.get_cargo(6))
 	for e in cs.get_inventory():
 		print("There are %d units of %s" % [e[1], e[0].name])
-	$VBoxContainer/top_container/factory_menu.initialize_storage(cs, null)
+	#$VBoxContainer/top_container/factory_menu.initialize_storage(cs, null)
 
 func test_vehicle():
 	var vehicle_model_catalog = load(Constants.VEHICLE_MODEL_CATALOG_PATH) as VehicleModelCatalog
@@ -169,6 +170,10 @@ func _on_actor_static_clicked(actor_static_id):
 		#print_debug('Route setting')
 		route_menu.add_destination(actor_static_clicked)
 	
+
+func _on_close_factory_menu():
+	show_screen(ScreenMode.MAP)
+
 func _on_buy_vehicle(vehicle_model : VehicleModel, depot : Depot):
 	# VALIDATE MONEY: TODO
 	map.create_vehicle(vehicle_model, depot)
