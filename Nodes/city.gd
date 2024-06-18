@@ -14,8 +14,9 @@ func _ready():
 	population = randi()
 
 func unload_cargo(cargo : Cargo, quantity : int) -> int:
-	var earnings : float = cargo.value * quantity
-	print('You earned: ' + str(earnings))
+	emit_signal("transaction_completed", cargo.value * quantity)
+	#var earnings : float = cargo.value * quantity
+	#print('You earned: ' + str(earnings))
 	return quantity
 
 

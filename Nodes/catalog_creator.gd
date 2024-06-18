@@ -15,70 +15,70 @@ static func create_cargo_catalog():
 	cargo = Cargo.new()
 	cargo.id = 1
 	cargo.name = "Wood"
-	cargo.value = 2
+	cargo.value = 275
 	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
 	catalog.cargos[cargo.id] = cargo
 	
 	cargo = Cargo.new()
 	cargo.id = 2
 	cargo.name = "Aluminium"
-	cargo.value = 1.8
+	cargo.value = 2750
 	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
 	catalog.cargos[cargo.id] = cargo
 	
 	cargo = Cargo.new()
 	cargo.id = 3
 	cargo.name = "Steel"
-	cargo.value = 2.4
+	cargo.value = 1250
 	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
 	catalog.cargos[cargo.id] = cargo
 	
 	cargo = Cargo.new()
 	cargo.id = 4
 	cargo.name = "Plastic"
-	cargo.value = 1.2
+	cargo.value = 750
 	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
 	catalog.cargos[cargo.id] = cargo
 	
 	cargo = Cargo.new()
 	cargo.id = 5
 	cargo.name = "Copper"
-	cargo.value = 2.1
+	cargo.value = 7500
 	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
 	catalog.cargos[cargo.id] = cargo
 	
 	cargo = Cargo.new()
 	cargo.id = 6
 	cargo.name = "Fabric"
-	cargo.value = 1.9
+	cargo.value = 1500
 	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
 	catalog.cargos[cargo.id] = cargo
 	
 	cargo = Cargo.new()
 	cargo.id = 7
 	cargo.name = "Furniture"
-	cargo.value = 10
+	cargo.value = 3000
 	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
 	catalog.cargos[cargo.id] = cargo
 	
 	cargo = Cargo.new()
 	cargo.id = 8
 	cargo.name = "Toys"
-	cargo.value = 3.2
+	cargo.value = 1750
 	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
 	catalog.cargos[cargo.id] = cargo
 	
 	cargo = Cargo.new()
 	cargo.id = 9
 	cargo.name = "Tools"
-	cargo.value = 5.8
+	cargo.value = 2250
 	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
 	catalog.cargos[cargo.id] = cargo
 	
 	cargo = Cargo.new()
 	cargo.id = 10
 	cargo.name = "Blankets"
-	cargo.value = 4.6
+	cargo.value = 2400
 	cargo.img_path = "res://Assets/Cargo/" + cargo.name.to_lower() + ".png"
 	catalog.cargos[cargo.id] = cargo
 
