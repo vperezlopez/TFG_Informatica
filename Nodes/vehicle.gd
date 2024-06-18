@@ -129,7 +129,8 @@ func dispatch():
 			cargo_storage.add_cargo(cargo, loaded)
 			load_dict[cargo] = quantity - loaded
 			load_remaining += load_dict[cargo]
-		do_while = wait_load and load_remaining and cargo_storage.get_free_space() > 0
+		do_while = false
+		#do_while = wait_load and load_remaining and cargo_storage.get_free_space() > 0
 	
 	#print('This vehicle is now transporting:')
 	#var inventory = cargo_storage.get_inventory()

@@ -44,6 +44,12 @@ func get_inventory() -> Array:
 func get_free_space() -> int:
 	return space
 
+func has(cargo : Cargo, quantity : int) -> bool:
+	var id = cargo.id
+	if _cargo_dict.has(id):
+		return _cargo_dict[id] >= quantity
+	return false
+
 func add_cargo(cargo : Cargo, quantity : int = Constants.MAX_INT) -> int:
 	# Checks if it can accept the cargo
 	if !_blacklist.has(cargo.id):
