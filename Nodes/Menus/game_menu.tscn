@@ -1,9 +1,13 @@
-[gd_scene format=3 uid="uid://b843jfyemoegl"]
+[gd_scene load_steps=3 format=3 uid="uid://b843jfyemoegl"]
+
+[ext_resource type="Script" path="res://Nodes/Menus/game_menu.gd" id="1_8pjcm"]
+[ext_resource type="Texture2D" uid="uid://dup6donbtsff3" path="res://Assets/GUI_Icons/Door.png" id="1_m6ub3"]
 
 [node name="game_menu" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 3
+script = ExtResource("1_8pjcm")
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -38,7 +42,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Button4" type="Button" parent="MarginContainer2/GridContainer"]
+[node name="ButtonExit" type="Button" parent="MarginContainer2/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+icon = ExtResource("1_m6ub3")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="MarginContainer2/GridContainer/ButtonExit" to="." method="_on_button_exit_pressed"]
+[connection signal="pressed" from="MarginContainer2/GridContainer/ButtonExit" to="." method="_on_button_4_pressed"]
