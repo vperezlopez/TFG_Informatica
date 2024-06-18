@@ -50,7 +50,8 @@ var debug_enabled : bool = false
 
 var explotation_type_catalog : ExplotationTypeCatalog
 
-signal forwarded_actor_static_clicked
+signal forwarded_actor_static_clicked(sender : Actor_Static)
+signal map_transaction(charge : float)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -188,6 +189,7 @@ func place_actor_static(actor_static_instance : Actor_Static, pos : Vector2i = V
 		
 		occupied_tiles[pos] = actor_static_instance
 		actor_static_instance.connect("actor_static_clicked", Callable(self, "_on_actor_static_clicked"))
+		actor_static_instance.connect("transaction_completed", Callable(self, "_on_transaction_completed"))
 		return true
 	else:
 		return false
@@ -390,6 +392,10 @@ func calculate_area_corners(pos1 : Vector2i, pos2 : Vector2i) -> Array[Vector2i]
 func _on_actor_static_clicked(actor_static_id : int):
 	#print_debug('Forwarding')
 	emit_signal("forwarded_actor_static_clicked", actor_static_id)
+
+func _on_transaction_completed(charge : float):
+	print('Transaction detected: ' + str(charge))
+	emit_signal("map_transaction", charge)
 
 func _input(event):
 	if event is InputEventKey:

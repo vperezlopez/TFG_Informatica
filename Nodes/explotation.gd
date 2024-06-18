@@ -24,7 +24,8 @@ func initialize(type : ExplotationType):
 
 
 func load_cargo(cargo : Cargo, quantity : int) -> int:
-	print('You spent: ' + str(cargo.value * quantity))
+	emit_signal("transaction_completed", -(cargo.value * quantity))
+	#print('You spent: ' + str(cargo.value * quantity))
 	return cargo_storage.remove_cargo(cargo, quantity)
 
 #func _on_input_event(_viewport, event, _shape_idx):

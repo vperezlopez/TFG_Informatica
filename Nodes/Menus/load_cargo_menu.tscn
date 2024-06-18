@@ -41,6 +41,8 @@ size_flags_stretch_ratio = 3.0
 [node name="QuantityBox" type="SpinBox" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = 1.0
+value = 1.0
 
 [node name="Separator" type="Control" parent="HBoxContainer"]
 layout_mode = 2

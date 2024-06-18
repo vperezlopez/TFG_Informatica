@@ -1,11 +1,14 @@
-[gd_scene format=3 uid="uid://cs4hn2cfdlvq8"]
+[gd_scene load_steps=2 format=3 uid="uid://cs4hn2cfdlvq8"]
+
+[ext_resource type="Script" path="res://Nodes/Menus/money_menu.gd" id="1_na4mo"]
 
 [node name="money_menu" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 3
+script = ExtResource("1_na4mo")
 
-[node name="Label" type="Label" parent="."]
+[node name="LabelMoney" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

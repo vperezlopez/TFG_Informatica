@@ -24,6 +24,9 @@ const vehicle = preload("res://Nodes/vehicle.tscn")
 enum ScreenMode {MAP, ROUTE, CITY, FACTORY, DEPOT, EXPLOTATION, EXIT}
 var selected_screen : ScreenMode
 
+const starting_money : float = 3000000.00
+var money : float
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#if !FileAccess.file_exists(Constants.CARGO_CATALOG_PATH):
@@ -37,7 +40,10 @@ func _ready():
 	if get_parent() is Window:
 		print_debug('Manual initialization')
 		new_game(Vector2i(64, 64), 12, 4, 2)
-
+	
+	money = 0
+	update_money(+starting_money)
+	
 	#test_cargo()
 	#test_vehicle()
 
@@ -50,6 +56,7 @@ func _process(_delta):
 func connect_signals():
 	const_menu.connect("const_button_clicked", Callable(map, "_on_construction_button_clicked"))
 	map.connect("forwarded_actor_static_clicked", Callable(self, "_on_actor_static_clicked"))
+	map.connect("map_transaction", Callable(self, "_on_map_transaction"))
 	factory_menu.connect("close_factory_menu", Callable(self, "_on_close_factory_menu"))
 	depot_road_menu.connect("buy_vehicle", Callable(self, "_on_buy_vehicle"))
 	depot_road_menu.connect("find_vehicle", Callable(self, "_on_find_vehicle"))
@@ -152,6 +159,10 @@ func test_vehicle():
 	
 	pass
 
+func update_money(amount : float):
+	money += amount
+	money_menu.update_money(money)
+
 func _on_game_container_resized():
 	if game_viewport and game_container:
 		game_viewport.size = game_container.size
@@ -174,7 +185,9 @@ func _on_actor_static_clicked(actor_static_id):
 	elif selected_screen == ScreenMode.ROUTE:
 		#print_debug('Route setting')
 		route_menu.add_destination(actor_static_clicked)
-	
+
+func _on_map_transaction(charge : float):
+	update_money(charge)
 
 func _on_close_factory_menu():
 	show_screen(ScreenMode.MAP)

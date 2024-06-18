@@ -10,7 +10,8 @@ var sprite : Sprite2D
 var label : Label
 var demolishable : bool
 
-signal actor_static_clicked(instance_id)
+signal actor_static_clicked(instance_id : Actor_Static)
+signal transaction_completed(charge : float)
 
 func _ready(): 
 	# INITIALIZE COLLISION SHAPE

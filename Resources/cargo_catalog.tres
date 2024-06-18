@@ -3,87 +3,90 @@
 [ext_resource type="Script" path="res://Nodes/cargo.gd" id="1_0x2g3"]
 [ext_resource type="Script" path="res://Nodes/cargo_catalog.gd" id="2_k2eca"]
 
+
 [sub_resource type="Resource" id="Resource_u5g14"]
 script = ExtResource("1_0x2g3")
 id = 1
 name = "Wood"
-value = 2.0
+value = 275.0
 img_path = "res://Assets/Cargo/wood.png"
+
 
 [sub_resource type="Resource" id="Resource_0qd28"]
 script = ExtResource("1_0x2g3")
 id = 2
 name = "Aluminium"
-value = 1.8
+value = 2750.0
 img_path = "res://Assets/Cargo/aluminium.png"
 
-[sub_resource type="Resource" id="Resource_1tpl2"]
+
+[sub_resource type="Resource" id="Resource_g21d7"]
 script = ExtResource("1_0x2g3")
 id = 3
 name = "Steel"
-value = 2.4
+value = 1250.0
 img_path = "res://Assets/Cargo/steel.png"
 
-[sub_resource type="Resource" id="Resource_5pdkv"]
+[sub_resource type="Resource" id="Resource_ln3lu"]
 script = ExtResource("1_0x2g3")
 id = 4
 name = "Plastic"
-value = 1.2
+value = 750.0
 img_path = "res://Assets/Cargo/plastic.png"
 
-[sub_resource type="Resource" id="Resource_s3wpr"]
+[sub_resource type="Resource" id="Resource_pplh2"]
 script = ExtResource("1_0x2g3")
 id = 5
 name = "Copper"
-value = 2.1
+value = 7500.0
 img_path = "res://Assets/Cargo/copper.png"
 
-[sub_resource type="Resource" id="Resource_txui8"]
+[sub_resource type="Resource" id="Resource_1uspj"]
 script = ExtResource("1_0x2g3")
 id = 6
 name = "Fabric"
-value = 1.9
+value = 1500.0
 img_path = "res://Assets/Cargo/fabric.png"
 
-[sub_resource type="Resource" id="Resource_sa58g"]
+[sub_resource type="Resource" id="Resource_vrwsx"]
 script = ExtResource("1_0x2g3")
 id = 7
 name = "Furniture"
-value = 10.0
+value = 3000.0
 img_path = "res://Assets/Cargo/furniture.png"
 
-[sub_resource type="Resource" id="Resource_bb7xg"]
+[sub_resource type="Resource" id="Resource_s3fa3"]
 script = ExtResource("1_0x2g3")
 id = 8
 name = "Toys"
-value = 3.2
+value = 1750.0
 img_path = "res://Assets/Cargo/toys.png"
 
-[sub_resource type="Resource" id="Resource_fmkad"]
+[sub_resource type="Resource" id="Resource_mj6co"]
 script = ExtResource("1_0x2g3")
 id = 9
 name = "Tools"
-value = 5.8
+value = 2250.0
 img_path = "res://Assets/Cargo/tools.png"
 
-[sub_resource type="Resource" id="Resource_4fjy7"]
+[sub_resource type="Resource" id="Resource_g7pvy"]
 script = ExtResource("1_0x2g3")
 id = 10
 name = "Blankets"
-value = 4.6
+value = 2400.0
 img_path = "res://Assets/Cargo/blankets.png"
 
 [resource]
 script = ExtResource("2_k2eca")
 cargos = {
-1: SubResource("Resource_u5g14"),
-2: SubResource("Resource_0qd28"),
-3: SubResource("Resource_1tpl2"),
-4: SubResource("Resource_5pdkv"),
-5: SubResource("Resource_s3wpr"),
-6: SubResource("Resource_txui8"),
-7: SubResource("Resource_sa58g"),
-8: SubResource("Resource_bb7xg"),
-9: SubResource("Resource_fmkad"),
-10: SubResource("Resource_4fjy7")
+1: SubResource("Resource_yxa3p"),
+2: SubResource("Resource_r0c1v"),
+3: SubResource("Resource_g21d7"),
+4: SubResource("Resource_ln3lu"),
+5: SubResource("Resource_pplh2"),
+6: SubResource("Resource_1uspj"),
+7: SubResource("Resource_vrwsx"),
+8: SubResource("Resource_s3fa3"),
+9: SubResource("Resource_mj6co"),
+10: SubResource("Resource_g7pvy")
 }
