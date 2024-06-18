@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfaipfii1a8i4"]
 
 [ext_resource type="Script" path="res://Nodes/map.gd" id="1_638rh"]
-[ext_resource type="TileSet" uid="uid://r1qnxk0jv3fq" path="res://tile_set_backup.tres" id="1_pnhkj"]
+[ext_resource type="TileSet" uid="uid://brdq00vbxu8b4" path="res://tile_set.tres" id="1_h2o0j"]
 
 [node name="TileMap" type="TileMap"]
 y_sort_enabled = true
-tile_set = ExtResource("1_pnhkj")
+tile_set = ExtResource("1_h2o0j")
 format = 2
 layer_0/name = "Base"
 layer_0/y_sort_enabled = true

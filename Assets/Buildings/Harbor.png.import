@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lea8pxp80rep"
-path="res://.godot/imported/truck.png-e1f1b9ce56928a05a84bd3aea44b74e0.ctex"
+uid="uid://bsl35cu8ytsio"
+path="res://.godot/imported/Harbor.png-d349b55fa2d4c048ff16ba3eecf8a848.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Vehicle_Models/truck.png"
-dest_files=["res://.godot/imported/truck.png-e1f1b9ce56928a05a84bd3aea44b74e0.ctex"]
+source_file="res://Assets/Buildings/Harbor.png"
+dest_files=["res://.godot/imported/Harbor.png-d349b55fa2d4c048ff16ba3eecf8a848.ctex"]
 
 [params]
 

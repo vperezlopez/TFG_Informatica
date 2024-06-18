@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lea8pxp80rep"
-path="res://.godot/imported/truck.png-e1f1b9ce56928a05a84bd3aea44b74e0.ctex"
+uid="uid://gap18aorbrtd"
+path="res://.godot/imported/exp_refinery.png-e6ea6b11b5c6533772c5131b281522f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Vehicle_Models/truck.png"
-dest_files=["res://.godot/imported/truck.png-e1f1b9ce56928a05a84bd3aea44b74e0.ctex"]
+source_file="res://Assets/Buildings/Explotations/exp_refinery.png"
+dest_files=["res://.godot/imported/exp_refinery.png-e6ea6b11b5c6533772c5131b281522f1.ctex"]
 
 [params]
 

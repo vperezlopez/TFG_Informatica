@@ -37,9 +37,9 @@ func _ready():
 	
 	connect_signals()
 
-	if get_parent() is Window:
-		print_debug('Manual initialization')
-		new_game(Vector2i(64, 64), 12, 4, 2)
+	#if get_parent() is Window:
+		#print_debug('Manual initialization')
+		#new_game(Vector2i(64, 64), 12, 4, 2)
 	
 	money = 0
 	update_money(+starting_money)
@@ -78,6 +78,7 @@ func new_game(size : Vector2i, ncities : int, nexplotations : int, nharbors : in
 	var center_y = (map.tile_set.tile_size.y * size.y) / 2
 	# We have to half the center position because the camera itself is not centered, but anchored to the top_left corner
 	camera.set_starting_position(Vector2i(center_x / 2, center_y / 2))
+	camera.set_map_limits(Vector2i(center_x, center_y))
 
 func test_cargo():
 	var cargo_catalog = load(Constants.CARGO_CATALOG_PATH) as CargoCatalog

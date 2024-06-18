@@ -26,6 +26,11 @@ enum BuildMode { NONE, BUILDING, DEMOLISH, PATH, DEMOLISH_PATH }
 enum BuildTypes { NONE, FACTORY, WAREHOUSE, DEPOT_ROAD, DEPOT_RAILWAY}
 enum PathTypes { NONE = 99, ROAD = 0, RAILWAY = 1}
 
+const BASE_TILESET : int = 1
+const PATHS_TILESET : int = 2
+const BASE_TILE : Vector2i = Vector2i(0, 1)
+const BASE_ALTERNATIVE_TILE : Vector2i = Vector2i(1, 1)
+
 var map_width = 0
 var map_height = 0
 
@@ -59,19 +64,19 @@ func _ready():
 	#map_width = 16
 	#map_height = 16
 	
-	if get_parent() is Window:
-		print_debug('Manual initialization')
-		var city_inst = city.instantiate()
-		add_child(city_inst)
-		place_actor_static(city_inst, Vector2i(8, 8))
-		
-		var city_inst2 = city.instantiate()
-		add_child(city_inst2)
-		place_actor_static(city_inst2, Vector2i(10, 6))
-		
-		var city_inst3 = city.instantiate()
-		add_child(city_inst3)
-		place_actor_static(city_inst3, Vector2i(6, 10))
+	#if get_parent() is Window:
+		#print_debug('Manual initialization')
+		#var city_inst = city.instantiate()
+		#add_child(city_inst)
+		#place_actor_static(city_inst, Vector2i(8, 8))
+		#
+		#var city_inst2 = city.instantiate()
+		#add_child(city_inst2)
+		#place_actor_static(city_inst2, Vector2i(10, 6))
+		#
+		#var city_inst3 = city.instantiate()
+		#add_child(city_inst3)
+		#place_actor_static(city_inst3, Vector2i(6, 10))
 		
 		#initialize(64, 64, 5, 2, 2)
 	
@@ -152,7 +157,7 @@ func generate_map(width : int, height : int):
 	map_height = height
 	for x in range (width):
 		for y in range (floor(height/2)):
-			set_cell(Layers.BASE, Vector2i(x, y), 1, Vector2i(0, 3))
+			set_cell(Layers.BASE, Vector2i(x, y), BASE_TILESET, BASE_TILE)
 
 func generate_actors_static(actor_static_class, n : int):
 	for i in range(n):
@@ -185,7 +190,7 @@ func place_actor_static(actor_static_instance : Actor_Static, pos : Vector2i = V
 	if valid_position(pos.x, pos.y):
 		actor_static_instance.z_index = Layers.ACTOR_STATIC
 		actor_static_instance.position = map_to_local(pos) + Vector2(0, -8)
-		set_cell(Layers.PATH, pos, 1, Vector2i(1, 3))
+		set_cell(Layers.PATH, pos, BASE_TILESET, BASE_ALTERNATIVE_TILE)
 		
 		occupied_tiles[pos] = actor_static_instance
 		actor_static_instance.connect("actor_static_clicked", Callable(self, "_on_actor_static_clicked"))
@@ -394,7 +399,6 @@ func _on_actor_static_clicked(actor_static_id : int):
 	emit_signal("forwarded_actor_static_clicked", actor_static_id)
 
 func _on_transaction_completed(charge : float):
-	print('Transaction detected: ' + str(charge))
 	emit_signal("map_transaction", charge)
 
 func _input(event):

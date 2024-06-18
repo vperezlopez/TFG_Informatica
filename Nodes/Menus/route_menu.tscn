@@ -176,12 +176,14 @@ vertical_alignment = 1
 [node name="ButtonAccept" type="Button" parent="HBoxContainer/DestinationContainer/RouteTitleBox/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Confirm changes"
 icon = ExtResource("2_xd2mp")
 icon_alignment = 1
 
 [node name="ButtonCancel" type="Button" parent="HBoxContainer/DestinationContainer/RouteTitleBox/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Cancel changes"
 icon = ExtResource("3_toa50")
 icon_alignment = 1
 

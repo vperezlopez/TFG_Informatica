@@ -8,7 +8,7 @@ var cargo_storage : CargoStorage
 func _ready():
 	super._ready()
 	demolishable = false
-	sprite.texture = preload("res://Assets/Placeholder_1.png")
+	#sprite.texture = preload("res://Assets/Placeholder_1.png")
 	
 	cargo_storage = CargoStorage.new()
 

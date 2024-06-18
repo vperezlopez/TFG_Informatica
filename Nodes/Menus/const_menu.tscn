@@ -1,8 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://c6yvx1lg154nf"]
+[gd_scene load_steps=25 format=3 uid="uid://c6yvx1lg154nf"]
 
 [ext_resource type="Script" path="res://Nodes/Menus/const_menu.gd" id="1_3y2va"]
-[ext_resource type="Texture2D" uid="uid://dkhpbhcgvpj43" path="res://Nodes/Assets/Placeholder_4.png" id="1_8e7fh"]
-[ext_resource type="Texture2D" uid="uid://biqiitlap7tnk" path="res://Nodes/Assets/Placeholder_3.png" id="2_hwbgg"]
+[ext_resource type="Texture2D" uid="uid://b5g5ly0j8xrtb" path="res://Assets/Buildings/Factory.png" id="2_qlbtc"]
+[ext_resource type="Texture2D" uid="uid://dff6cq0n7cdn5" path="res://Assets/Buildings/Depot.png" id="3_of6d4"]
+[ext_resource type="Texture2D" uid="uid://ufwwmy8vwdvq" path="res://Assets/TileSets/Paths_Isometric_Edges.png" id="4_behhh"]
+[ext_resource type="Texture2D" uid="uid://bakykl8oxm4nl" path="res://Assets/GUI_Icons/Demolish_Building.png" id="5_xsudq"]
+[ext_resource type="Texture2D" uid="uid://cg46di44pcl88" path="res://Assets/GUI_Icons/Demolish_Path.png" id="6_c0rwm"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_qelgd"]
 device = -1
@@ -27,6 +30,10 @@ unicode = 114
 
 [sub_resource type="Shortcut" id="Shortcut_s2645"]
 events = [SubResource("InputEventKey_qmk2h")]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rpkf"]
+atlas = ExtResource("4_behhh")
+region = Rect2(0, 16, 32, 16)
 
 [sub_resource type="InputEventKey" id="InputEventKey_ar75x"]
 device = -1
@@ -59,6 +66,10 @@ unicode = 116
 
 [sub_resource type="Shortcut" id="Shortcut_76mdy"]
 events = [SubResource("InputEventKey_6bwdl")]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77mge"]
+atlas = ExtResource("4_behhh")
+region = Rect2(0, 144, 32, 16)
 
 [sub_resource type="InputEventKey" id="InputEventKey_sgaq2"]
 device = -1
@@ -96,53 +107,71 @@ columns = 4
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+tooltip_text = "Build a new Factory"
 shortcut = SubResource("Shortcut_8y6ds")
-icon = ExtResource("1_8e7fh")
+icon = ExtResource("2_qlbtc")
 icon_alignment = 1
 
 [node name="Button_Road_Depot" type="Button" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+tooltip_text = "Build a new Depot for road Vehicles"
 shortcut = SubResource("Shortcut_vwigj")
+icon = ExtResource("3_of6d4")
+icon_alignment = 1
 
 [node name="Button_Road" type="Button" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+tooltip_text = "Build new Roads"
 shortcut = SubResource("Shortcut_s2645")
+icon = SubResource("AtlasTexture_5rpkf")
+icon_alignment = 1
 
 [node name="Button_Demolish" type="Button" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+tooltip_text = "Demolish a Building"
 shortcut = SubResource("Shortcut_wsr75")
+icon = ExtResource("5_xsudq")
+icon_alignment = 1
 
 [node name="Button_Warehouse" type="Button" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+disabled = true
 shortcut = SubResource("Shortcut_4e8rq")
-icon = ExtResource("2_hwbgg")
 icon_alignment = 1
 
 [node name="Button_Rail_Depot" type="Button" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+disabled = true
 shortcut = SubResource("Shortcut_dvbj6")
+icon_alignment = 1
 
 [node name="Button_Railway" type="Button" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+tooltip_text = "Build new Railways"
 shortcut = SubResource("Shortcut_76mdy")
+icon = SubResource("AtlasTexture_77mge")
+icon_alignment = 1
 
 [node name="Button_Demolish_Path" type="Button" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+tooltip_text = "Demolish Roads or Railways"
 shortcut = SubResource("Shortcut_o3ynd")
+icon = ExtResource("6_c0rwm")
+icon_alignment = 1
 
 [connection signal="pressed" from="MarginContainer/GridContainer/Button_Factory" to="." method="_on_button_factory_pressed"]
 [connection signal="pressed" from="MarginContainer/GridContainer/Button_Road_Depot" to="." method="_on_button_road_depot_pressed"]
