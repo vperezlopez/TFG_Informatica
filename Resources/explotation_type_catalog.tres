@@ -4,12 +4,14 @@
 [ext_resource type="Script" path="res://Nodes/explotation_type.gd" id="2_a54xw"]
 [ext_resource type="Script" path="res://Nodes/explotation_type_catalog.gd" id="3_oaikv"]
 
-[sub_resource type="Resource" id="Resource_shhud"]
+[sub_resource type="Resource" id="Resource_dei54"]
+
 script = ExtResource("1_ugqje")
 id = 1
 name = "Wood"
 value = 275.0
 img_path = "res://Assets/Cargo/wood.png"
+
 
 [sub_resource type="Resource" id="Resource_8fiug"]
 script = ExtResource("2_a54xw")
@@ -25,12 +27,14 @@ name = "Steel"
 value = 1250.0
 img_path = "res://Assets/Cargo/steel.png"
 
+
 [sub_resource type="Resource" id="Resource_mmobv"]
 script = ExtResource("1_ugqje")
 id = 2
 name = "Aluminium"
 value = 2750.0
 img_path = "res://Assets/Cargo/aluminium.png"
+
 
 [sub_resource type="Resource" id="Resource_r7kaa"]
 script = ExtResource("1_ugqje")
@@ -53,6 +57,7 @@ name = "Fabric"
 value = 1500.0
 img_path = "res://Assets/Cargo/fabric.png"
 
+
 [sub_resource type="Resource" id="Resource_j2nry"]
 script = ExtResource("2_a54xw")
 id = 3
@@ -67,6 +72,7 @@ name = "Plastic"
 value = 750.0
 img_path = "res://Assets/Cargo/plastic.png"
 
+
 [sub_resource type="Resource" id="Resource_8giut"]
 script = ExtResource("2_a54xw")
 id = 4
@@ -77,6 +83,7 @@ img_path = "res://Assets/Buildings/exp_refinery.png"
 [resource]
 script = ExtResource("3_oaikv")
 explotation_types = {
+
 1: SubResource("Resource_8fiug"),
 2: SubResource("Resource_7fo4t"),
 3: SubResource("Resource_j2nry"),

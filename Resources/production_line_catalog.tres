@@ -1,104 +1,106 @@
-[gd_resource type="Resource" script_class="ProductionLineCatalog" load_steps=16 format=3]
+[gd_resource type="Resource" script_class="ProductionLineCatalog" load_steps=16 format=3 uid="uid://dkjk6no8i2hcs"]
 
 [ext_resource type="Script" path="res://Nodes/cargo.gd" id="1_q7s2c"]
 [ext_resource type="Script" path="res://Nodes/production_line.gd" id="2_72rjk"]
 [ext_resource type="Script" path="res://Nodes/production_line_catalog.gd" id="3_4ykec"]
 
-[sub_resource type="Resource" id="Resource_shhud"]
+[sub_resource type="Resource" id="Resource_dei54"]
 script = ExtResource("1_q7s2c")
 id = 1
 name = "Wood"
 value = 275.0
 img_path = "res://Assets/Cargo/wood.png"
 
-[sub_resource type="Resource" id="Resource_p8dqd"]
+[sub_resource type="Resource" id="Resource_tdrwn"]
 script = ExtResource("1_q7s2c")
 id = 7
 name = "Furniture"
 value = 3000.0
 img_path = "res://Assets/Cargo/furniture.png"
 
-[sub_resource type="Resource" id="Resource_wkh5n"]
+[sub_resource type="Resource" id="Resource_j27g2"]
 script = ExtResource("2_72rjk")
 id = 1
 input = {
-SubResource("Resource_shhud"): 2
+SubResource("Resource_dei54"): 2
 }
-output = SubResource("Resource_p8dqd")
+output = SubResource("Resource_tdrwn")
 production_time = 2.0
 
-[sub_resource type="Resource" id="Resource_g2x3o"]
+[sub_resource type="Resource" id="Resource_ypfa2"]
 script = ExtResource("1_q7s2c")
 id = 4
 name = "Plastic"
 value = 750.0
 img_path = "res://Assets/Cargo/plastic.png"
 
-[sub_resource type="Resource" id="Resource_e6ca4"]
+
+[sub_resource type="Resource" id="Resource_rcehr"]
 script = ExtResource("1_q7s2c")
 id = 8
 name = "Toys"
 value = 1750.0
 img_path = "res://Assets/Cargo/toys.png"
 
-[sub_resource type="Resource" id="Resource_5epyt"]
+[sub_resource type="Resource" id="Resource_pnu0w"]
 script = ExtResource("2_72rjk")
 id = 2
 input = {
-SubResource("Resource_g2x3o"): 1
+SubResource("Resource_ypfa2"): 1
 }
-output = SubResource("Resource_e6ca4")
+output = SubResource("Resource_rcehr")
 production_time = 0.6
 
-[sub_resource type="Resource" id="Resource_wjaa5"]
+[sub_resource type="Resource" id="Resource_y4bg1"]
 script = ExtResource("1_q7s2c")
 id = 3
 name = "Steel"
 value = 1250.0
 img_path = "res://Assets/Cargo/steel.png"
 
-[sub_resource type="Resource" id="Resource_yfbfx"]
+[sub_resource type="Resource" id="Resource_reouk"]
 script = ExtResource("1_q7s2c")
 id = 9
 name = "Tools"
 value = 2250.0
 img_path = "res://Assets/Cargo/tools.png"
 
-[sub_resource type="Resource" id="Resource_bxnkb"]
+[sub_resource type="Resource" id="Resource_dtdn2"]
 script = ExtResource("2_72rjk")
 id = 3
 input = {
-SubResource("Resource_wjaa5"): 1
+SubResource("Resource_y4bg1"): 1
 }
-output = SubResource("Resource_yfbfx")
+output = SubResource("Resource_reouk")
 production_time = 1.3
 
-[sub_resource type="Resource" id="Resource_rq8xd"]
+[sub_resource type="Resource" id="Resource_d3s00"]
 script = ExtResource("1_q7s2c")
 id = 6
 name = "Fabric"
 value = 1500.0
 img_path = "res://Assets/Cargo/fabric.png"
 
-[sub_resource type="Resource" id="Resource_404ko"]
+[sub_resource type="Resource" id="Resource_ud4qp"]
 script = ExtResource("1_q7s2c")
 id = 10
 name = "Blankets"
 value = 2400.0
 img_path = "res://Assets/Cargo/blankets.png"
 
-[sub_resource type="Resource" id="Resource_alb7f"]
+[sub_resource type="Resource" id="Resource_qfyv5"]
 script = ExtResource("2_72rjk")
 id = 4
 input = {
-SubResource("Resource_rq8xd"): 1
+SubResource("Resource_d3s00"): 1
 }
-output = SubResource("Resource_404ko")
+output = SubResource("Resource_ud4qp")
 production_time = 0.9
 
 [resource]
 script = ExtResource("3_4ykec")
 production_lines = {
+
 1: SubResource("Resource_wkh5n"),
 2: SubResource("Resource_5epyt"),
 3: SubResource("Resource_bxnkb"),

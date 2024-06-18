@@ -9,6 +9,7 @@ const vehicle = preload("res://Nodes/vehicle.tscn")
 @onready var camera = $VBoxContainer/top_container/game_container/game_viewport/camera
 @onready var factory_menu = $VBoxContainer/top_container/factory_menu
 @onready var depot_road_menu = $VBoxContainer/top_container/depot_road_menu
+@onready var exit_menu = $VBoxContainer/top_container/exit_menu
 
 @onready var bottom_container = $VBoxContainer/bottom_container
 @onready var const_menu = $VBoxContainer/bottom_container/bottom_menu/const_menu
@@ -18,9 +19,9 @@ const vehicle = preload("res://Nodes/vehicle.tscn")
 @onready var route_menu = $VBoxContainer/bottom_container/bottom_menu/route_menu
 
 
-@onready var Menus = [game_container, factory_menu, depot_road_menu, const_menu, cargo_mini_menu, money_menu, game_menu, route_menu]
+@onready var Menus = [game_container, factory_menu, depot_road_menu, exit_menu, const_menu, cargo_mini_menu, money_menu, game_menu, route_menu]
 
-enum ScreenMode {MAP, ROUTE, CITY, FACTORY, DEPOT, EXPLOTATION}
+enum ScreenMode {MAP, ROUTE, CITY, FACTORY, DEPOT, EXPLOTATION, EXIT}
 var selected_screen : ScreenMode
 
 const starting_money : float = 3000000.00
@@ -63,6 +64,10 @@ func connect_signals():
 	depot_road_menu.connect("sell_vehicle", Callable(self, "_on_sell_vehicle"))
 	route_menu.connect("find_destination", Callable(self, "_on_find_destination"))
 	route_menu.connect("close_route_menu", Callable(self, "_on_close_route_menu"))
+	game_menu.connect("exit_game", Callable(self, "_on_exit_game"))
+	exit_menu.connect("back_to_game", Callable(self, "_on_back_to_game"))
+	exit_menu.connect("back_to_main", Callable(self, "_on_back_to_main"))
+	exit_menu.connect("back_to_desktop", Callable(self, "_on_back_to_desktop"))
 	
 	#load("res://Nodes/actor_static.tscn").connect("actor_static_clicked", Callable(map, "_on_static_actor_clicked"))
 
@@ -209,6 +214,20 @@ func _on_find_destination(pos : Vector2i):
 func _on_close_route_menu():
 	show_screen(ScreenMode.MAP)
 
+func _on_exit_game():
+	show_screen(ScreenMode.EXIT)
+
+func _on_back_to_game():
+	show_screen(ScreenMode.MAP)
+
+func _on_back_to_main():
+	var main_menu = load("res://Nodes/Menus/main_menu.tscn").instantiate()
+	get_tree().root.add_child(main_menu)
+	queue_free()
+
+func _on_back_to_desktop():
+	get_tree().quit()
+
 func show_screen(new_screen : ScreenMode):
 	hide_menus()
 	match new_screen:
@@ -233,6 +252,8 @@ func show_screen(new_screen : ScreenMode):
 			cargo_mini_menu.visible = true
 			money_menu.visible = true
 			game_menu.visible = true
+		ScreenMode.EXIT:
+			exit_menu.visible = true
 	selected_screen = new_screen
 	
 
