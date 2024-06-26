@@ -1,106 +1,106 @@
-[gd_resource type="Resource" script_class="ProductionLineCatalog" load_steps=16 format=3]
+[gd_resource type="Resource" script_class="ProductionLineCatalog" load_steps=16 format=3 uid="uid://bdn718pbqyvib"]
 
-[ext_resource type="Script" path="res://Nodes/cargo.gd" id="1_vmora"]
-[ext_resource type="Script" path="res://Nodes/production_line.gd" id="2_bjld0"]
-[ext_resource type="Script" path="res://Nodes/production_line_catalog.gd" id="3_gupvc"]
+[ext_resource type="Script" path="res://Scripts/cargo.gd" id="1_8lk4q"]
+[ext_resource type="Script" path="res://Scripts/production_line.gd" id="2_tcjvi"]
+[ext_resource type="Script" path="res://Scripts/production_line_catalog.gd" id="3_v0mq0"]
 
-[sub_resource type="Resource" id="Resource_p2or7"]
-script = ExtResource("1_vmora")
+[sub_resource type="Resource" id="Resource_p00xx"]
+script = ExtResource("1_8lk4q")
 id = 1
 name = "Wood"
 value = 275.0
 img_path = "res://Assets/Cargo/wood.png"
 
-[sub_resource type="Resource" id="Resource_y0lh7"]
-script = ExtResource("1_vmora")
+[sub_resource type="Resource" id="Resource_tvey0"]
+script = ExtResource("1_8lk4q")
 id = 7
 name = "Furniture"
 value = 3000.0
 img_path = "res://Assets/Cargo/furniture.png"
 
-[sub_resource type="Resource" id="Resource_uls0f"]
-script = ExtResource("2_bjld0")
+[sub_resource type="Resource" id="Resource_xkxla"]
+script = ExtResource("2_tcjvi")
 id = 1
 input = {
-SubResource("Resource_p2or7"): 2
+SubResource("Resource_p00xx"): 2
 }
-output = SubResource("Resource_y0lh7")
+output = SubResource("Resource_tvey0")
 production_time = 2.0
 
-[sub_resource type="Resource" id="Resource_x1f72"]
-script = ExtResource("1_vmora")
+[sub_resource type="Resource" id="Resource_rk0m8"]
+script = ExtResource("1_8lk4q")
 id = 4
 name = "Plastic"
 value = 750.0
 img_path = "res://Assets/Cargo/plastic.png"
 
-[sub_resource type="Resource" id="Resource_52tvw"]
-script = ExtResource("1_vmora")
+[sub_resource type="Resource" id="Resource_ukid1"]
+script = ExtResource("1_8lk4q")
 id = 8
 name = "Toys"
 value = 1750.0
 img_path = "res://Assets/Cargo/toys.png"
 
-[sub_resource type="Resource" id="Resource_d7pyr"]
-script = ExtResource("2_bjld0")
+[sub_resource type="Resource" id="Resource_aafxb"]
+script = ExtResource("2_tcjvi")
 id = 2
 input = {
-SubResource("Resource_x1f72"): 1
+SubResource("Resource_rk0m8"): 1
 }
-output = SubResource("Resource_52tvw")
+output = SubResource("Resource_ukid1")
 production_time = 0.6
 
-[sub_resource type="Resource" id="Resource_ka2i6"]
-script = ExtResource("1_vmora")
+[sub_resource type="Resource" id="Resource_gntmu"]
+script = ExtResource("1_8lk4q")
 id = 3
 name = "Steel"
 value = 1250.0
 img_path = "res://Assets/Cargo/steel.png"
 
-[sub_resource type="Resource" id="Resource_ear2x"]
-script = ExtResource("1_vmora")
+[sub_resource type="Resource" id="Resource_ve1c5"]
+script = ExtResource("1_8lk4q")
 id = 9
 name = "Tools"
 value = 2250.0
 img_path = "res://Assets/Cargo/tools.png"
 
-[sub_resource type="Resource" id="Resource_y77su"]
-script = ExtResource("2_bjld0")
+[sub_resource type="Resource" id="Resource_s6q2m"]
+script = ExtResource("2_tcjvi")
 id = 3
 input = {
-SubResource("Resource_ka2i6"): 1
+SubResource("Resource_gntmu"): 1
 }
-output = SubResource("Resource_ear2x")
+output = SubResource("Resource_ve1c5")
 production_time = 1.3
 
-[sub_resource type="Resource" id="Resource_yl0uy"]
-script = ExtResource("1_vmora")
+[sub_resource type="Resource" id="Resource_mtdcp"]
+script = ExtResource("1_8lk4q")
 id = 6
 name = "Fabric"
 value = 1500.0
 img_path = "res://Assets/Cargo/fabric.png"
 
-[sub_resource type="Resource" id="Resource_k2o2b"]
-script = ExtResource("1_vmora")
+[sub_resource type="Resource" id="Resource_fvxr5"]
+script = ExtResource("1_8lk4q")
 id = 10
 name = "Blankets"
 value = 2400.0
 img_path = "res://Assets/Cargo/blankets.png"
 
-[sub_resource type="Resource" id="Resource_plosh"]
-script = ExtResource("2_bjld0")
+[sub_resource type="Resource" id="Resource_j8qcs"]
+script = ExtResource("2_tcjvi")
 id = 4
 input = {
-SubResource("Resource_yl0uy"): 1
+SubResource("Resource_mtdcp"): 1
 }
-output = SubResource("Resource_k2o2b")
+output = SubResource("Resource_fvxr5")
 production_time = 0.9
 
 [resource]
-script = ExtResource("3_gupvc")
+script = ExtResource("3_v0mq0")
 production_lines = {
-1: SubResource("Resource_uls0f"),
-2: SubResource("Resource_d7pyr"),
-3: SubResource("Resource_y77su"),
-4: SubResource("Resource_plosh")
+1: SubResource("Resource_xkxla"),
+2: SubResource("Resource_aafxb"),
+3: SubResource("Resource_s6q2m"),
+4: SubResource("Resource_j8qcs")
 }

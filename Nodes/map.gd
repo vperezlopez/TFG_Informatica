@@ -11,7 +11,7 @@ var harbor = preload("res://Nodes/harbor.tscn")
 var vehicle = preload("res://Nodes/vehicle.tscn")
 var truck = preload("res://Nodes/truck.tscn")
 
-const priority_queue_class = preload("res://Nodes/PriorityQueue.gd")
+const priority_queue_class = preload("res://Scripts/PriorityQueue.gd")
 
 const iso_dirs = [ #this has to be corrected adding + Vector2i(0, x % 2)
 		Vector2i(-1, -1),	# Top-left

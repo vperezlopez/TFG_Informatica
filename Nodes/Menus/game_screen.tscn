@@ -44,7 +44,7 @@ stretch = true
 handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
-size = Vector2i(1152, 515)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="map" parent="VBoxContainer/top_container/game_container/game_viewport" instance=ExtResource("1_qbx3c")]
